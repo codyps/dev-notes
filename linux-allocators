@@ -1,0 +1,69 @@
+
+
+== memblock ==
+include/linux/memblock.h, mm/memblock.c
+
+Tracks memory as 2 lists of regions: "reserved" and "memory". Also keeps track
+of a total "limit" for memory, essentially a maximum physical address.
+
+Regions are composed of the base address, length and (with
+CONFIG_HAVE_MEMBLOCK_NODEMAP) node id.
+
+Allocations are treated as additions to the reserved list (which differ from
+reservations only in needed to choose a address to limit fragmentation).
+
+Neighboring regions in both lists are merged when adjacent.
+
+The supporting funtions & data are in "__init" on most architectures (but not
+all, powerpc being a prominent exception) as determined by
+CONFIG_ARCH_DISCARD_MEMBLOCK.
+
+Not designed to be used while bootmem is active, only used before hand or much
+later (when slab is active). Only used with slab for memory-hotplug on powerpc.
+Slab is not initialized until far after the freeing of __init, so any kernel
+builds with CONFIG_ARCH_DISCARD_MEMBLOCK will not use memblock with slab.
+
+=== Initialization ===
+
+
+=== Teardown ===
+
+XXX: are the 'memblock_region's freed prior to the freeing of __init?
+Completely unusable after arch specific freeing of __init memory
+
+== bootmem ==
+mm/bootmem.c
+mm/nobootmem.c
+include/linux/bootmem.h
+
+=== Api ===
+
+	extern unsigned long max_low_pfn;
+	extern unsigned long min_low_pfn;
+	extern unsigned long max_pfn;
+
+	int reserve_bootmem(ul addr, ul size, int flags);
+	int reserve_bootmem_node(pg_data_t *pgdat, ul physaddr, ul size, int flags);
+	extern void *__alloc_bootmem_node(pg_data_t *pgdat,
+					  unsigned long size,
+					  unsigned long align,
+					  unsigned long goal);
+
+via init_bootmem(), 
+
+=== Notes ===
+
+@goal is commonly "BOOTMEM_LOW_LIMIT".
+@align is commonly "SMP_CACHE_BYTES" or, for __alloc_*_pages, "PAGE_SIZE")
+
+Q: What does all this "nobootmem" (CONFIG_NO_BOOTMEM) stuff do?
+
+== page_alloc ==
+== kmem_cache / slab ==
+
+
+== x86's remap allocator ==
+
+	init_alloc_remap(nid, pa_start, pa_end)
+	alloc_remap(nid, pa_size) : void *va
+

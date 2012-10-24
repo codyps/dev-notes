@@ -1,0 +1,599 @@
+- links
+  - http://linux-mm.org/PageAllocation
+
+- Per node data structures:
+
+arch/sparc/mm/init_64.c:745:static struct node_mem_mask node_masks[MAX_NUMNODES];
+arch/sparc/mm/init_64.c:749:cpumask_t numa_cpumask_lookup_table[MAX_NUMNODES];
+arch/sparc/mm/init_64.c:855:struct pglist_data *node_data[MAX_NUMNODES];
+
+arch/m32r/mm/discontig.c:21:struct pglist_data *node_data[MAX_NUMNODES];
+arch/m32r/mm/discontig.c:24:pg_data_t m32r_node_data[MAX_NUMNODES];
+arch/m32r/mm/discontig.c:33:static mem_prof_t mem_prof[MAX_NUMNODES];
+
+arch/sh/kernel/setup.c:100:static struct resource mem_resources[MAX_NUMNODES];
+arch/sh/mm/numa.c:18:struct pglist_data *node_data[MAX_NUMNODES] __read_mostly;
+
+arch/alpha/kernel/setup.c:83:struct cpumask node_to_cpumask_map[MAX_NUMNODES] __read_mostly;
+arch/alpha/mm/numa.c:21:pg_data_t node_data[MAX_NUMNODES];
+
+arch/x86/kernel/apic/summit_32.c:332:static struct scal_detail   *scal_devs[MAX_NUMNODES];
+arch/x86/kernel/apic/summit_32.c:333:static struct rio_detail    *rio_devs[MAX_NUMNODES*4];
+
+arch/x86/kernel/pci-calgary_64.c:164:static struct scal_detail	*scal_devs[MAX_NUMNODES] __initdata;
+arch/x86/kernel/pci-calgary_64.c:165:static struct rio_detail	*rio_devs[MAX_NUMNODES * 4] __initdata;
+
+arch/x86/include/asm/e820.h:32:#define E820_X_MAX (E820MAX + 3 * MAX_NUMNODES)
+arch/x86/include/asm/numa.h:11:#define NR_NODE_MEMBLKS		(MAX_NUMNODES*2)
+arch/x86/include/asm/numaq.h:164:	struct		eachquadmem eq[MAX_NUMNODES];	/* indexed by quad id */
+arch/x86/include/asm/topology.h:73:extern cpumask_var_t node_to_cpumask_map[MAX_NUMNODES];
+
+arch/x86/mm/numa.c:26:struct pglist_data *node_data[MAX_NUMNODES] __read_mostly;
+arch/x86/mm/numa.c:72:cpumask_var_t node_to_cpumask_map[MAX_NUMNODES];
+
+arch/x86/mm/numa_emulation.c:13:static int emu_nid_to_phys[MAX_NUMNODES] __cpuinitdata;
+
+arch/x86/mm/numa_32.c:78:static void *node_remap_start_vaddr[MAX_NUMNODES];
+arch/x86/mm/numa_32.c:84:static unsigned long node_remap_start_pfn[MAX_NUMNODES];
+arch/x86/mm/numa_32.c:85:static void *node_remap_end_vaddr[MAX_NUMNODES];
+arch/x86/mm/numa_32.c:86:static void *node_remap_alloc_vaddr[MAX_NUMNODES];
+
+arch/m68k/mm/init_mm.c:35:pg_data_t pg_data_map[MAX_NUMNODES];
+
+arch/ia64/kernel/numa.c:30:cpumask_t node_to_cpu_mask[MAX_NUMNODES] __cacheline_aligned;
+arch/ia64/kernel/uncached.c:43:struct uncached_pool uncached_pools[MAX_NUMNODES];
+arch/ia64/kernel/iosapic.c:660:		    iosapic_lists[iosapic_index].node == MAX_NUMNODES)
+arch/ia64/kernel/iosapic.c:1054:	iosapic_lists[index].node = MAX_NUMNODES;
+arch/ia64/sn/kernel/sn2/sn2_smp.c:172:	short nasids[MAX_NUMNODES], nix;
+arch/ia64/include/asm/numa.h:26:extern cpumask_t node_to_cpu_mask[MAX_NUMNODES] __cacheline_aligned;
+arch/ia64/include/asm/numa.h:27:extern pg_data_t *pgdat_list[MAX_NUMNODES];
+arch/ia64/include/asm/numa.h:61:extern u8 numa_slit[MAX_NUMNODES * MAX_NUMNODES];
+arch/ia64/include/asm/acpi.h:157:extern int __initdata nid_to_pxm_map[MAX_NUMNODES];
+arch/ia64/include/asm/nodedata.h:29:	struct pglist_data	*pg_data_ptrs[MAX_NUMNODES];
+arch/ia64/mm/numa.c:37:u8 numa_slit[MAX_NUMNODES * MAX_NUMNODES];
+arch/ia64/mm/discontig.c:48:static struct early_node_data mem_data[MAX_NUMNODES] __initdata;
+arch/ia64/mm/discontig.c:51:pg_data_t *pgdat_list[MAX_NUMNODES];
+arch/ia64/mm/discontig.c:196:	ai = pcpu_alloc_alloc_info(MAX_NUMNODES, nr_cpu_ids);
+
+arch/tile/kernel/setup.c:52:struct pglist_data node_data[MAX_NUMNODES] __read_mostly;
+arch/tile/kernel/setup.c:56:unsigned long __cpuinitdata node_start_pfn[MAX_NUMNODES];
+arch/tile/kernel/setup.c:57:unsigned long __cpuinitdata node_end_pfn[MAX_NUMNODES];
+arch/tile/kernel/setup.c:58:unsigned long __initdata node_memmap_pfn[MAX_NUMNODES];
+arch/tile/kernel/setup.c:59:unsigned long __initdata node_percpu_pfn[MAX_NUMNODES];
+arch/tile/kernel/setup.c:60:unsigned long __initdata node_free_pfn[MAX_NUMNODES];
+arch/tile/kernel/setup.c:62:static unsigned long __initdata node_percpu[MAX_NUMNODES];
+arch/tile/kernel/setup.c:82:unsigned long __cpuinitdata node_lowmem_end_pfn[MAX_NUMNODES];
+arch/tile/kernel/setup.c:89:int node_controller[MAX_NUMNODES] = { [0 ... MAX_NUMNODES-1] = -1 };
+arch/tile/kernel/setup.c:108:static unsigned int __initdata maxnodemem_pfn[MAX_NUMNODES] = {
+arch/tile/kernel/setup.c:109:	[0 ... MAX_NUMNODES-1] = -1U
+arch/tile/kernel/setup.c:154:	char buf[MAX_NUMNODES * 5];
+
+arch/tile/kernel/setup.c:764:struct cpumask node_2_cpu_mask[MAX_NUMNODES] __write_once;
+arch/tile/kernel/setup.c:802:	int distance[MAX_NUMNODES][NR_CPUS];
+
+arch/tile/kernel/setup.c:1405:static size_t __initdata pfn_offset[MAX_NUMNODES] = { 0 };
+arch/tile/include/asm/pci.h:152:	int mem_maps[MAX_NUMNODES];
+arch/tile/mm/init.c:80:static pte_t *l2_ptes[MAX_NUMNODES];
+arch/tile/mm/init.c:81:static int num_l2_ptes[MAX_NUMNODES];
+
+arch/parisc/mm/init.c:49:struct node_map_data node_data[MAX_NUMNODES] __read_mostly;
+
+arch/powerpc/platforms/cell/spu_base.c:49:struct cbe_spu_info cbe_spu_info[MAX_NUMNODES];
+arch/powerpc/oprofile/cell/spu_task_sync.c:40:struct spu_buffer spu_buff[MAX_NUMNODES * SPUS_PER_NODE];
+arch/powerpc/oprofile/cell/spu_task_sync.c:143:static struct cached_info *spu_info[MAX_NUMNODES * 8];
+arch/powerpc/oprofile/op_model_cell.c:142:static unsigned long spu_pm_cnt[MAX_NUMNODES * NUM_SPUS_PER_NODE];
+
+arch/powerpc/mm/numa.c:41:cpumask_var_t node_to_cpumask_map[MAX_NUMNODES];
+arch/powerpc/mm/numa.c:42:struct pglist_data *node_data[MAX_NUMNODES];
+arch/powerpc/mm/numa.c:55:static int distance_lookup_table[MAX_NUMNODES][MAX_DISTANCE_REF_POINTS];
+
+arch/powerpc/mm/numa.c:231:/* Returns nid in the range [0..MAX_NUMNODES-1], or -1 if no useful numa
+
+fs/proc/task_mmu.c:1031:	unsigned long node[MAX_NUMNODES];
+
+drivers/misc/sgi-xp/xpc_sn2.c:563:static u64 xpc_prot_vec_sn2[MAX_NUMNODES];
+drivers/char/mspec.c:105:static unsigned long scratch_page[MAX_NUMNODES];
+
+drivers/base/node.c:309:struct node node_devices[MAX_NUMNODES];
+drivers/acpi/numa.c:45:static int node_to_pxm_map[MAX_NUMNODES]
+drivers/acpi/numa.c:46:			= { [0 ... MAX_NUMNODES - 1] = PXM_INVAL };
+
+include/linux/hugetlb.h:232:	struct list_head hugepage_freelists[MAX_NUMNODES];
+include/linux/hugetlb.h:233:	unsigned int nr_huge_pages_node[MAX_NUMNODES];
+include/linux/hugetlb.h:234:	unsigned int free_huge_pages_node[MAX_NUMNODES];
+include/linux/hugetlb.h:235:	unsigned int surplus_huge_pages_node[MAX_NUMNODES];
+
+include/linux/nodemask.h:278:	[BITS_TO_LONGS(MAX_NUMNODES)-1] = NODE_MASK_LAST_WORD		\
+include/linux/nodemask.h:285:	[0 ... BITS_TO_LONGS(MAX_NUMNODES)-2] = ~0UL,			\
+include/linux/nodemask.h:286:	[BITS_TO_LONGS(MAX_NUMNODES)-1] = NODE_MASK_LAST_WORD		\
+include/linux/nodemask.h:293:	[0 ... BITS_TO_LONGS(MAX_NUMNODES)-1] =  0UL			\
+
+
+include/linux/slub_def.h:111:	struct kmem_cache_node *node[MAX_NUMNODES];
+
+mm/memcontrol.c:168:	struct mem_cgroup_per_node *nodeinfo[MAX_NUMNODES];
+mm/memcontrol.c:186:	struct mem_cgroup_tree_per_node *rb_tree_per_node[MAX_NUMNODES];
+
+mm/hugetlb.c:1718:struct node_hstate node_hstates[MAX_NUMNODES];
+
+mm/bootmem.c:37:bootmem_data_t bootmem_node_data[MAX_NUMNODES] __initdata;
+
+mm/page_alloc.c:205:static unsigned long __meminitdata zone_movable_pfn[MAX_NUMNODES];
+
+
+mm/page_alloc.c:3106:static int node_load[MAX_NUMNODES];
+
+
+
+arch/sparc/kernel/sysfs.c:290:	for (i = 0; i < MAX_NUMNODES; i++)
+arch/sparc/mm/init_64.c:1293:	sparse_memory_present_with_active_regions(MAX_NUMNODES);
+arch/sparc/mm/init_64.c:1896:		totalram_pages += free_low_memory_core_early(MAX_NUMNODES);
+arch/m32r/include/asm/mmzone.h:40:	for (node = 0 ; node < MAX_NUMNODES ; node++)
+arch/sh/kernel/machine_kexec.c:148:	VMCOREINFO_LENGTH(node_data, MAX_NUMNODES);
+arch/sh/include/asm/mmzone.h:16:	for (nid = 0; nid < MAX_NUMNODES; nid++)
+arch/sh/mm/numa.c:34:	BUG_ON(nid > MAX_NUMNODES || nid <= 0);
+arch/alpha/mm/numa.c:262:	for (nid = 0; nid < MAX_NUMNODES; nid++)
+arch/x86/kernel/machine_kexec_32.c:266:	VMCOREINFO_LENGTH(node_data, MAX_NUMNODES);
+arch/x86/kernel/apic/summit_32.c:406:	if (rio_table_hdr->num_scal_dev > MAX_NUMNODES) {
+arch/x86/kernel/apic/summit_32.c:407:		pr_warn("MAX_NUMNODES too low!  Defined as %d, but system has %d nodes\n",
+arch/x86/kernel/apic/summit_32.c:408:			MAX_NUMNODES, rio_table_hdr->num_scal_dev);
+arch/x86/kernel/apic/numaq_32.c:190:	if (m->trans_quad < MAX_NUMNODES && !node_online(m->trans_quad))
+arch/x86/kernel/machine_kexec_64.c:353:	VMCOREINFO_LENGTH(node_data, MAX_NUMNODES);
+arch/x86/kernel/check.c:94:	for_each_free_mem_range(i, MAX_NUMNODES, &start, &end, NULL) {
+arch/x86/kernel/pci-calgary_64.c:1238:	if (numnodes > MAX_NUMNODES){
+arch/x86/kernel/pci-calgary_64.c:1240:			"Calgary: MAX_NUMNODES too low! Defined as %d, "
+arch/x86/kernel/pci-calgary_64.c:1242:			MAX_NUMNODES, numnodes);
+arch/x86/kernel/e820.c:1097:	for_each_mem_pfn_range(i, MAX_NUMNODES, &start_pfn, &end_pfn, NULL) {
+arch/x86/kernel/e820.c:1103:	for_each_free_mem_range(u, MAX_NUMNODES, &start, &end, NULL) {
+arch/x86/include/asm/e820.h:13: * kernel was built: MAX_NUMNODES == (1 << CONFIG_NODES_SHIFT),
+arch/x86/mm/numa.c:121:	if (nr_node_ids == MAX_NUMNODES) {
+arch/x86/mm/numa.c:143:	if (start > end || nid < 0 || nid >= MAX_NUMNODES) {
+arch/x86/mm/numa.c:561:		if (rr == MAX_NUMNODES)
+arch/x86/mm/numa.c:578:	WARN_ON(memblock_set_node(0, ULLONG_MAX, MAX_NUMNODES));
+arch/x86/mm/memtest.c:76:	for_each_free_mem_range(i, MAX_NUMNODES, &this_start, &this_end, NULL) {
+arch/x86/mm/numa_64.c:22:	pages += free_low_memory_core_early(MAX_NUMNODES);
+arch/x86/mm/numa_emulation.c:92:	if (nr_nodes > MAX_NUMNODES) {
+arch/x86/mm/numa_emulation.c:94:			nr_nodes, MAX_NUMNODES);
+arch/x86/mm/numa_emulation.c:95:		nr_nodes = MAX_NUMNODES;
+arch/x86/mm/numa_emulation.c:217:	 * The limit on emulated nodes is MAX_NUMNODES, so the size per node is
+arch/x86/mm/numa_emulation.c:222:	min_size = (max_addr - addr - mem_hole_size(addr, max_addr)) / MAX_NUMNODES;
+arch/x86/mm/numa_emulation.c:273:			ret = emu_setup_memblk(ei, pi, nid++ % MAX_NUMNODES,
+arch/x86/mm/numa_emulation.c:326:	for (i = 0; i < MAX_NUMNODES; i++)
+arch/x86/mm/init_64.c:619:	sparse_memory_present_with_active_regions(MAX_NUMNODES);
+arch/x86/mm/init_32.c:698:	sparse_memory_present_with_active_regions(MAX_NUMNODES);
+arch/ia64/hp/common/sba_iommu.c:1144:		page = alloc_pages_exact_node(ioc->node == MAX_NUMNODES ?
+arch/ia64/hp/common/sba_iommu.c:1917:	if (ioc->node != MAX_NUMNODES)
+arch/ia64/hp/common/sba_iommu.c:2025:	ioc->node = MAX_NUMNODES;
+arch/ia64/hp/common/sba_iommu.c:2034:	if (node >= MAX_NUMNODES || !node_online(node))
+arch/ia64/kernel/numa.c:73:	for(node=0; node < MAX_NUMNODES; node++)
+arch/ia64/kernel/acpi.c:550:	 * mapping with sparse node numbering iff MAX_PXM_DOMAINS <= MAX_NUMNODES.
+arch/ia64/kernel/acpi.c:584:		for (i = 0; i < MAX_NUMNODES; i++)
+arch/ia64/kernel/acpi.c:585:			for (j = 0; j < MAX_NUMNODES; j++)
+arch/ia64/kernel/acpi.c:1001:	if (node >= MAX_NUMNODES || !node_online(node) ||
+arch/ia64/kernel/uncached.c:191:	if (unlikely(starting_nid >= MAX_NUMNODES))
+arch/ia64/kernel/uncached.c:211:	} while ((nid = (nid + 1) % MAX_NUMNODES) != starting_nid);
+arch/ia64/kernel/machine_kexec.c:149:	VMCOREINFO_LENGTH(pgdat_list, MAX_NUMNODES);
+arch/ia64/sn/kernel/sn2/sn_hwperf.c:206:	return node < MAX_NUMNODES && node_online(node) && nr_cpus_node(node);
+arch/ia64/sn/kernel/sn2/sn_hwperf.c:211:	return node < MAX_NUMNODES && node_online(node) && NODE_DATA(node)->node_present_pages;
+arch/ia64/sn/kernel/setup.c:622:	for (i=0; i < MAX_NUMNODES; i++) {
+arch/ia64/include/asm/mmzone.h:32:# define NR_NODE_MEMBLKS	(MAX_NUMNODES * 8)
+arch/ia64/include/asm/mmzone.h:35:# define NR_NODE_MEMBLKS	(MAX_NUMNODES * 4)
+arch/ia64/include/asm/mmzone.h:39:# define NR_NODE_MEMBLKS	(MAX_NUMNODES * 4)
+arch/ia64/include/asm/sn/arch.h:32: * 	should be deleted and TIOs should be included in MAX_NUMNODES.
+arch/ia64/include/asm/sn/arch.h:34:#define MAX_TIO_NODES		MAX_NUMNODES
+arch/ia64/include/asm/sn/arch.h:35:#define MAX_COMPACT_NODES	(MAX_NUMNODES + MAX_TIO_NODES)
+arch/ia64/include/asm/acpi.h:151:#if MAX_NUMNODES > 256
+arch/ia64/include/asm/acpi.h:152:#define MAX_PXM_DOMAINS MAX_NUMNODES
+arch/ia64/mm/discontig.c:558:	for (node = MAX_NUMNODES - 1; node >= 0; node--) {
+arch/ia64/mm/discontig.c:767:	sparse_memory_present_with_active_regions(MAX_NUMNODES);
+arch/tile/kernel/setup.c:140:	if (node >= MAX_NUMNODES || *endp != ':')
+arch/tile/kernel/setup.c:329:	BUILD_BUG_ON(MAX_NUMNODES > 127);
+arch/tile/kernel/setup.c:397:		if (i >= MAX_NUMNODES) {
+arch/tile/kernel/setup.c:518:	for (i = 1; i < MAX_NUMNODES; ++i) {
+arch/tile/kernel/setup.c:525:	for (i = 0; i < MAX_NUMNODES; ++i) {
+arch/tile/kernel/setup.c:623:	for (i = 0; i < MAX_NUMNODES; ++i)
+arch/tile/kernel/setup.c:883:		if (node == MAX_NUMNODES)
+arch/tile/mm/init.c:97:	BUG_ON(node >= MAX_NUMNODES);
+arch/tile/mm/init.c:473:	for (i = 0; i < MAX_NUMNODES; ++i) {
+arch/tile/mm/init.c:886:	for (i = MAX_NUMNODES-1; i >= 0; --i) {
+arch/tile/mm/init.c:899:	for (i = MAX_NUMNODES-1; i >= 0; --i) {
+arch/powerpc/platforms/cell/spu_base.c:809:	for (i = 0; i < MAX_NUMNODES; i++) {
+arch/powerpc/platforms/cell/spufs/sched.c:315:	for (n = 0; n < MAX_NUMNODES; n++, node++) {
+arch/powerpc/platforms/cell/spufs/sched.c:327:		node = (node < MAX_NUMNODES) ? node : 0;
+arch/powerpc/platforms/cell/spufs/sched.c:598:	for (n = 0; n < MAX_NUMNODES; n++, node++) {
+arch/powerpc/platforms/cell/spufs/sched.c:599:		node = (node < MAX_NUMNODES) ? node : 0;
+arch/powerpc/platforms/cell/spufs/sched.c:646:	for (n = 0; n < MAX_NUMNODES; n++, node++) {
+arch/powerpc/platforms/cell/spufs/sched.c:647:		node = (node < MAX_NUMNODES) ? node : 0;
+arch/powerpc/platforms/cell/spufs/sched.c:971:	for (node = 0; node < MAX_NUMNODES; node++)
+arch/powerpc/platforms/cell/spufs/sched.c:1014:		for (node = 0; node < MAX_NUMNODES; node++) {
+arch/powerpc/platforms/cell/spufs/sched.c:1166:	for (node = 0; node < MAX_NUMNODES; node++) {
+arch/powerpc/platforms/cell/spufs/inode.c:392:		for (node = 0; node < MAX_NUMNODES; node++) {
+arch/powerpc/platforms/cell/spufs/inode.c:398:		if (node == MAX_NUMNODES) {
+arch/powerpc/platforms/cell/spu_manage.c:316:	if (spu->node >= MAX_NUMNODES) {
+arch/powerpc/platforms/cell/spu_manage.c:406:	for (node = 0; node < MAX_NUMNODES; node++) {
+arch/powerpc/platforms/cell/spu_manage.c:530:	for (cbe = 0; cbe < MAX_NUMNODES; cbe++)
+arch/powerpc/kernel/machine_kexec.c:73:	VMCOREINFO_LENGTH(node_data, MAX_NUMNODES);
+arch/powerpc/kernel/sysfs.c:604:	for (i = 0; i < MAX_NUMNODES; i++)
+arch/powerpc/oprofile/op_model_cell.c:753:	for (i=0; i < MAX_NUMNODES * NUM_SPUS_PER_NODE; i++)
+arch/powerpc/mm/numa.c:68:	if (nr_node_ids == MAX_NUMNODES) {
+arch/powerpc/mm/numa.c:141:	for_each_mem_pfn_range(i, MAX_NUMNODES, &start_pfn, &end_pfn, &nid) {
+arch/powerpc/mm/numa.c:245:	if (nid == 0xffff || nid >= MAX_NUMNODES)
+arch/powerpc/mm/numa.c:533:		if (nid == 0xffff || nid >= MAX_NUMNODES)
+arch/mips/sgi-ip27/ip27-nmi.c:216:		if (node == MAX_NUMNODES)
+arch/s390/mm/init.c:122:	sparse_memory_present_with_active_regions(MAX_NUMNODES);
+kernel/cpuset.c:1707:		.max_write_len = (100U + 6 * MAX_NUMNODES),
+kernel/cpuset.c:2465:	if (node == MAX_NUMNODES)
+kernel/compat.c:1130:	nr_bits = min_t(unsigned long, maxnode - 1, MAX_NUMNODES);
+drivers/misc/sgi-gru/grutables.h:160:#define GRU_MAX_BLADES		MAX_NUMNODES
+drivers/net/ethernet/intel/igb/igb_main.c:691:			if (cur_node == MAX_NUMNODES)
+drivers/net/ethernet/intel/igb/igb_main.c:717:			if (cur_node == MAX_NUMNODES)
+drivers/net/ethernet/intel/igb/igb_main.c:1129:			if (cur_node == MAX_NUMNODES)
+drivers/base/node.c:204:	BUILD_BUG_ON(MAX_NUMNODES * 4 > PAGE_SIZE);
+drivers/acpi/numa.c:77:		if (nodes_weight(nodes_found_map) >= MAX_NUMNODES)
+include/linux/seq_file.h:104:	return seq_bitmap(m, mask->bits, MAX_NUMNODES);
+include/linux/seq_file.h:118:	return seq_bitmap_list(m, mask->bits, MAX_NUMNODES);
+include/linux/mmzone.h:537:#define MAX_ZONES_PER_ZONELIST (MAX_NUMNODES * MAX_NR_ZONES)
+include/linux/numa.h:11:#define MAX_NUMNODES    (1 << NODES_SHIFT)
+include/linux/memblock.h:68: * @nid: node selector, %MAX_NUMNODES for all nodes
+include/linux/memblock.h:87: * @nid: node selector, %MAX_NUMNODES for all nodes
+include/linux/memblock.h:107: * @nid: node selector, %MAX_NUMNODES for all nodes
+include/linux/nodemask.h:45: * int first_node(mask)			Number lowest set bit, or MAX_NUMNODES
+include/linux/nodemask.h:46: * int next_node(node, mask)		Next node past 'node', or MAX_NUMNODES
+include/linux/nodemask.h:48: *					MAX_NUMNODES.
+include/linux/nodemask.h:98:typedef struct { DECLARE_BITMAP(bits, MAX_NUMNODES); } nodemask_t;
+include/linux/nodemask.h:113:#define nodes_setall(dst) __nodes_setall(&(dst), MAX_NUMNODES)
+include/linux/nodemask.h:119:#define nodes_clear(dst) __nodes_clear(&(dst), MAX_NUMNODES)
+include/linux/nodemask.h:136:			__nodes_and(&(dst), &(src1), &(src2), MAX_NUMNODES)
+include/linux/nodemask.h:144:			__nodes_or(&(dst), &(src1), &(src2), MAX_NUMNODES)
+include/linux/nodemask.h:152:			__nodes_xor(&(dst), &(src1), &(src2), MAX_NUMNODES)
+include/linux/nodemask.h:160:			__nodes_andnot(&(dst), &(src1), &(src2), MAX_NUMNODES)
+include/linux/nodemask.h:168:			__nodes_complement(&(dst), &(src), MAX_NUMNODES)
+include/linux/nodemask.h:176:			__nodes_equal(&(src1), &(src2), MAX_NUMNODES)
+include/linux/nodemask.h:184:			__nodes_intersects(&(src1), &(src2), MAX_NUMNODES)
+include/linux/nodemask.h:192:			__nodes_subset(&(src1), &(src2), MAX_NUMNODES)
+include/linux/nodemask.h:199:#define nodes_empty(src) __nodes_empty(&(src), MAX_NUMNODES)
+include/linux/nodemask.h:205:#define nodes_full(nodemask) __nodes_full(&(nodemask), MAX_NUMNODES)
+include/linux/nodemask.h:211:#define nodes_weight(nodemask) __nodes_weight(&(nodemask), MAX_NUMNODES)
+include/linux/nodemask.h:218:			__nodes_shift_right(&(dst), &(src), (n), MAX_NUMNODES)
+include/linux/nodemask.h:226:			__nodes_shift_left(&(dst), &(src), (n), MAX_NUMNODES)
+include/linux/nodemask.h:234:          > MAX_NUMNODES, then the silly min_ts could be dropped. */
+include/linux/nodemask.h:239:	return min_t(int, MAX_NUMNODES, find_first_bit(srcp->bits, MAX_NUMNODES));
+include/linux/nodemask.h:245:	return min_t(int,MAX_NUMNODES,find_next_bit(srcp->bits, MAX_NUMNODES, n+1));
+include/linux/nodemask.h:268:	return min_t(int,MAX_NUMNODES,
+include/linux/nodemask.h:269:			find_first_zero_bit(maskp->bits, MAX_NUMNODES));
+include/linux/nodemask.h:272:#define NODE_MASK_LAST_WORD BITMAP_LAST_WORD_MASK(MAX_NUMNODES)
+include/linux/nodemask.h:274:#if MAX_NUMNODES <= BITS_PER_LONG
+include/linux/nodemask.h:299:			__nodemask_scnprintf((buf), (len), &(src), MAX_NUMNODES)
+include/linux/nodemask.h:307:		__nodemask_parse_user((ubuf), (ulen), &(dst), MAX_NUMNODES)
+include/linux/nodemask.h:315:			__nodelist_scnprintf((buf), (len), &(src), MAX_NUMNODES)
+include/linux/nodemask.h:322:#define nodelist_parse(buf, dst) __nodelist_parse((buf), &(dst), MAX_NUMNODES)
+include/linux/nodemask.h:329:		__node_remap((oldbit), &(old), &(new), MAX_NUMNODES)
+include/linux/nodemask.h:337:		__nodes_remap(&(dst), &(src), &(old), &(new), MAX_NUMNODES)
+include/linux/nodemask.h:345:		__nodes_onto(&(dst), &(orig), &(relmap), MAX_NUMNODES)
+include/linux/nodemask.h:353:		__nodes_fold(&(dst), &(orig), sz, MAX_NUMNODES)
+include/linux/nodemask.h:360:#if MAX_NUMNODES > 1
+include/linux/nodemask.h:363:		(node) < MAX_NUMNODES;			\
+include/linux/nodemask.h:365:#else /* MAX_NUMNODES == 1 */
+include/linux/nodemask.h:369:#endif /* MAX_NUMNODES */
+include/linux/nodemask.h:394:#if MAX_NUMNODES > 1
+include/linux/nodemask.h:460:#define next_online_node(nid)	(MAX_NUMNODES)
+include/linux/nodemask.h:469:#if defined(CONFIG_NUMA) && (MAX_NUMNODES > 1)
+include/linux/gfp.h:324:	VM_BUG_ON(nid < 0 || nid >= MAX_NUMNODES || !node_online(nid));
+include/acpi/acpi_numa.h:8:#if MAX_NUMNODES > 256
+include/acpi/acpi_numa.h:9:#define MAX_PXM_DOMAINS MAX_NUMNODES
+mm/memcontrol.c:273:#if MAX_NUMNODES > 1
+mm/memcontrol.c:852:#if MAX_NUMNODES > 1
+mm/memcontrol.c:861:#if MAX_NUMNODES > 1
+mm/memcontrol.c:1599:#if MAX_NUMNODES > 1
+mm/memcontrol.c:1652:	if (node == MAX_NUMNODES)
+mm/memcontrol.c:1660:	if (unlikely(node == MAX_NUMNODES))
+mm/memcontrol.c:1683:		     nid < MAX_NUMNODES;
+mm/memcontrol.c:4764:	/* Can be very big if MAX_NUMNODES is very big */
+mm/memcontrol.c:4977:	memcg->last_scanned_node = MAX_NUMNODES;
+mm/hugetlb.c:720:	if (nid == MAX_NUMNODES)
+mm/hugetlb.c:722:	VM_BUG_ON(nid >= MAX_NUMNODES);
+mm/hugetlb.c:1934:	for (i = 0; i < MAX_NUMNODES; ++i)
+mm/mempolicy.c:340:		if (current->il_next >= MAX_NUMNODES)
+mm/mempolicy.c:342:		if (current->il_next >= MAX_NUMNODES)
+mm/mempolicy.c:1223:	if (nlongs > BITS_TO_LONGS(MAX_NUMNODES)) {
+mm/mempolicy.c:1226:		for (k = BITS_TO_LONGS(MAX_NUMNODES); k < nlongs; k++) {
+mm/mempolicy.c:1236:		nlongs = BITS_TO_LONGS(MAX_NUMNODES);
+mm/mempolicy.c:1251:	const int nbytes = BITS_TO_LONGS(MAX_NUMNODES) * sizeof(long);
+mm/mempolicy.c:1408:	if (nmask != NULL && maxnode < MAX_NUMNODES)
+mm/mempolicy.c:1435:	DECLARE_BITMAP(bm, MAX_NUMNODES);
+mm/mempolicy.c:1437:	nr_bits = min_t(unsigned long, maxnode-1, MAX_NUMNODES);
+mm/mempolicy.c:1463:	DECLARE_BITMAP(bm, MAX_NUMNODES);
+mm/mempolicy.c:1465:	nr_bits = min_t(unsigned long, maxnode-1, MAX_NUMNODES);
+mm/mempolicy.c:1489:	nr_bits = min_t(unsigned long, maxnode-1, MAX_NUMNODES);
+mm/mempolicy.c:1590:	if (next >= MAX_NUMNODES)
+mm/mempolicy.c:1592:	if (next < MAX_NUMNODES)
+mm/mempolicy.c:1699:			get_random_int() % w, MAX_NUMNODES);
+mm/sparse.c:37:#if MAX_NUMNODES <= 256
+mm/nobootmem.c:129:	for_each_free_mem_range(i, MAX_NUMNODES, &start, &end, NULL)
+mm/nobootmem.c:150:	/* free_low_memory_core_early(MAX_NUMNODES) will be called later */
+mm/nobootmem.c:162:	 * We need to use MAX_NUMNODES instead of NODE_DATA(0)->node_id
+mm/nobootmem.c:165:	 * Use MAX_NUMNODES will make sure all ranges in early_node_map[]
+mm/nobootmem.c:168:	return free_low_memory_core_early(MAX_NUMNODES);
+mm/nobootmem.c:215:	ptr = __alloc_memory_core_early(MAX_NUMNODES, size, align, goal, limit);
+mm/nobootmem.c:299:	ptr = __alloc_memory_core_early(MAX_NUMNODES, size, align,
+mm/page_alloc.c:212:#if MAX_NUMNODES > 1
+mm/page_alloc.c:213:int nr_node_ids __read_mostly = MAX_NUMNODES;
+mm/page_alloc.c:3153:		val *= (MAX_NODE_LOAD*MAX_NUMNODES);
+mm/page_alloc.c:3208:static int node_order[MAX_NUMNODES];
+mm/page_alloc.c:3423:	for (node = local_node + 1; node < MAX_NUMNODES; node++) {
+mm/page_alloc.c:4026:	for_each_mem_pfn_range(i, MAX_NUMNODES, &start_pfn, &end_pfn, &nid)
+mm/page_alloc.c:4059: * @nid: The node to free memory on. If MAX_NUMNODES, all nodes are freed.
+mm/page_alloc.c:4084: * @nid: The node to call memory_present for. If MAX_NUMNODES, all nodes will be used.
+mm/page_alloc.c:4101: * @nid: The nid to return the range for. If MAX_NUMNODES, the min and max PFN are returned.
+mm/page_alloc.c:4217: * Return the number of holes in a range on a node. If nid is MAX_NUMNODES,
+mm/page_alloc.c:4246:	return __absent_pages_in_range(MAX_NUMNODES, start_pfn, end_pfn);
+mm/page_alloc.c:4538:#if MAX_NUMNODES > 1
+mm/page_alloc.c:4583:	for_each_mem_pfn_range(i, MAX_NUMNODES, &start, &end, &nid) {
+mm/page_alloc.c:4634:	return find_min_pfn_for_node(MAX_NUMNODES);
+mm/page_alloc.c:4648:	for_each_mem_pfn_range(i, MAX_NUMNODES, &start_pfn, &end_pfn, &nid) {
+mm/page_alloc.c:4793:	for (nid = 0; nid < MAX_NUMNODES; nid++)
+mm/page_alloc.c:4876:	for (i = 0; i < MAX_NUMNODES; i++) {
+mm/page_alloc.c:4884:	for_each_mem_pfn_range(i, MAX_NUMNODES, &start_pfn, &end_pfn, &nid)
+mm/memblock.c:90: * @nid: nid of the free area to find, %MAX_NUMNODES for any node
+mm/memblock.c:143:					   MAX_NUMNODES);
+mm/memblock.c:159:		memblock_set_region_node(&type->regions[0], MAX_NUMNODES);
+mm/memblock.c:444:	return memblock_add_region(&memblock.memory, base, size, MAX_NUMNODES);
+mm/memblock.c:560:	return memblock_add_region(_rgn, base, size, MAX_NUMNODES);
+mm/memblock.c:566: * @nid: nid: node selector, %MAX_NUMNODES for all nodes
+mm/memblock.c:601:		if (nid != MAX_NUMNODES && nid != memblock_get_region_node(m))
+mm/memblock.c:642: * @nid: nid: node selector, %MAX_NUMNODES for all nodes
+mm/memblock.c:669:		if (nid != MAX_NUMNODES && nid != memblock_get_region_node(m))
+mm/memblock.c:719:		if (nid == MAX_NUMNODES || nid == r->nid)
+mm/memblock.c:789:	return memblock_alloc_base_nid(size, align, max_addr, MAX_NUMNODES);
+mm/memblock.c:952:		if (memblock_get_region_node(rgn) != MAX_NUMNODES)
+mm/migrate.c:1054:	while (pm->node != MAX_NUMNODES && pm->page != p)
+mm/migrate.c:1057:	if (pm->node == MAX_NUMNODES)
+mm/migrate.c:1070: * The pm array ends with node = MAX_NUMNODES.
+mm/migrate.c:1085:	for (pp = pm; pp->node != MAX_NUMNODES; pp++) {
+mm/migrate.c:1201:			if (node < 0 || node >= MAX_NUMNODES)
+mm/migrate.c:1215:		pm[chunk_nr_pages].node = MAX_NUMNODES;
+mm/slab.c:324:#define NUM_INIT_LISTS (3 * MAX_NUMNODES)
+mm/slab.c:327:#define	SIZE_AC MAX_NUMNODES
+mm/slab.c:328:#define	SIZE_L3 (2 * MAX_NUMNODES)
+mm/slab.c:588:static struct kmem_list3 *cache_cache_nodelists[MAX_NUMNODES];
+mm/slab.c:864:	if (node == MAX_NUMNODES)
+mm/slab.c:875:	if (unlikely(node >= MAX_NUMNODES))
+mm/slab.c:1609:		if (i < MAX_NUMNODES)
+mm/mmzone.c:21:	if (nid == MAX_NUMNODES)
+
+- wtf Pat?
+  arch/m32r/include/asm/mmzone.h
+
+- Questions:
+  - How do we decide what memory ends up in what zone?
+    - clarification needed: when?
+  - Does the interface that is driving the node change also change anything which would affect the zone a page belongs to?
+
+- PAPR notes:
+>> If the long term mapping changes the client program can be made aware of the
+>> new associativity information using the ibm,update-properties RTAS call (See
+>> Section 7.3.29‚ “ibm,update-properties RTAS Call‚” on page 272).
+
+>> A PRRN event is signaled via the RTAS event-scan mechanism, which returns a
+>> Hot Plug Event message “fixed part” (See Section 10.3.2.1.9‚ “RTAS Event
+>> Return Format Fixed Part‚” on page 316) indicating “Platform Resource Reas-
+>> signment”. In response to the Hot Plug Event message, the OS may call
+>> ibm,update-nodes to determine which re- sources were reassigned, and then
+>> ibm,update-properties to obtain the new affinity information about those
+>> resources.
+
+  - what is the format of ibm,update-nodes & ibm,update-properties?
+    - ibm,update-nodes merely indicates which OF nodes have changed, and we
+      should call ibm,update-properties.
+    - ibm,update-properties returns the new property values for the changed note.
+    - Essentially, our new NUMA mapping comes in the same form as the initial
+      NUMA mapping came in @ boot time.
+  - What is the format of the OF prop containing the numa layout?
+
+- What needs to be adjusted if node A looses pfn B to node C?
+  - Can we gain greater efficiency by processing more than a page at a time?
+  - We have to lookup which node pfn B belongs to currently (A = page_to_nid(pfn_to_page(B)))
+
+  - pg_data = node_data[A] // XXX: what actually reads this data? (node_start_pfn & node_spanned_pages)
+    - lock_memory_hotplug();
+    - lock(pg_data->node_size_lock);
+    - pg_data->node_present_pages--;
+    - if (B == pg_data->node_start_pfn)
+        pg_data->node_start_pfn = next_pfn;
+        pg_data->node_spanned_pages --;
+    - if (B is at end of spanned_pages)
+        pg_data->node_spanned_pages --;
+    - ifdef CONFIG_FLAT_NODE_MEM_MAP /* !SPARSEMEM */
+        Is this even handlable? It is possible we'll be poking holes.
+        What does FLAT_NODE_MEM_MAP actually mean?
+        When is it enabled?
+  - for_each_moved_page:
+    - mark as from a different node.
+      XXX: Do the allocators/deallocators 'freeing' a page use this mark to
+           determine what node's free list to return it to?
+  - pg_data = num_nodes[A]
+    for_each(zone, pg_data->zones)
+    - If page is free, remove from zone->free_list
+
+- PageBuddy(page) and PageLRU(page) query the Buddy & LRU flags (respectively)
+  on a particular page.
+  - What is the "lifecycle" of a page? How does it move through various states and lists within the MM?
+
+- include/linux/node.h
+  - register_mem_sect_under_node()
+  - unregister_mem_sect_under_node()
+  - take a 'struct mem_section'
+  - Appear to simply update sysfs files indicating what memory is there.
+
+- What is a
+  - struct pglist_data == pg_data_t
+    - include/linux/mmzone.h
+    - node_zones[] - an array of 'struct zone'.
+    - on NUMA machines, each NUMA node has a pglist_data to describe it's memory layout.
+    - has a spinlock_t node_size_lock for MEMORY_HOTPLUG gaurding
+      node_start_pfn, node_present_pages, node_spanned_pages.
+    - struct pglist_data *node_data[MAX_NUMNODES];
+  - NODE
+    limit:     MAX_NUMNODES [include/linux/numa.h]
+    dyn limit: nr_node_ids  [mm/page_alloc.c]
+    iter:      for_each_online_node(i)
+    tracking bitmap: node_states[X] [include/linux/nodemask.h]
+  - ZONE
+    files: include/linux/mmzone.h, linux/mm/mmzone.c
+    limit: MAX_ORDER
+
+    Each 'struct zone' contains a 'int node'.
+    Each zone has a free_area which contains a free_list.
+
+    With CONFIG_NUMA
+      'zone reclaim' via min_unmapped_pages & min_slab_pages.
+
+    Has knowledge of SPARSEMEM, MEMORY_HOTPLUG, COMPACTION.
+
+    Has a 'seqlock_t span_seqlock;' for use with MEMORY_HOTPLUG
+      Notes: 'see spanned/present_pages for more description'.
+      Is this appropriate to use for Dynamic Numa Memory Migration?
+
+    Has a 'spinlock_t' {'lock', 'lru_lock'} for all configurations.
+
+    'unsigned long inactive_ratio' is a statistic
+
+  - zone list :: a list of zones upon which an allocation request acts.
+
+  - ZONEID
+  - SECTION
+  - pgd_t
+  - mm_struct
+  - vm_area_struct
+  - address_space
+
+- Potential for failure:
+  - NODES_SHIFT == 0 -> MAX_NUMNODES = 1
+  - "These are only used during initialization" wrt pfn_to_nid()
+  - node_states[N_HIGH_MEMORY, N_NORMAL_MEMORY, N_CPU] do not have [0] set to 1
+    when NUMA is enabled.
+  - in calling 'free_all_bootmem_node()'
+    - sometimes iteration occurs over 'for_each_online_pgdat()' (ia64)
+    - and sometimes over 'for_each_online_node'. (avr32, everything else)
+    - sometimes there is an extra condition
+      - ia64: pgdat->bdata->node_bootmem_map
+      - x86: none.
+      - sparc: NODE_DATA(i)->node_spanned_pages != 0
+  - debugfs.h has stubs that return ERR_PTR(-ENODEV), actual functions don't
+    return ERR_PTRs.
+  - config MEMORY_HOTPLUG depends on ARCH_ENABLE_MEMORY_HOTPLUG but also
+    supplies a list of architectures it supports. Appears that this list of
+    supported architectures should be eliminated.
+  - if using simple_attribute, i_private (the void *data argument) could easily
+    be leaked.
+
+- Things in ARCH that should be GENERIC
+  - fake numa (ppc has it, see fake_numa_create_new_node).
+  - struct pglist_data *node_data[MAX_NUMNODES];
+    - m32r, tile, sh, x86, powerpc all have this.
+
+- On varying PAGE_SIZEs:
+  While the HW may have support for one particular size for VM mappings (4k for
+  x86, 64k for power, et c.), that doesn't require that we track avaliable pages
+  in chunks of that size. We could keep 1 'struct page' for every N hw/phys/real
+  pages, allowing a reduction in the presure applied by 'mem_map' (the
+  array/tracker of 'struct page's).
+  - Influencing Variables: workload, memory size.
+  - What is the cost in wasted memory under various workloads?
+  - What is the memory gained?
+
+- with CONFIG_SPARSEMEM && ! CONFIG_SPARSEMEM_VMEMMAP the section a page
+  belongs to can change (via 'set_page_section()')
+
+- MAX_NUMNODES
+  This should catch all things iterating statically over all the nodes.
+
+  include/acpi/acpi_numa.h
+  8:#if MAX_NUMNODES > 256
+  9:#define MAX_PXM_DOMAINS MAX_NUMNODES
+
+  - linux/mm/mmzone.c
+      struct pglist_data *next_oneline_pgdat(struct pglist_data *pgdat)
+        |- struct zone *next_zone(struct zone *zone)
+        \-
+
+- CONFIG_NODES_SHIFT
+
+  - include/linux/numa.h
+
+- NODES_SHIFT
+  Only used in the NODE_NOT_IN_PAGE_FLAGS case
+  Does _not_ indicate position of NODES field in page flags.
+
+  '#define ZONEID_SHIFT (NODES_SHIFT + ZONES_SHIFT)'
+
+  - CONFIG_NODES_SHIFT
+  - include/linux/numa.h, #define ...
+  - arch/avr32/include/asm/numnodesh
+
+- NODE_NOT_IN_PAGE_FLAGS
+
+  #if !(NODES_WIDTH > 0 || NODES_SHIFT == 0)
+  #define NODE_NOT_IN_PAGE_FLAGS
+  #endif
+
+  - include/linux/mm.h, #define ...
+
+  - arch/x86/mm/numa.c, #ifdef ...
+
+  - mm/sparse.c
+  - mm/mm_init.c
+
+- page_to_nid()
+  Low direct usage.
+
+  /* {{{ if NODE_NOT_IN_PAGE_FLAGS , from mm/sparse.c */
+  int page_to_nid(const struct page *page)
+  {
+    return section_to_node_table[page_to_section(page)];
+  }
+
+  static minimal_int_for(MAX_NUMNODES) section_to_node_table[NR_MEM_SECTIONS] __cacheline_aligned;
+
+  __cacheline_aligned could indicate that this is a performance sensitive operation.
+  /* }}} */
+
+  /* {{{ from include/linux/mm.h */
+  static inline int page_to_nid(const struct page *page)
+  {
+    return (page->flags >> NODES_PGSHIFT) & NODES_MASK;
+  }
+  /* }}} */
+
+  - mm/sparse.c [EXPORT_SYMBOL]
+  - mm/memcontrol.c
+  - mm/memory-failure.c
+  - mm/mempolicy.c
+  - mm/page_alloc.c
+  - mm/mm_init.c
+  - mm/vmalloc.c
+
+  - drivers/net/ethernet/intel/igb/igb_main.c
+  - drivers/net/ethernet/intel/ixgbe/ixgbe_main.c
+
+  - arch/x86/include/asm/pgtable.h
+  - arch/m68k/include/asm/page_mm.h
+
+  - fs/proc/task_mmu.c
+
+  - include/linux/mm.h, #define ...
+  - include/asm-generic/memory_model.h
+  - include/linux/mmzone.h
+
+  - mm/hugetlb.c
+  - mm/huge_memory.c
+
+  - mm/page_cgroup.c
+  - mm/memory_hotplug.c
+  - mm/migrate.c
+
+  - mm/slub.c
+  - mm/slob.c
+  - mm/slab.c
+
+# vim: et:sts=2:sw=2
