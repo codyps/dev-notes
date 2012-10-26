@@ -1,0 +1,94 @@
+= Linux Kernel Memory Allocation =
+
+When `__init` areas are being freed to the page allocator (with some variation
+on the following code block), slab has already been initialized enough to
+indicte it is available via `slab_is_available()`.
+
+	addr = (unsigned long)__init_begin;
+	for (; addr < (unsigned long)__init_end; addr += PAGE_SIZE) {
+		memset((void *)addr, POISON_FREE_INITMEM, PAGE_SIZE);
+		ClearPageReserved(virt_to_page(addr));
+		init_page_count(virt_to_page(addr));
+		free_page(addr);
+		totalram_pages++;
+	}
+
+== memblock ==
+files :: `include/linux/memblock.h`, `mm/memblock.c`
+
+Memblock tracks memory as 2 lists of regions: "reserved" and "memory". It also
+keeps track of a total "limit" for memory, essentially a maximum physical
+address.
+
+Memblock _Regions_ are composed of the base address, length and (with
+`CONFIG_HAVE_MEMBLOCK_NODEMAP`) node id.
+
+Allocations are treated as additions to the reserved list (which differ from
+reservations only in needed to choose a address to limit fragmentation).
+
+Neighboring regions in both lists are merged when adjacent.
+
+The supporting funtions & data are in `__init{,data}' on most architectures
+(but not all, _powerpc_ being a prominent exception) as determined by
+`CONFIG_ARCH_DISCARD_MEMBLOCK`.
+
+Not designed to be used while bootmem is active, only used before hand or much
+later (when slab is active). Only used with slab for memory-hotplug on powerpc.
+Slab is not initialized until far after the freeing of __init, so any kernel
+builds with CONFIG_ARCH_DISCARD_MEMBLOCK will not use memblock with slab.
+
+Q: when memblock is used later (with slab), but is using an allocation made
+from memblock itself for tracking it's own memory consumtion, how is this
+memory freed? Simply using the typical memblock freeing mechanizsm will be
+insufficient to allow actual reuse of the now free area as slab & the page
+allocator don't use or consult memblock's datastructures.
+
+Combines both tracking of memory layout and allocations. Additionally provides
+the greatest degree of flexibility in describing the avaliable memory, which
+is why on _powerpc_ it is used
+
+=== Initialization ===
+
+
+=== Teardown ===
+
+XXX: are the 'memblock_region's freed prior to the freeing of '__init'?
+
+Completely unusable after arch specific freeing of '__init' memory
+
+== bootmem ==
+files :: `mm/bootmem.c`, `mm/nobootmem.c`, `include/linux/bootmem.h`
+
+api::
+
+	extern unsigned long max_low_pfn;
+	extern unsigned long min_low_pfn;
+	extern unsigned long max_pfn;
+
+	int reserve_bootmem(ul addr, ul size, int flags);
+	int reserve_bootmem_node(pg_data_t *pgdat, ul physaddr, ul size, int flags);
+	extern void *__alloc_bootmem_node(pg_data_t *pgdat,
+					  unsigned long size,
+					  unsigned long align,
+					  unsigned long goal);
+
+Bootmem is initialized with either init_bootmem() or init_bootmem_node(), called from architecture specific code.
+
+=== Notes ===
+
+`goal` is commonly "BOOTMEM_LOW_LIMIT".
+`align` is commonly "SMP_CACHE_BYTES" or, for __alloc_*_pages, "PAGE_SIZE")
+
+Q: What does all this "nobootmem" (CONFIG_NO_BOOTMEM) stuff do?
+
+== page_alloc ==
+files:: `mm/page_alloc.c`
+
+== kmem_cache / slab ==
+== percpu allocations ==
+
+== x86's remap allocator ==
+
+	init_alloc_remap(nid, pa_start, pa_end)
+	alloc_remap(nid, pa_size) : void *va
+
