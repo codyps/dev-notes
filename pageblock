@@ -1,0 +1,271 @@
+./Documentation/trace/events-kmem.txt:95:mm_page_alloc_extfrag		page=%p pfn=%lu alloc_order=%d fallback_order=%d pageblock_order=%d alloc_migratetype=%d fallback_migratetype=%d fragmenting=%d change_ownership=%d
+./Documentation/trace/events-kmem.txt:106:min_free_kbytes in increments of 3*pageblock_size*nr_online_nodes where
+./Documentation/trace/events-kmem.txt:107:pageblock_size is usually the size of the default hugepage size.
+./Documentation/trace/postprocess/trace-pagealloc-postprocess.pl:80:my $regex_fragdetails_default = 'page=([0-9a-f]*) pfn=([0-9]*) alloc_order=([-0-9]*) fallback_order=([-0-9]*) pageblock_order=([-0-9]*) alloc_migratetype=([-0-9]*) fallback_migratetype=([-0-9]*) fragmenting=([-0-9]) change_ownership=([-0-9])';
+./Documentation/trace/postprocess/trace-pagealloc-postprocess.pl:132:			"alloc_order", "fallback_order", "pageblock_order",
+./Documentation/trace/postprocess/trace-pagealloc-postprocess.pl:242:			my ($alloc_order, $fallback_order, $pageblock_order);
+./Documentation/trace/postprocess/trace-pagealloc-postprocess.pl:256:			$pageblock_order = $5;
+./drivers/base/dma-contiguous.c:140:	unsigned i = count >> pageblock_order;
+./drivers/base/dma-contiguous.c:149:		for (j = pageblock_nr_pages; j; --j, pfn++) {
+./drivers/base/dma-contiguous.c:154:		init_cma_reserved_pageblock(pfn_to_page(base_pfn));
+./drivers/base/dma-contiguous.c:250:	alignment = PAGE_SIZE << max(MAX_ORDER - 1, pageblock_order);
+./include/linux/compaction.h:7:/* compaction should continue to another pageblock */
+./include/linux/dnuma.h:26:		/*	allocate a new pageblock_flags
+./include/linux/dnuma.h:29:		 *		give it a new pageblock_flags.
+./include/linux/dnuma.h:32:		 *	free old pageblock_flags
+./include/linux/dnuma.h:53:	/* XXX: handle pageblock_flags */
+./include/linux/gfp.h:404:extern void init_cma_reserved_pageblock(struct page *page);
+./include/linux/memory.h:60: * During pageblock isolation, count the number of pages within the
+./include/linux/memory_hotplug.h:87:extern bool is_pageblock_removable_nolock(struct page *page);
+./include/linux/mmzone.h:17:#include <linux/pageblock-flags.h>
+./include/linux/mmzone.h:48:	 * from MIGRATE_CMA pageblocks and page allocator never
+./include/linux/mmzone.h:49:	 * implicitly change migration type of MIGRATE_CMA pageblock.
+./include/linux/mmzone.h:52:	 * pageblocks to MIGRATE_CMA which can be done by
+./include/linux/mmzone.h:53:	 * __free_pageblock_cma() function.  What is important though
+./include/linux/mmzone.h:54:	 * is that a range of pageblocks must be aligned to
+./include/linux/mmzone.h:56:	 * a single pageblock.
+./include/linux/mmzone.h:78:static inline int get_pageblock_migratetype(struct page *page)
+./include/linux/mmzone.h:80:	return get_pageblock_flags_group(page, PB_migrate, PB_migrate_end);
+./include/linux/mmzone.h:397:	 * Flags for a pageblock_nr_pages block. See pageblock-flags.h.
+./include/linux/mmzone.h:400:	unsigned long		*pageblock_flags;
+./include/linux/mmzone.h:490:	 * the number of MIGRATE_ISOLATE *pageblock*.
+./include/linux/mmzone.h:494:	int		nr_pageblock_isolate;
+./include/linux/mmzone.h:1044:	((1UL << (PFN_SECTION_SHIFT - pageblock_order)) * NR_PAGEBLOCK_BITS)
+./include/linux/mmzone.h:1074:	unsigned long *pageblock_flags;
+./include/linux/page-isolation.h:6:void set_pageblock_migratetype(struct page *page, int migratetype);
+./include/linux/page-isolation.h:40: * Internal functions. Changes pageblock's migrate type.
+./include/linux/pageblock-flags.h:3: * pageblock_nr_pages number of pages.
+./include/linux/pageblock-flags.h:29:enum pageblock_bits {
+./include/linux/pageblock-flags.h:44:extern int pageblock_order;
+./include/linux/pageblock-flags.h:49:#define pageblock_order		HUGETLB_PAGE_ORDER
+./include/linux/pageblock-flags.h:56:#define pageblock_order		(MAX_ORDER-1)
+./include/linux/pageblock-flags.h:60:#define pageblock_nr_pages	(1UL << pageblock_order)
+./include/linux/pageblock-flags.h:66:unsigned long get_pageblock_flags_group(struct page *page,
+./include/linux/pageblock-flags.h:68:void set_pageblock_flags_group(struct page *page, unsigned long flags,
+./include/linux/pageblock-flags.h:72:#define get_pageblock_skip(page) \
+./include/linux/pageblock-flags.h:73:			get_pageblock_flags_group(page, PB_migrate_skip,     \
+./include/linux/pageblock-flags.h:75:#define clear_pageblock_skip(page) \
+./include/linux/pageblock-flags.h:76:			set_pageblock_flags_group(page, 0, PB_migrate_skip,  \
+./include/linux/pageblock-flags.h:78:#define set_pageblock_skip(page) \
+./include/linux/pageblock-flags.h:79:			set_pageblock_flags_group(page, 1, PB_migrate_skip,  \
+./include/linux/pageblock-flags.h:83:#define get_pageblock_flags(page) \
+./include/linux/pageblock-flags.h:84:			get_pageblock_flags_group(page, 0, PB_migrate_end)
+./include/linux/pageblock-flags.h:85:#define set_pageblock_flags(page, flags) \
+./include/linux/pageblock-flags.h:86:			set_pageblock_flags_group(page, flags,	\
+./include/linux/swap.h:172:#define SWAP_MAP_BAD	0x3f	/* Note pageblock is bad, in first swap_map */
+./include/trace/events/kmem.h:293:	TP_printk("page=%p pfn=%lu alloc_order=%d fallback_order=%d pageblock_order=%d alloc_migratetype=%d fallback_migratetype=%d fragmenting=%d change_ownership=%d",
+./include/trace/events/kmem.h:298:		pageblock_order,
+./include/trace/events/kmem.h:301:		__entry->fallback_order < pageblock_order,
+./mm/compaction.c:54:/* Returns true if the pageblock should be scanned for pages to isolate. */
+./mm/compaction.c:61:	return !get_pageblock_skip(page);
+./mm/compaction.c:65: * This function is called to clear all cached information on pageblocks that
+./mm/compaction.c:79:	/* Walk the zone and mark every pageblock as suitable for isolation */
+./mm/compaction.c:80:	for (pfn = start_pfn; pfn < end_pfn; pfn += pageblock_nr_pages) {
+./mm/compaction.c:92:		clear_pageblock_skip(page);
+./mm/compaction.c:112: * If no pages were isolated then mark this pageblock to be skipped in the
+./mm/compaction.c:115:static void update_pageblock_skip(struct compact_control *cc,
+./mm/compaction.c:125:		set_pageblock_skip(page);
+./mm/compaction.c:146:static void update_pageblock_skip(struct compact_control *cc,
+./mm/compaction.c:199:	int migratetype = get_pageblock_migratetype(page);
+./mm/compaction.c:206:	if (PageBuddy(page) && page_order(page) >= pageblock_order)
+./mm/compaction.c:229:	 * allocation is typically at least a pageblock size and overall
+./mm/compaction.c:232:	 * could pollute other pageblocks like MIGRATE_MOVABLE with
+./mm/compaction.c:274: * pages inside of the pageblock (even though it may still end up isolating
+./mm/compaction.c:355:	/* Update the pageblock-skip if the whole pageblock was scanned */
+./mm/compaction.c:357:		update_pageblock_skip(cc, valid_page, total_isolated, false);
+./mm/compaction.c:390:		block_end_pfn = ALIGN(pfn + 1, pageblock_nr_pages);
+./mm/compaction.c:406:		 * pageblock_nr_pages for some non-negative n.  (Max order
+./mm/compaction.c:407:		 * page may span two pageblocks).
+./mm/compaction.c:482:	unsigned long last_pageblock_nr = 0, pageblock_nr;
+./mm/compaction.c:520:		 * pageblock. Ensure that pfn_valid is called when moving
+./mm/compaction.c:549:		pageblock_nr = low_pfn >> pageblock_order;
+./mm/compaction.c:551:			goto next_pageblock;
+./mm/compaction.c:562:		if (!cc->sync && last_pageblock_nr != pageblock_nr &&
+./mm/compaction.c:563:		    !migrate_async_suitable(get_pageblock_migratetype(page))) {
+./mm/compaction.c:565:			goto next_pageblock;
+./mm/compaction.c:577:		 * Check TransHuge without lock and skip the whole pageblock if
+./mm/compaction.c:584:				goto next_pageblock;
+./mm/compaction.c:632:next_pageblock:
+./mm/compaction.c:633:		low_pfn += pageblock_nr_pages;
+./mm/compaction.c:634:		low_pfn = ALIGN(low_pfn, pageblock_nr_pages) - 1;
+./mm/compaction.c:635:		last_pageblock_nr = pageblock_nr;
+./mm/compaction.c:643:	/* Update the pageblock-skip if the whole pageblock was scanned */
+./mm/compaction.c:645:		update_pageblock_skip(cc, valid_page, nr_isolated, true);
+./mm/compaction.c:669:	 * is the end of the pageblock the migration scanner is using.
+./mm/compaction.c:672:	low_pfn = cc->migrate_pfn + pageblock_nr_pages;
+./mm/compaction.c:689:					pfn -= pageblock_nr_pages) {
+./mm/compaction.c:716:		end_pfn = min(pfn + pageblock_nr_pages, zone_end_pfn);
+./mm/compaction.c:804:	/* Only scan within a pageblock boundary */
+./mm/compaction.c:805:	end_pfn = ALIGN(low_pfn + pageblock_nr_pages, pageblock_nr_pages);
+./mm/compaction.c:873:			if (cc->order >= pageblock_order && area->nr_free)
+./mm/compaction.c:956:		cc->free_pfn = end_pfn & ~(pageblock_nr_pages-1);
+./mm/compaction.c:965:	 * Clear pageblock skip if there were failures recently and compaction
+./mm/huge_memory.c:113:	recommended_min = pageblock_nr_pages * nr_zones * 2;
+./mm/huge_memory.c:116:	 * Make sure that on average at least two pageblocks are almost free
+./mm/huge_memory.c:121:	recommended_min += pageblock_nr_pages * nr_zones *
+./mm/internal.h:353:extern void set_pageblock_order(void);
+./mm/memory_hotplug.c:154:	usemap = __nr_to_section(section_nr)->pageblock_flags;
+./mm/memory_hotplug.c:678: * the function determines if the pageblock contains only free pages.
+./mm/memory_hotplug.c:679: * Due to buddy contraints, a free page at least the size of a pageblock will
+./mm/memory_hotplug.c:680: * be located at the start of the pageblock
+./mm/memory_hotplug.c:682:static inline int pageblock_free(struct page *page)
+./mm/memory_hotplug.c:684:	return PageBuddy(page) && page_order(page) >= pageblock_order;
+./mm/memory_hotplug.c:687:/* Return the start of the next active pageblock after a given page */
+./mm/memory_hotplug.c:688:static struct page *next_active_pageblock(struct page *page)
+./mm/memory_hotplug.c:690:	/* Ensure the starting page is pageblock-aligned */
+./mm/memory_hotplug.c:691:	BUG_ON(page_to_pfn(page) & (pageblock_nr_pages - 1));
+./mm/memory_hotplug.c:693:	/* If the entire pageblock is free, move to the end of free page */
+./mm/memory_hotplug.c:694:	if (pageblock_free(page)) {
+./mm/memory_hotplug.c:698:		if ((order < MAX_ORDER) && (order >= pageblock_order))
+./mm/memory_hotplug.c:702:	return page + pageblock_nr_pages;
+./mm/memory_hotplug.c:711:	/* Check the starting page of each pageblock within the range */
+./mm/memory_hotplug.c:712:	for (; page < end_page; page = next_active_pageblock(page)) {
+./mm/memory_hotplug.c:713:		if (!is_pageblock_removable_nolock(page))
+./mm/memory_hotplug.c:718:	/* All pageblocks in the memory block are likely to be hot-removable */
+./mm/memory_hotplug.c:887:	/* at least, alignment against pageblock is necessary */
+./mm/memory_hotplug.c:888:	if (!IS_ALIGNED(start_pfn, pageblock_nr_pages))
+./mm/memory_hotplug.c:890:	if (!IS_ALIGNED(end_pfn, pageblock_nr_pages))
+./mm/page_alloc.c:150:int pageblock_order __read_mostly;
+./mm/page_alloc.c:224: * Don't use set_pageblock_migratetype(page, MIGRATE_ISOLATE) directly.
+./mm/page_alloc.c:225: * Instead, use {un}set_pageblock_isolate.
+./mm/page_alloc.c:227:void set_pageblock_migratetype(struct page *page, int migratetype)
+./mm/page_alloc.c:233:	set_pageblock_flags_group(page, (unsigned long)migratetype,
+./mm/page_alloc.c:742:	migratetype = get_pageblock_migratetype(page);
+./mm/page_alloc.c:768:/* Free whole pageblock and set it's migration type to MIGRATE_CMA. */
+./mm/page_alloc.c:769:void __init init_cma_reserved_pageblock(struct page *page)
+./mm/page_alloc.c:771:	unsigned i = pageblock_nr_pages;
+./mm/page_alloc.c:780:	set_pageblock_migratetype(page, MIGRATE_CMA);
+./mm/page_alloc.c:781:	__free_pages(page, pageblock_order);
+./mm/page_alloc.c:782:	totalram_pages += pageblock_nr_pages;
+./mm/page_alloc.c:926: * Note that start_page and end_pages are not aligned on a pageblock
+./mm/page_alloc.c:989:	start_pfn = start_pfn & ~(pageblock_nr_pages-1);
+./mm/page_alloc.c:991:	end_page = start_page + pageblock_nr_pages - 1;
+./mm/page_alloc.c:992:	end_pfn = start_pfn + pageblock_nr_pages - 1;
+./mm/page_alloc.c:1003:static void change_pageblock_range(struct page *pageblock_page,
+./mm/page_alloc.c:1006:	int nr_pageblocks = 1 << (start_order - pageblock_order);
+./mm/page_alloc.c:1008:	while (nr_pageblocks--) {
+./mm/page_alloc.c:1009:		set_pageblock_migratetype(pageblock_page, migratetype);
+./mm/page_alloc.c:1010:		pageblock_page += pageblock_nr_pages;
+./mm/page_alloc.c:1048:			 * type of MIGRATE_CMA pageblocks nor move CMA
+./mm/page_alloc.c:1054:			    (unlikely(current_order >= pageblock_order / 2) ||
+./mm/page_alloc.c:1062:				if (pages >= (1 << (pageblock_order-1)) ||
+./mm/page_alloc.c:1064:					set_pageblock_migratetype(page,
+./mm/page_alloc.c:1074:			/* Take ownership for orders >= pageblock_order */
+./mm/page_alloc.c:1075:			if (current_order >= pageblock_order &&
+./mm/page_alloc.c:1077:				change_pageblock_range(page, current_order,
+./mm/page_alloc.c:1155:			mt = get_pageblock_migratetype(page);
+./mm/page_alloc.c:1327:	migratetype = get_pageblock_migratetype(page);
+./mm/page_alloc.c:1430:	mt = get_pageblock_migratetype(page);
+./mm/page_alloc.c:1438:	/* Set the pageblock if the captured page is at least a pageblock */
+./mm/page_alloc.c:1439:	if (order >= pageblock_order - 1) {
+./mm/page_alloc.c:1441:		for (; page < endpage; page += pageblock_nr_pages) {
+./mm/page_alloc.c:1442:			int mt = get_pageblock_migratetype(page);
+./mm/page_alloc.c:1444:				set_pageblock_migratetype(page,
+./mm/page_alloc.c:1537:					  get_pageblock_migratetype(page));
+./mm/page_alloc.c:1671:	if (unlikely(zone->nr_pageblock_isolate))
+./mm/page_alloc.c:1672:		return zone->nr_pageblock_isolate * pageblock_nr_pages;
+./mm/page_alloc.c:2234:		 * As async compaction considers a subset of pageblocks, only
+./mm/page_alloc.c:3646:	if (vm_total_pages < (pageblock_nr_pages * MIGRATE_TYPES))
+./mm/page_alloc.c:3731: * Check if a pageblock contains reserved pages
+./mm/page_alloc.c:3733:static int pageblock_is_reserved(unsigned long start_pfn, unsigned long end_pfn)
+./mm/page_alloc.c:3745: * Mark a number of pageblocks as MIGRATE_RESERVE. The number
+./mm/page_alloc.c:3760:	 * We have to be careful to be aligned to pageblock_nr_pages to
+./mm/page_alloc.c:3766:	start_pfn = roundup(start_pfn, pageblock_nr_pages);
+./mm/page_alloc.c:3767:	reserve = roundup(min_wmark_pages(zone), pageblock_nr_pages) >>
+./mm/page_alloc.c:3768:							pageblock_order;
+./mm/page_alloc.c:3779:	for (pfn = start_pfn; pfn < end_pfn; pfn += pageblock_nr_pages) {
+./mm/page_alloc.c:3788:		block_migratetype = get_pageblock_migratetype(page);
+./mm/page_alloc.c:3796:			block_end_pfn = min(pfn + pageblock_nr_pages, end_pfn);
+./mm/page_alloc.c:3797:			if (pageblock_is_reserved(pfn, block_end_pfn))
+./mm/page_alloc.c:3808:				set_pageblock_migratetype(page,
+./mm/page_alloc.c:3822:			set_pageblock_migratetype(page, MIGRATE_MOVABLE);
+./mm/page_alloc.c:3874:		 * check here not to call set_pageblock_migratetype() against
+./mm/page_alloc.c:3879:		    && !(pfn & (pageblock_nr_pages - 1)))
+./mm/page_alloc.c:3880:			set_pageblock_migratetype(page, MIGRATE_MOVABLE);
+./mm/page_alloc.c:4400: * Start by making sure zonesize is a multiple of pageblock_order by rounding
+./mm/page_alloc.c:4401: * up. Then use 1 NR_PAGEBLOCK_BITS worth of bits per pageblock, finally
+./mm/page_alloc.c:4409:	usemapsize = roundup(zonesize, pageblock_nr_pages);
+./mm/page_alloc.c:4410:	usemapsize = usemapsize >> pageblock_order;
+./mm/page_alloc.c:4421:	zone->pageblock_flags = NULL;
+./mm/page_alloc.c:4423:		zone->pageblock_flags = alloc_bootmem_node_nopanic(pgdat,
+./mm/page_alloc.c:4434:void __init set_pageblock_order(void)
+./mm/page_alloc.c:4438:	/* Check that pageblock_nr_pages has not already been setup */
+./mm/page_alloc.c:4439:	if (pageblock_order)
+./mm/page_alloc.c:4452:	pageblock_order = order;
+./mm/page_alloc.c:4457: * When CONFIG_HUGETLB_PAGE_SIZE_VARIABLE is not set, set_pageblock_order()
+./mm/page_alloc.c:4458: * is unused as pageblock_order is set at compile-time. See
+./mm/page_alloc.c:4459: * include/linux/pageblock-flags.h for the values of pageblock_order based on
+./mm/page_alloc.c:4462:void __init set_pageblock_order(void)
+./mm/page_alloc.c:4545:		set_pageblock_order();
+./mm/page_alloc.c:5525:static inline unsigned long *get_pageblock_bitmap(struct zone *zone,
+./mm/page_alloc.c:5529:	return __pfn_to_section(pfn)->pageblock_flags;
+./mm/page_alloc.c:5531:	return zone->pageblock_flags;
+./mm/page_alloc.c:5539:	return (pfn >> pageblock_order) * NR_PAGEBLOCK_BITS;
+./mm/page_alloc.c:5542:	return (pfn >> pageblock_order) * NR_PAGEBLOCK_BITS;
+./mm/page_alloc.c:5547: * get_pageblock_flags_group - Return the requested group of flags for the pageblock_nr_pages block of pages
+./mm/page_alloc.c:5551: * returns pageblock_bits flags
+./mm/page_alloc.c:5553:unsigned long get_pageblock_flags_group(struct page *page,
+./mm/page_alloc.c:5564:	bitmap = get_pageblock_bitmap(zone, pfn);
+./mm/page_alloc.c:5575: * set_pageblock_flags_group - Set the requested group of flags for a pageblock_nr_pages block of pages
+./mm/page_alloc.c:5581:void set_pageblock_flags_group(struct page *page, unsigned long flags,
+./mm/page_alloc.c:5591:	bitmap = get_pageblock_bitmap(zone, pfn);
+./mm/page_alloc.c:5604: * This function checks whether pageblock includes unmovable pages or not.
+./mm/page_alloc.c:5622:	mt = get_pageblock_migratetype(page);
+./mm/page_alloc.c:5627:	for (found = 0, iter = 0; iter < pageblock_nr_pages; iter++) {
+./mm/page_alloc.c:5667:bool is_pageblock_removable_nolock(struct page *page)
+./mm/page_alloc.c:5696:			     pageblock_nr_pages) - 1);
+./mm/page_alloc.c:5702:				pageblock_nr_pages));
+./mm/page_alloc.c:5802: * @migratetype:	migratetype of the underlaying pageblocks (either
+./mm/page_alloc.c:5803: *			#MIGRATE_MOVABLE or #MIGRATE_CMA).  All pageblocks
+./mm/page_alloc.c:5807: * The PFN range does not have to be pageblock or MAX_ORDER_NR_PAGES
+./mm/page_alloc.c:5809: * we are the only thread that changes migrate type of pageblocks the
+./mm/page_alloc.c:5835:	 * What we do here is we mark all pageblocks in range as
+./mm/page_alloc.c:5836:	 * MIGRATE_ISOLATE.  Because pageblock and max order pages may
+./mm/page_alloc.c:5840:	 * different pageblocks and change MIGRATE_ISOLATE to some
+./mm/page_alloc.c:5843:	 * Once the pageblocks are marked as MIGRATE_ISOLATE, we
+./mm/page_alloc.c:5852:	 * This lets us mark the pageblocks back as
+./mm/page_isolation.c:7:#include <linux/pageblock-flags.h>
+./mm/page_isolation.c:12:static void set_pageblock_isolate(struct page *page)
+./mm/page_isolation.c:14:	if (get_pageblock_migratetype(page) == MIGRATE_ISOLATE)
+./mm/page_isolation.c:17:	set_pageblock_migratetype(page, MIGRATE_ISOLATE);
+./mm/page_isolation.c:18:	page_zone(page)->nr_pageblock_isolate++;
+./mm/page_isolation.c:22:static void restore_pageblock_isolate(struct page *page, int migratetype)
+./mm/page_isolation.c:25:	if (WARN_ON(get_pageblock_migratetype(page) != MIGRATE_ISOLATE))
+./mm/page_isolation.c:28:	BUG_ON(zone->nr_pageblock_isolate <= 0);
+./mm/page_isolation.c:29:	set_pageblock_migratetype(page, migratetype);
+./mm/page_isolation.c:30:	zone->nr_pageblock_isolate--;
+./mm/page_isolation.c:47:	arg.nr_pages = pageblock_nr_pages;
+./mm/page_isolation.c:51:	 * It may be possible to isolate a pageblock even if the
+./mm/page_isolation.c:80:		int migratetype = get_pageblock_migratetype(page);
+./mm/page_isolation.c:82:		set_pageblock_isolate(page);
+./mm/page_isolation.c:101:	if (get_pageblock_migratetype(page) != MIGRATE_ISOLATE)
+./mm/page_isolation.c:105:	restore_pageblock_isolate(page, migratetype);
+./mm/page_isolation.c:133: * start_pfn/end_pfn must be aligned to pageblock_order.
+./mm/page_isolation.c:143:	BUG_ON((start_pfn) & (pageblock_nr_pages - 1));
+./mm/page_isolation.c:144:	BUG_ON((end_pfn) & (pageblock_nr_pages - 1));
+./mm/page_isolation.c:148:	     pfn += pageblock_nr_pages) {
+./mm/page_isolation.c:149:		page = __first_valid_page(pfn, pageblock_nr_pages);
+./mm/page_isolation.c:159:	     pfn += pageblock_nr_pages)
+./mm/page_isolation.c:173:	BUG_ON((start_pfn) & (pageblock_nr_pages - 1));
+./mm/page_isolation.c:174:	BUG_ON((end_pfn) & (pageblock_nr_pages - 1));
+./mm/page_isolation.c:177:	     pfn += pageblock_nr_pages) {
+./mm/page_isolation.c:178:		page = __first_valid_page(pfn, pageblock_nr_pages);
+./mm/page_isolation.c:179:		if (!page || get_pageblock_migratetype(page) != MIGRATE_ISOLATE)
+./mm/page_isolation.c:193:__test_page_isolated_in_pageblock(unsigned long pfn, unsigned long end_pfn)
+./mm/page_isolation.c:207:			 * although pageblock's migratation type of the page
+./mm/page_isolation.c:239:	 * Note: pageblock_nr_page != MAX_ORDER. Then, chunks of free page
+./mm/page_isolation.c:240:	 * is not aligned to pageblock_nr_pages.
+./mm/page_isolation.c:243:	for (pfn = start_pfn; pfn < end_pfn; pfn += pageblock_nr_pages) {
+./mm/page_isolation.c:244:		page = __first_valid_page(pfn, pageblock_nr_pages);
+./mm/page_isolation.c:245:		if (page && get_pageblock_migratetype(page) != MIGRATE_ISOLATE)
+./mm/page_isolation.c:254:	ret = __test_page_isolated_in_pageblock(start_pfn, end_pfn);
+./mm/sparse.c:233:		unsigned long *pageblock_bitmap)
+./mm/sparse.c:241: 	ms->pageblock_flags = pageblock_bitmap;
+./mm/sparse.c:484:	/* Setup pageblock_order for HUGETLB_PAGE_SIZE_VARIABLE */
+./mm/sparse.c:485:	set_pageblock_order();
+./mm/sparse.c:782:		usemap = ms->pageblock_flags;
+./mm/sparse.c:786:		ms->pageblock_flags = NULL;
+./mm/vmstat.c:884:	for (pfn = start_pfn; pfn < end_pfn; pfn += pageblock_nr_pages) {
+./mm/vmstat.c:896:		mtype = get_pageblock_migratetype(page);
+./mm/vmstat.c:936:	seq_printf(m, "Page block order: %d\n", pageblock_order);
+./mm/vmstat.c:937:	seq_printf(m, "Pages per block:  %lu\n", pageblock_nr_pages);

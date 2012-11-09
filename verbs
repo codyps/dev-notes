@@ -1,0 +1,24 @@
+"valid"
+ - pfn_valid()
+   - Apparent definition: if true, then 'struct page' of pfn_to_page() will be accessable.
+     XXX: what does this imply?
+   - in SPARSEMEM, idicates that the pfn has a corresponding section, and this section is valid.
+   - in FLATMEM, does an architecture specific check
+     - typically this checks if the pfn is between 2 bounds, a maximum and a
+       minumum pfn number. Often these are varaibles.
+     - in MIPS: (pfn >= min_low_pfn && pfn < max_mapnr)
+     - in x86_32: (pfn < max_mapnr)
+     - in x86_64: (pfn < max_pfn)
+   - XXX: in DISCONTIG?
+ - valid_section(), SPARSEMEM only
+   - idicates that the given section has a memmap.
+   - XXX: what does a section having a memmap imply?
+
+"possible"
+
+"available"
+
+"isolated"
+ - test_pages_isolated()
+ - When pages are isolated, they will not be allocated after being returned to the page allocator.
+ - Isolation is done per-pageblock (what is a pageblock and how many pages does it cover?)

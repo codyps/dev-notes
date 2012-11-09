@@ -488,7 +488,7 @@ mm/mmzone.c:21:	if (nid == MAX_NUMNODES)
     be leaked.
 
 - Things in ARCH that should be GENERIC
-  - fake numa (ppc has it, see fake_numa_create_new_node).
+  - fake numa (x86 & ppc have it, see fake_numa_create_new_node).
   - struct pglist_data *node_data[MAX_NUMNODES];
     - m32r, tile, sh, x86, powerpc all have this.
 

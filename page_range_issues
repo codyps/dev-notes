@@ -1,0 +1,88 @@
+= On the usage of 'spanned_pages' and 'start_pfn' =
+
+Both nodes (of type pgdat_t) and zones (struct zone) track the pages they
+control with a base ('node_start_pfn' or 'zone_start_pfn') and a length
+('node_spanned_pages' or 'spanned_pages') combined with various filtering
+mechanizms.
+
+Filtering is necessary because on some archs nodes can "overlap" on another.
+
+(XXX: is it relevent that some memory models have holes in their memory?)
+
+These filtering mechanisms include:
+ - Almost always (are there any exceptions?) checking 'pfn_valid(pfn)'
+ - Sometimes checking the that the zone iterating over it's pages is the same
+   as the zone returned by 'page_zone()' (which reads the node id either from
+   struct page or struct mem_section and the zonenum from struct page, then looks
+   up the appropriate zone in the appropriate node).
+ - Sometimes checking 'present_section_nr(section_number)'
+
+== Uses of node->node_spanned_pages | pgdat->node_spanned_pages ==
+
+ - mm/kmemleak.c::1305
+   - Iteration over pages, skipping !pfn_valid().
+   LOCKING: under lock_memory_hotplug().
+
+ - mm/oomkill.c::263
+   - uses node_spanned_pages(nid) to count up 'totalpages' over all nodes in a nodemask.
+
+*- mm/page_cgroup.c::71
+   - uses NODE_DATA(nid)->node_spanned_pages to size a bootmem allocation
+   - attached to NODE_DATA(nid)->node_page_cgroup.
+   LOCKING: XXX
+
+ - drivers/base/node.c:link_mem_sections():446, called via `register_one_node(nid)`
+   - Iteration over mem_sections, skipping !present_section_nr(section_nr).
+   - Looks up the 'struct memory_block' which each section belongs(?) to, and
+     attaches that memory_block to the node.
+   - Appears to assume that if sections can only belong to the same memory
+     block if the sections are consecutive.
+   LOCKING: XXX
+
+ - fs/proc/kcore.c:kcore_update_ram():255,
+   - Iterates over all N_HIGH_MEMORY_NODES and calculates their end_pfn to
+     determine the maximum PFN on the system.
+   - Then walk_system_ram_range() and build a list.
+   LOCKING: XXX
+
+ - lib/show_mem.c:show_mem():25
+   - Iteration over pages, skipping !pfn_valid().
+   - Counting PageHighMem(page), PageReserved(page), "nonshared" and "shared"
+     (via page_count(page)), and total pages.
+   - Counts are added up over all nodes.
+   LOCKING: pgdat_resize_lock(pgdat, &flags) is held while iterating over pages.
+
+ - mm/memory_hotplug.c:register_page_bootmem_info_node(pgdat):184
+   - #if defined(CONFIG_MEMORY_HOTPLUG_SPARSE) && !defined(CONFIG_SPARSEMEM_VMEMMAP)
+   - Iterates over sections, skipping !pfn_valid() & pfn_to_nid(pfn) != node.
+   - Calls register_page_bootmem_info_section(pfn) on each iterated section.
+   LOCKING: none localy, XXX: examine callers
+
+ - mm/memory_hotplug.c:grow_pgdat_span()
+   - Adjusts node_start_pfn & node_spanned_pages.
+   - Adjusts changes so that only range expantion occurs.
+   LOCKING: none locally.
+   - called by __meminit __add_zone() under pgdat_resize_lock().
+   + in turn called by __meminit __add_section, no locking.
+   + in turn called by exported __ref __add_pages(), no locking.
+
+Uses of zone->spanned_pages & zone->zone_start_pfn:
+
+ - mm/page_alloc.c - move_freepages & move_freepages_block:
+   XXX: details.
+   - Used to restrict the page range to move.
+
+ - mm/vmstat.c:pagetypeinfo_showblockcount_print():881
+   - Iteration over pageblocks, skipping !memmap_valid_within() & !pfn_valid().
+   - Counts up in bins for each get_pageblock_migratetype(page).
+   LOCKING: XXX
+
+ - mm/memory_hotplug.c:grow_zone_span():233
+   - Adjusts both zone->spanned_pages & zone_start_pfn.
+   - Will not shrink the range covered by start_pfn + spanned_pages.
+   LOCKING: zone_span_writelock() is held.
+   - called by __meminit __add_zone under pgdat_resize_lock().
+   + in turn called by __meminit __add_section, no locking.
+   + in turn called by exported __ref __add_pages(), no locking.
+
+

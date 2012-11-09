@@ -82,7 +82,16 @@ Bootmem is initialized with either init_bootmem() or init_bootmem_node(), called
 Q: What does all this "nobootmem" (CONFIG_NO_BOOTMEM) stuff do?
 
 == page_alloc ==
-files:: `mm/page_alloc.c`
+files :: `mm/page_alloc.c`
+
+internals ::
+
+	static struct page *
+	get_page_from_freelist(gfp_t gfp_mask, nodemask_t *nodemask, unsigned int order,
+			struct zonelist *zonelist, int high_zoneidx, int alloc_flags,
+			struct zone *preferred_zone, int migratetype)
+
+api ::
 
 == kmem_cache / slab ==
 == percpu allocations ==
@@ -92,3 +101,6 @@ files:: `mm/page_alloc.c`
 	init_alloc_remap(nid, pa_start, pa_end)
 	alloc_remap(nid, pa_size) : void *va
 
+== percpu ==
+
+`per_cpu_offset(smp_processor_id())` returns an offset into an array

@@ -1,0 +1,14 @@
+./include/linux/page-isolation.h:7:int move_freepages_block(struct zone *zone, struct page *page,
+./include/linux/page-isolation.h:9:int move_freepages(struct zone *zone,
+./mm/dnuma.c:15: * - look @ move_freepages() */
+./mm/page_alloc.c:927: * boundary. If alignment is required, use move_freepages_block()
+./mm/page_alloc.c:929:int move_freepages(struct zone *zone,
+./mm/page_alloc.c:941:	 * anyway as we check zone boundaries in move_freepages_block().
+./mm/page_alloc.c:982:int move_freepages_block(struct zone *zone, struct page *page,
+./mm/page_alloc.c:1000:	return move_freepages(zone, start_page, end_page, migratetype);
+./mm/page_alloc.c:1058:				pages = move_freepages_block(zone, page,
+./mm/page_alloc.c:3810:				move_freepages_block(zone, page,
+./mm/page_alloc.c:3823:			move_freepages_block(zone, page, MIGRATE_MOVABLE);
+./mm/page_isolation.c:83:		nr_pages = move_freepages_block(zone, page, MIGRATE_ISOLATE);
+./mm/page_isolation.c:103:	nr_pages = move_freepages_block(zone, page, migratetype);
+./mm/page_isolation.c:215:				move_freepages(page_zone(page), page, end_page,
