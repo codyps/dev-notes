@@ -66,11 +66,14 @@ These filtering mechanisms include:
    + in turn called by __meminit __add_section, no locking.
    + in turn called by exported __ref __add_pages(), no locking.
 
-Uses of zone->spanned_pages & zone->zone_start_pfn:
+== Uses of zone->spanned_pages & zone->zone_start_pfn ==
 
- - mm/page_alloc.c - move_freepages & move_freepages_block:
-   XXX: details.
-   - Used to restrict the page range to move.
+ - mm/page_alloc.c:move_freepages()
+ - mm/page_alloc.c:move_freepages_block()
+   - If start_pfn is not within the zone's span, adjust it.
+   - If end_pfn is not within the zone's span, don't move the pages.
+   LOCKING: none locally.
+   - Expect that at least zone->lock is held
 
  - mm/vmstat.c:pagetypeinfo_showblockcount_print():881
    - Iteration over pageblocks, skipping !memmap_valid_within() & !pfn_valid().

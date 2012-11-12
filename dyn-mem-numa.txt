@@ -1,3 +1,33 @@
+
+- pageblock sizing
+  - CONFIG_HUGETLB_PAGE
+    - CONFIG_HUGETLB_PAGE_SIZE_VARIABLE: int
+    - otherwise: HUGETLB_PAGE_ORDER
+      - HPAGE_SHIFT - PAGE_SHIFT
+  - otherwise: (MAX_ORDER-1)
+    - if CONFIG_FORCE_MAX_ZONEORDER, MAX_ORDER = CONFIG_FORCE_MAX_ZONEORDER
+    - else MAX_ORDER = 11
+
+./arch/arm/configs/armadillo800eva_defconfig
+33:CONFIG_FORCE_MAX_ZONEORDER=13
+
+./arch/arm/configs/bonito_defconfig
+26:CONFIG_FORCE_MAX_ZONEORDER=12
+
+./arch/arm/configs/mackerel_defconfig
+23:CONFIG_FORCE_MAX_ZONEORDER=15
+
+./arch/powerpc/Kconfig
+525:config FORCE_MAX_ZONEORDER
+
+  - allows config of up to 64 on 64bit platforms.
+    - XXX: breakage with NUMA nodes??
+
+- How fine can memory boundaries on NUMA nodes be?
+
+  R1-14.5.4.1-3 : lower 28bits of a virtual address map directly to physical
+                  addresses.
+
 - links
   - http://linux-mm.org/PageAllocation
 
