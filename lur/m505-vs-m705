@@ -1,0 +1,31 @@
+--- logitech-unifying-reciever-lsusb	2012-11-16 01:40:10.554178222 -0500
++++ logitech-unifying-reciever-uninitialized-lsusb	2012-11-16 01:51:00.944277862 -0500
+@@ -1,5 +1,5 @@
+ 
+-Bus 004 Device 003: ID 046d:c52b Logitech, Inc. Unifying Receiver
++Bus 004 Device 008: ID 046d:c52b Logitech, Inc. Unifying Receiver
+ Device Descriptor:
+   bLength                18
+   bDescriptorType         1
+@@ -7,10 +7,10 @@ Device Descriptor:
+   bDeviceClass            0 (Defined at Interface level)
+   bDeviceSubClass         0 
+   bDeviceProtocol         0 
+-  bMaxPacketSize0        32
++  bMaxPacketSize0         8
+   idVendor           0x046d Logitech, Inc.
+   idProduct          0xc52b Unifying Receiver
+-  bcdDevice           24.00
++  bcdDevice           12.01
+   iManufacturer           1 Logitech
+   iProduct                2 USB Receiver
+   iSerial                 0 
+@@ -21,7 +21,7 @@ Device Descriptor:
+     wTotalLength           84
+     bNumInterfaces          3
+     bConfigurationValue     1
+-    iConfiguration          4 RQR24.00_B0018
++    iConfiguration          4 RQR12.01_B0019
+     bmAttributes         0xa0
+       (Bus Powered)
+       Remote Wakeup
