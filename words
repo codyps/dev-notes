@@ -1,4 +1,5 @@
 "valid"
+ - pfn_valid_within()
  - pfn_valid()
    - Apparent definition: if true, then 'struct page' of pfn_to_page() will be accessable.
      XXX: what does this imply?
@@ -22,3 +23,7 @@
  - test_pages_isolated()
  - When pages are isolated, they will not be allocated after being returned to the page allocator.
  - Isolation is done per-pageblock (what is a pageblock and how many pages does it cover?)
+
+"page_idx", "buddy_idx" : The index of a page within a MAX_ORDER grouping of pages. Only used for determining which page is a buddy page.
+
+

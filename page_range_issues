@@ -16,20 +16,31 @@ These filtering mechanisms include:
    struct page or struct mem_section and the zonenum from struct page, then looks
    up the appropriate zone in the appropriate node).
  - Sometimes checking 'present_section_nr(section_number)'
+ - Should potentially be using 'memmap_valid_within()' &| 'pfn_valid_within()'
 
-== Uses of node->node_spanned_pages | pgdat->node_spanned_pages ==
+== Others ==
 
- - mm/kmemleak.c::1305
-   - Iteration over pages, skipping !pfn_valid().
+- node_start_pfn(nid), node_end_pfn(nid)
+  - mm/page_cgroup.c:page_cgroup_init(void)
+    - Within iteration over nodes, iterates over pages.
+    - Skips !pfn_valid(pfn)
+    - Skips (pfn_to_nid(pfn) != nid), where nid = node id of the node we are
+      currently iterating over.
+
+== Uses of node->node_start_pfn (A) and/or pgdat->node_spanned_pages (B) ==
+
+ - mm/kmemleak.c:void kmemleak_scan(void):1305
+   - Within iteration over nodes, uses A & B for iteration over pages, skipping !pfn_valid().
    LOCKING: under lock_memory_hotplug().
 
  - mm/oomkill.c::263
    - uses node_spanned_pages(nid) to count up 'totalpages' over all nodes in a nodemask.
 
-*- mm/page_cgroup.c::71
+ - mm/page_cgroup.c:__init alloc_node_page_cgroup(int nid):71
+   - Only used when !defined(CONFIG_SPARSEMEM).
    - uses NODE_DATA(nid)->node_spanned_pages to size a bootmem allocation
    - attached to NODE_DATA(nid)->node_page_cgroup.
-   LOCKING: XXX
+   LOCKING: none, called @ __init time.
 
  - drivers/base/node.c:link_mem_sections():446, called via `register_one_node(nid)`
    - Iteration over mem_sections, skipping !present_section_nr(section_nr).
@@ -89,3 +100,4 @@ These filtering mechanisms include:
    + in turn called by exported __ref __add_pages(), no locking.
 
 
+# vim: et:sts=2:sw=2
