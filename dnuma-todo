@@ -1,0 +1,304 @@
+
+Issues:
+	- atomicity of pageflag modifications: __ClearPage* and __SetPage*
+	  affecting other users of page flags
+		- mm/page_alloc.c::destroy_compound_page() uses
+		  __ClearPageHead() and __ClearPageTail in a non-atomic
+		  context.
+		- set_page_order() uses __SetPageBuddy()
+		- rmv_page_order() uses __ClearPageBuddy()
+	- Given pages A and B, assuming B is A's buddy, what rules exsist
+	  regarding the contents of A's struct page?
+
+Todo:
+	- Page flags may not be usable due to non-atomic users, hook something on sections or memlayout.
+	- Potentially expand caching into a hashtable.
+	- Make commits all nice & clean.
+	- Properly update nodemasks.
+	- avoid stop_machine when updating zonelists.
+
+Bugs:
+
+>> Fix list corruption bug
+
+[    3.598128] ------------[ cut here ]------------
+[    3.598939] WARNING: at /home/cody/g/linux/lib/list_debug.c:59 __list_del_entry+0xac/0xe0()
+[    3.600339] Hardware name: Bochs
+[    3.600605] list_del corruption. prev->next should be c3a1fc3c, but was c2800478
+[    3.600605] Pid: 36, comm: kswapd1 Not tainted 3.7.0-rc8-dnuma-00073-g3de4a79-dirty #96
+[    3.600605] Call Trace:
+[    3.600605]  [<c102d6a8>] warn_slowpath_common+0x68/0xa0
+[    3.600605]  [<c1187c1c>] ? __list_del_entry+0xac/0xe0
+[    3.600605]  [<c1187c1c>] ? __list_del_entry+0xac/0xe0
+[    3.600605]  [<c102d73e>] warn_slowpath_fmt+0x2e/0x30
+[    3.600605]  [<c1187c1c>] __list_del_entry+0xac/0xe0
+[    3.600605]  [<c1187c5b>] list_del+0xb/0x20
+[    3.600605]  [<c10a22a3>] free_pcppages_bulk+0x3b3/0xa60
+[    3.600605]  [<c10a2054>] ? free_pcppages_bulk+0x164/0xa60
+[    3.600605]  [<c10a342d>] free_hot_cold_page+0x29d/0x420
+[    3.600605]  [<c10a31c8>] ? free_hot_cold_page+0x38/0x420
+[    3.600605]  [<c107967c>] ? trace_hardirqs_on_caller+0xec/0x170
+[    3.600605]  [<c10a35db>] free_hot_cold_page_list+0x2b/0x40
+[    3.600605]  [<c10aa23d>] shrink_page_list+0x27d/0x460
+[    3.600605]  [<c10aa8a9>] shrink_inactive_list+0x1a9/0x2b0
+[    3.600605]  [<c10aad26>] shrink_lruvec+0x116/0x120
+[    3.600605]  [<c10a8bad>] ? zone_balanced+0x1d/0x30
+[    3.600605]  [<c10ab24e>] balance_pgdat+0x2ce/0x5a0
+[    3.600605]  [<c10ab657>] kswapd+0x137/0x1a0
+[    3.600605]  [<c10ab520>] ? balance_pgdat+0x5a0/0x5a0
+[    3.600605]  [<c104c23f>] kthread+0x8f/0xa0
+[    3.600605]  [<c107970b>] ? trace_hardirqs_on+0xb/0x10
+[    3.600605]  [<c1304a77>] ret_from_kernel_thread+0x1b/0x28
+[    3.600605]  [<c104c1b0>] ? __kthread_bind+0x30/0x30
+[    3.600605] ---[ end trace b73405c1e714622c ]---
+[    3.628884] returning page c3a1fc28 (order = 0) to zone c28003c0 (node = 2, name = 'Normal')
+
+warn_slowpath_common()  /home/cody/g/linux/kernel/panic.c:423
+__list_del_entry()      /home/cody/g/linux/lib/list_debug.c:57 (discriminator 1)
+__list_del_entry()      /home/cody/g/linux/lib/list_debug.c:57 (discriminator 1)
+warn_slowpath_fmt()     /home/cody/g/linux/kernel/panic.c:436
+__list_del_entry()      /home/cody/g/linux/lib/list_debug.c:57 (discriminator 1)
+list_del()              /home/cody/g/linux/lib/list_debug.c:78
+__free_one_page()       /home/cody/g/linux/mm/page_alloc.c:589
+free_pcppages_bulk()    /home/cody/g/linux/mm/page_alloc.c:693
+free_hot_cold_page()    /home/cody/g/linux/mm/page_alloc.c:1431
+get_pageblock_migratetype()	/home/cody/g/linux/include/linux/mmzone.h:80
+__trace_hardirqs_on_caller()	/home/cody/g/linux/kernel/lockdep.c:2549
+free_hot_cold_page_list()	/home/cody/g/linux/mm/page_alloc.c:1445 (discriminator 2)
+list_empty()		/home/cody/g/linux/include/linux/list.h:188
+shrink_inactive_list()	/home/cody/g/linux/mm/vmscan.c:1312
+shrink_list()		/home/cody/g/linux/mm/vmscan.c:1619
+zone_balanced()		/home/cody/g/linux/mm/vmscan.c:2428
+balance_pgdat()		/home/cody/g/linux/mm/vmscan.c:2697
+kswapd()		/home/cody/g/linux/mm/vmscan.c:3017
+kswapd()		/home/cody/g/linux/mm/vmscan.c:2934
+kthread()		/home/cody/g/linux/kernel/kthread.c:168
+trace_hardirqs_on()	/home/cody/g/linux/kernel/lockdep.c:2604
+ret_from_kernel_thread()	/home/cody/g/linux/arch/x86/kernel/entry_32.S:312
+kthread()		/home/cody/g/linux/kernel/kthread.c:144
+
+>> Fix bug triggered in set_free_page_order(). Page passed is not marked as in the buddy allocator.
+Note: this occurs after the above list corruption, so may be caused by it.
+
+[    3.630852] ------------[ cut here ]------------
+[    3.631923] kernel BUG at /home/cody/g/linux/mm/page_alloc.c:454!
+[    3.632847] invalid opcode: 0000 [#1] PREEMPT SMP DEBUG_PAGEALLOC
+[    3.632847] Pid: 82, comm: dnuma-test Tainted: G        W    3.7.0-rc8-dnuma-00073-g3de4a79-dirty #96 Bochs Bochs
+[    3.632847] EIP: 0060:[<c10a1ecb>] EFLAGS: 00010002 CPU: 1
+[    3.632847] EIP is at return_pages_to_zone+0x3fb/0x420
+[    3.632847] EAX: ffffffff EBX: c3a1fc28 ECX: 00000005 EDX: c3a1fc00
+[    3.632847] ESI: 00000381 EDI: 00000000 EBP: c2811ec8 ESP: c2811e74
+[    3.632847]  DS: 007b ES: 007b FS: 00d8 GS: 0033 SS: 0068
+[    3.632847] CR0: 8005003b CR2: 080d8e84 CR3: 0281d000 CR4: 000006b0
+[    3.632847] DR0: 00000000 DR1: 00000000 DR2: 00000000 DR3: 00000000
+[    3.632847] DR6: ffff0ff0 DR7: 00000400
+[    3.632847] Process dnuma-test (pid: 82, ti=c2810000 task=c285a9e0 task.ti=c2810000)
+[    3.632847] Stack:
+[    3.632847]  c13a88f4 c3a1fc28 00000000 c28003c0 00000002 c13ab03a 00000006 00000000
+[    3.632847]  00000286 c28003f4 00000000 c2811eb0 c28003c0 04800000 02800000 00000001
+[    3.632847]  c107970b 00000380 00000001 00000000 c3a1fc28 c2811f20 c10d4049 00000001
+[    3.632847] Call Trace:
+[    3.632847]  [<c107970b>] ? trace_hardirqs_on+0xb/0x10
+[    3.632847]  [<c10d4049>] dnuma_move_to_new_ml+0x239/0x360
+[    3.632847]  [<c10d4380>] ? _ml_dbgfs_set_current+0x40/0x50
+[    3.632847]  [<c10d50a9>] memlayout_commit+0x69/0xc0
+[    3.632847]  [<c10d512a>] dnuma_user_commit_watch_set+0x2a/0x50
+[    3.632847]  [<c10fa7f5>] simple_attr_write+0xb5/0xd0
+[    3.632847]  [<c10d72c6>] vfs_write+0x86/0x140
+[    3.632847]  [<c10fa740>] ? simple_attr_read+0xf0/0xf0
+[    3.632847]  [<c10d7442>] sys_write+0x42/0x80
+[    3.632847]  [<c13043c8>] syscall_call+0x7/0xb
+[    3.632847] Code: ff ff 81 e6 00 40 02 00 81 fe 00 40 02 00 0f 44 ca 8b 41 10 85 c0 0f 84 4c fe ff ff 0f 0b 66 90 e8 b7 8d 25 00 0f 0b 0f 0b 0f 0b <0f> 0b 0f 0b 89 fa 89 d8 e8 b3 8d 25 00 85 c0 0f 84 7c fc ff ff
+[    3.632847] EIP: [<c10a1ecb>] return_pages_to_zone+0x3fb/0x420 SS:ESP 0068:c2811e74
+[    3.632847] ---[ end trace b73405c1e714622d ]---
+
+>> Fix OOM condition.
+Note: occurs when the above 2 issues _do_not_ occur.
+
+[    5.179939] init invoked oom-killer: gfp_mask=0x201da, order=0, oom_score_adj=0
+[    5.179947] Pid: 1, comm: init Not tainted 3.7.0-rc8-dnuma-00073-g3de4a79-dirty #96
+[    5.179950] Call Trace:
+[    5.179974]  [<c12fa94e>] dump_header.isra.14+0x64/0x89
+[    5.179979]  [<c12fa9a1>] oom_kill_process.part.16+0x2e/0x29b
+[    5.179990]  [<c109e5f9>] ? select_bad_process+0x2a9/0x2c0
+[    5.179993]  [<c109e662>] oom_kill_process+0x52/0x60
+[    5.179996]  [<c109e9ca>] out_of_memory+0x14a/0x1a0
+[    5.180147]  [<c10a455f>] __alloc_pages_nodemask+0x6df/0x6f0
+[    5.180192]  [<c10c8406>] alloc_pages_current+0x66/0xd0
+[    5.180201]  [<c109a5ea>] __page_cache_alloc+0xa/0x10
+[    5.180203]  [<c109b2b3>] filemap_fault+0x253/0x380
+[    5.180207]  [<c10b64d1>] __do_fault+0x61/0x4b0
+[    5.180209]  [<c109b060>] ? do_read_cache_page+0x160/0x160
+[    5.180212]  [<c10b8af2>] handle_pte_fault+0x82/0x230
+[    5.180220]  [<c107560c>] ? __lock_is_held+0x3c/0x50
+[    5.180222]  [<c10b8dec>] handle_mm_fault+0xcc/0x110
+[    5.180227]  [<c1024e30>] ? vmalloc_sync_all+0x10/0x10
+[    5.180229]  [<c1024b56>] __do_page_fault+0x146/0x410
+[    5.180235]  [<c1031860>] ? wait_task_continued+0x2a0/0x2a0
+[    5.180246]  [<c13043fb>] ? restore_all+0xf/0xf
+[    5.180248]  [<c1024e30>] ? vmalloc_sync_all+0x10/0x10
+[    5.180251]  [<c107967c>] ? trace_hardirqs_on_caller+0xec/0x170
+[    5.180253]  [<c1024e30>] ? vmalloc_sync_all+0x10/0x10
+[    5.180256]  [<c1024e38>] do_page_fault+0x8/0x10
+[    5.180258]  [<c1304867>] error_code+0x5f/0x64
+[    5.180261]  [<c1024e30>] ? vmalloc_sync_all+0x10/0x10
+[    5.180262] Mem-Info:
+[    5.180264] Node 0 DMA per-cpu:
+[    5.180266] CPU    0: hi:    0, btch:   1 usd:   0
+[    5.180267] CPU    1: hi:    0, btch:   1 usd:   0
+[    5.180268] CPU    2: hi:    0, btch:   1 usd:   0
+[    5.180269] CPU    3: hi:    0, btch:   1 usd:   0
+[    5.180270] CPU    4: hi:    0, btch:   1 usd:   0
+[    5.180272] Node 0 Normal per-cpu:
+[    5.180273] CPU    0: hi:    6, btch:   1 usd:   0
+[    5.180273] CPU    1: hi:    6, btch:   1 usd:   0
+[    5.180274] CPU    2: hi:    6, btch:   1 usd:   0
+[    5.180275] CPU    3: hi:    6, btch:   1 usd:   0
+[    5.180276] CPU    4: hi:    6, btch:   1 usd:   0
+[    5.180277] Node 1 Normal per-cpu:
+[    5.180278] CPU    0: hi:   18, btch:   3 usd:   0
+[    5.180279] CPU    1: hi:   18, btch:   3 usd:   0
+[    5.180280] CPU    2: hi:   18, btch:   3 usd:   0
+[    5.180281] CPU    3: hi:   18, btch:   3 usd:   0
+[    5.180282] CPU    4: hi:   18, btch:   3 usd:   0
+[    5.180285] active_anon:56 inactive_anon:9 isolated_anon:0
+[    5.180285]  active_file:3 inactive_file:6 isolated_file:9
+[    5.180285]  unevictable:0 dirty:5 writeback:0 unstable:0
+[    5.180285]  free:22408 slab_reclaimable:103 slab_unreclaimable:1528
+[    5.180285]  mapped:5 shmem:11 pagetables:19 bounce:0
+[    5.180285]  free_cma:0
+[    5.180325] Node 0 DMA free:0kB min:172kB low:212kB high:256kB active_anon:0kB inactive_anon:0kB active_file:0kB inactive_file:0kB unevictable:0kB isolated(anon):0kB isolated(file):0kB present:4294967152kB mlocked:0kB dirty:0kB writeback:0kB mapped:0kB shmem:0kB slab_reclaimable:0kB slab_unreclaimable:0kB kernel_stack:0kB pagetables:0kB unstable:0kB bounce:0kB free_cma:0kB writeback_tmp:0kB pages_scanned:0 all_unreclaimable? yes
+[    5.180329] lowmem_reserve[]: 0 47 47 47
+[    5.180334] Node 0 Normal free:48kB min:540kB low:672kB high:808kB active_anon:120kB inactive_anon:0kB active_file:0kB inactive_file:4kB unevictable:0kB isolated(anon):0kB isolated(file):36kB present:27364kB mlocked:0kB dirty:8kB writeback:0kB mapped:0kB shmem:0kB slab_reclaimable:152kB slab_unreclaimable:2972kB kernel_stack:368kB pagetables:48kB unstable:0kB bounce:0kB free_cma:0kB writeback_tmp:0kB pages_scanned:4093 all_unreclaimable? yes
+[    5.180337] lowmem_reserve[]: 0 0 0 0
+[    5.180343] Node 1 Normal free:700kB min:720kB low:900kB high:1080kB active_anon:104kB inactive_anon:36kB active_file:16kB inactive_file:20kB unevictable:0kB isolated(anon):0kB isolated(file):0kB present:12868kB mlocked:0kB dirty:12kB writeback:0kB mapped:20kB shmem:44kB slab_reclaimable:260kB slab_unreclaimable:3140kB kernel_stack:96kB pagetables:28kB unstable:0kB bounce:0kB free_cma:0kB writeback_tmp:0kB pages_scanned:55 all_unreclaimable? yes
+[    5.180346] lowmem_reserve[]: 0 0 0 0
+[    5.180356] Node 0 DMA: 0*4kB 0*8kB 0*16kB 0*32kB 0*64kB 0*128kB 0*256kB 0*512kB 0*1024kB 0*2048kB 0*4096kB = 0kB
+[    5.180366] Node 0 Normal: 7*4kB 0*8kB 0*16kB 0*32kB 0*64kB 0*128kB 0*256kB 0*512kB 0*1024kB 0*2048kB 0*4096kB = 28kB
+[    5.180375] Node 1 Normal: 10*4kB 14*8kB 6*16kB 5*32kB 0*64kB 0*128kB 0*256kB 0*512kB 0*1024kB 0*2048kB 0*4096kB = 408kB
+[    5.180376] 41 total pagecache pages
+[    5.181223] 65450 pages RAM
+[    5.181224] 0 pages HighMem
+[    5.181224] 16370 pages reserved
+[    5.181225] 68 pages shared
+[    5.181225] 4050 pages non-shared
+[    5.181226] [ pid ]   uid  tgid total_vm      rss nr_ptes swapents oom_score_adj name
+[    5.181244] [   78]     0    78      284       20       4        0             0 sh
+[    5.181247] Out of memory: Kill process 78 (sh) score 0 or sacrifice child
+[    5.181251] Killed process 78 (sh) total-vm:1136kB, anon-rss:80kB, file-rss:0kB
+[    5.604815] checking new_nid 2 and zonenum 1
+[    5.607457] checking new_nid 2 and zonenum 1
+[    5.607463] checking new_nid 2 and zonenum 1
+[    5.607474] checking new_nid 2 and zonenum 1
+[    5.607483] checking new_nid 2 and zonenum 1
+[    5.607492] checking new_nid 2 and zonenum 1
+[    5.607500] checking new_nid 2 and zonenum 1
+[    5.607509] checking new_nid 2 and zonenum 1
+[    5.607518] checking new_nid 2 and zonenum 1
+[    5.607527] checking new_nid 2 and zonenum 1
+[    5.607538] checking new_nid 2 and zonenum 1
+[    5.607547] checking new_nid 2 and zonenum 1
+[    5.607555] checking new_nid 2 and zonenum 1
+[    5.607564] checking new_nid 2 and zonenum 1
+[    5.607573] checking new_nid 2 and zonenum 1
+[    5.607582] checking new_nid 2 and zonenum 1
+[    5.607591] checking new_nid 2 and zonenum 1
+[    5.607600] checking new_nid 2 and zonenum 1
+[    5.607609] checking new_nid 2 and zonenum 1
+[    5.607617] checking new_nid 2 and zonenum 1
+[    5.607626] checking new_nid 2 and zonenum 1
+[    5.607635] checking new_nid 2 and zonenum 1
+[    5.607644] checking new_nid 2 and zonenum 1
+[    5.607652] checking new_nid 2 and zonenum 1
+[    5.607661] checking new_nid 2 and zonenum 1
+[    5.607670] checking new_nid 2 and zonenum 1
+[    5.607679] checking new_nid 2 and zonenum 1
+[    5.607687] checking new_nid 2 and zonenum 1
+[    5.607697] checking new_nid 2 and zonenum 1
+[    5.609068] kthreadd invoked oom-killer: gfp_mask=0x1000d0, order=1, oom_score_adj=0
+[    5.609070] Pid: 2, comm: kthreadd Not tainted 3.7.0-rc8-dnuma-00073-g3de4a79-dirty #96
+[    5.609071] Call Trace:
+[    5.609076]  [<c12fa94e>] dump_header.isra.14+0x64/0x89
+[    5.609080]  [<c109ea0a>] out_of_memory+0x18a/0x1a0
+[    5.609082]  [<c10a455f>] __alloc_pages_nodemask+0x6df/0x6f0
+[    5.609084]  [<c102b899>] dup_task_struct+0x59/0x120
+[    5.609086]  [<c102bf72>] copy_process.part.56+0x22/0xc00
+[    5.609107]  [<c104c1b0>] ? __kthread_bind+0x30/0x30
+[    5.609109]  [<c102cbc9>] copy_process+0x79/0x80
+[    5.609110]  [<c104c1b0>] ? __kthread_bind+0x30/0x30
+[    5.609112]  [<c102cc81>] do_fork+0x91/0x210
+[    5.609114]  [<c107569d>] ? put_lock_stats.isra.26+0xd/0x30
+[    5.609116]  [<c10758ec>] ? lock_release_holdtime.part.27+0x6c/0xd0
+[    5.609118]  [<c107569d>] ? put_lock_stats.isra.26+0xd/0x30
+[    5.609120]  [<c1079334>] ? lock_release_nested+0x84/0xc0
+[    5.609121]  [<c104c6f1>] ? kthreadd+0xc1/0x110
+[    5.609122]  [<c1079405>] ? __lock_release+0x95/0xc0
+[    5.609124]  [<c104c1b0>] ? __kthread_bind+0x30/0x30
+[    5.609125]  [<c102ce2c>] kernel_thread+0x2c/0x40
+[    5.609126]  [<c104c70c>] kthreadd+0xdc/0x110
+[    5.609129]  [<c1304a77>] ret_from_kernel_thread+0x1b/0x28
+[    5.609131]  [<c104c630>] ? kthread_stop+0x70/0x70
+[    5.609131] Mem-Info:
+[    5.609133] Node 0 DMA per-cpu:
+[    5.609134] CPU    0: hi:    0, btch:   1 usd:   0
+[    5.609135] CPU    1: hi:    0, btch:   1 usd:   0
+[    5.609135] CPU    2: hi:    0, btch:   1 usd:   0
+[    5.609136] CPU    3: hi:    0, btch:   1 usd:   0
+[    5.609136] CPU    4: hi:    0, btch:   1 usd:   0
+[    5.609137] Node 0 Normal per-cpu:
+[    5.609138] CPU    0: hi:    6, btch:   1 usd:   0
+[    5.609139] CPU    1: hi:    6, btch:   1 usd:   0
+[    5.609139] CPU    2: hi:    6, btch:   1 usd:   0
+[    5.609140] CPU    3: hi:    6, btch:   1 usd:   0
+[    5.609140] CPU    4: hi:    6, btch:   1 usd:   0
+[    5.609141] Node 1 Normal per-cpu:
+[    5.609142] CPU    0: hi:   18, btch:   3 usd:   0
+[    5.609142] CPU    1: hi:   18, btch:   3 usd:   0
+[    5.609144] CPU    4: hi:   18, btch:   3 usd:   0
+[    5.609147] active_anon:35 inactive_anon:9 isolated_anon:0
+[    5.609147]  active_file:0 inactive_file:9 isolated_file:17
+[    5.609147]  unevictable:0 dirty:5 writeback:0 unstable:0
+[    5.609147]  free:22437 slab_reclaimable:103 slab_unreclaimable:1528
+[    5.609147]  mapped:5 shmem:11 pagetables:9 bounce:0
+[    5.609147]  free_cma:0
+[    5.609150] Node 0 DMA free:0kB min:172kB low:212kB high:256kB active_anon:0kB inactive_anon:0kB active_file:0kB inactive_file:0kB unevictable:0kB isolated(anon):0kB isolated(file):0kB present:4294967152kB mlocked:0kB dirty:0kB writeback:0kB mapped:0kB shmem:0kB slab_reclaimable:0kB slab_unreclaimable:0kB kernel_stack:0kB pagetables:0kB unstable:0kB bounce:0kB free_cma:0kB writeback_tmp:0kB pages_scanned:0 all_unreclaimable? yes
+[    5.609152] lowmem_reserve[]: 0 47 47 47
+[    5.609155] Node 0 Normal free:48kB min:540kB low:672kB high:808kB active_anon:36kB inactive_anon:0kB active_file:0kB inactive_file:36kB unevictable:0kB isolated(anon):0kB isolated(file):0kB present:27256kB mlocked:0kB dirty:8kB writeback:0kB mapped:0kB shmem:0kB slab_reclaimable:152kB slab_unreclaimable:2972kB kernel_stack:368kB pagetables:8kB unstable:0kB bounce:0kB free_cma:0kB writeback_tmp:0kB pages_scanned:4735 all_unreclaimable? yes
+[    5.609156] lowmem_reserve[]: 0 0 0 0
+[    5.609159] Node 1 Normal free:700kB min:720kB low:900kB high:1080kB active_anon:104kB inactive_anon:36kB active_file:0kB inactive_file:0kB unevictable:0kB isolated(anon):0kB isolated(file):68kB present:12860kB mlocked:0kB dirty:12kB writeback:0kB mapped:20kB shmem:44kB slab_reclaimable:260kB slab_unreclaimable:3140kB kernel_stack:96kB pagetables:28kB unstable:0kB bounce:0kB free_cma:0kB writeback_tmp:0kB pages_scanned:7313 all_unreclaimable? yes
+[    5.609161] lowmem_reserve[]: 0 0 0 0
+[    5.609166] Node 0 DMA: 0*4kB 0*8kB 0*16kB 0*32kB 0*64kB 0*128kB 0*256kB 0*512kB 0*1024kB 0*2048kB 0*4096kB = 0kB
+[    5.609171] Node 0 Normal: 5*4kB 0*8kB 0*16kB 0*32kB 0*64kB 0*128kB 0*256kB 0*512kB 0*1024kB 0*2048kB 0*4096kB = 20kB
+[    5.609175] Node 1 Normal: 11*4kB 13*8kB 7*16kB 4*32kB 0*64kB 0*128kB 0*256kB 0*512kB 0*1024kB 0*2048kB 0*4096kB = 388kB
+[    5.609176] 31 total pagecache pages
+[    5.609618] 65450 pages RAM
+[    5.609619] 0 pages HighMem
+[    5.609619] 16370 pages reserved
+[    5.609633] 38 pages shared
+[    5.609634] 4004 pages non-shared
+[    5.609635] [ pid ]   uid  tgid total_vm      rss nr_ptes swapents oom_score_adj name
+[    5.609661] Kernel panic - not syncing: Out of memory and no killable processes...
+[    5.609661] 
+[    5.609663] Pid: 2, comm: kthreadd Not tainted 3.7.0-rc8-dnuma-00073-g3de4a79-dirty #96
+[    5.609663] Call Trace:
+[    5.609666]  [<c12f80a5>] panic+0x82/0x176
+[    5.609668]  [<c109ea16>] out_of_memory+0x196/0x1a0
+[    5.609670]  [<c10a455f>] __alloc_pages_nodemask+0x6df/0x6f0
+[    5.609672]  [<c102b899>] dup_task_struct+0x59/0x120
+[    5.609673]  [<c102bf72>] copy_process.part.56+0x22/0xc00
+[    5.609675]  [<c104c1b0>] ? __kthread_bind+0x30/0x30
+[    5.609676]  [<c102cbc9>] copy_process+0x79/0x80
+[    5.609677]  [<c104c1b0>] ? __kthread_bind+0x30/0x30
+[    5.609679]  [<c102cc81>] do_fork+0x91/0x210
+[    5.609681]  [<c107569d>] ? put_lock_stats.isra.26+0xd/0x30
+[    5.609683]  [<c10758ec>] ? lock_release_holdtime.part.27+0x6c/0xd0
+[    5.609684]  [<c107569d>] ? put_lock_stats.isra.26+0xd/0x30
+[    5.609686]  [<c1079334>] ? lock_release_nested+0x84/0xc0
+[    5.609687]  [<c104c6f1>] ? kthreadd+0xc1/0x110
+[    5.609688]  [<c1079405>] ? __lock_release+0x95/0xc0
+[    5.609689]  [<c104c1b0>] ? __kthread_bind+0x30/0x30
+[    5.609691]  [<c102ce2c>] kernel_thread+0x2c/0x40
+[    5.609692]  [<c104c70c>] kthreadd+0xdc/0x110
+[    5.609695]  [<c1304a77>] ret_from_kernel_thread+0x1b/0x28
+[    5.609696]  [<c104c630>] ? kthread_stop+0x70/0x70
+Timeout, server kernel.stglabs.ibm.com not responding.

@@ -1,0 +1,5 @@
+There are expectations made about the stat of page flags when a page is
+returned to the page (or buddy) allocator, as well as the state of the page
+flags when a page is allocated from the page allocator.
+
+These 
