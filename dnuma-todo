@@ -11,12 +11,14 @@ Issues:
 	  regarding the contents of A's struct page?
 
 Todo:
+	- Consider CONFIG_HAVE_MEMORYLESS_NODES. Changes the meaning of `local_memory_node()`
 	- Page flags may not be usable due to non-atomic users, hook something on sections or memlayout.
 	- Potentially expand caching into a hashtable.
 	- Make commits all nice & clean.
 	- Properly update nodemasks.
 	- avoid stop_machine when updating zonelists.
 	- In x86/mm/numa.c, update nr_node_ids , cpumask_of_node() , node_to_cpumask_map[]
+	- sysfs updates to reflect new memory<->node associations.
 	- zone->managed_pages and zone->present_pages locking schemes.
 		- documentation now indicates they are locked by
 		  lock_memory_hotplug(), which is not acceptable for DNUMA
@@ -24,7 +26,7 @@ Todo:
 	- using functions which use stop_machine(): Analyze each, determine
 	  when it is actually required, examine the need for using
           stop_machine().
-		- drain_all_pages()
+		- drain_all_pages() - on_each_cpu_mask(), not stop_machine().
 			Emptys pcp page sets used for allocation of order 0 pages.
 			Called at end of transistion to new memlayout to ensure
 			 that new allocations are from the right nodes.
@@ -33,16 +35,404 @@ Todo:
 			 a way to schedule work to occur on a cpu in the future?
 			Alternately, does using rcu lists incur too high a
 			 cost? Neglecting the cost, is it an option?.
+			- free_pcppages_bulk()
 		- build_all_zonelists(NULL, dest_zone)
-			
 		- zone_pcp_update(zone)
 			Currently called whenever we "add a new page to a zone"
 			while moving free pages between zones.
-			- drain_zonestat()
+			- free_pcppages_bulk(zone, pcp->count, pcp)
+				- stop_machine() not required, can be done via
+				  on_each_cpu_mask()
+			- drain_zonestat(zone, pset)
+				- adds pset vmstats into zone & global vmstats,
+				  and zeros pset vmstats.
+				- Can we unhook the pset vmstats hook in new
+				  (zeroed) ones, then add the old ones into the
+				  zone & global vmstats? Essentially: rcu. Is
+				  there anything special about per_cpu_pagesets
+				  that prevents this?
+			- setup_pageset(pset, batch)
 
 Bugs:
 
+
+----------------------------------------
+
+Shows up after the sl*b notify  bug is fixed::
+
+---
+
+# dnuma-test all-to 2
+[    4.090109] On node 2 totalpages: 0
+[    4.140780] Built 2 zonelists in Zone order, mobility grouping on.  Total pages: 31797
+[    4.142616] Policy zone: Normal
+[    4.192612] Built 3 zonelists in Node order, mobility grouping on.  Total pages: 31797
+[    4.195321] Policy zone: Normal
+[    6.744055] hrtimer: interrupt took 20012390 ns
+# 
+# dnuma-test all-to 10
+sh: write error: Invalid argument
+# dnuma-test all-to 4
+[   12.405106] BUG: sleeping function called from invalid context at /home/cody/g/linux/arch/x86/mm/fault.c:1144
+[   12.408222] in_atomic(): 0, irqs_disabled(): 1, pid: 96, name: sh
+[   12.408222] 2 locks held by sh/96:
+[   12.408222]  #0:  (&sig->cred_guard_mutex){+.+.+.}, at: [<c10df327>] prepare_bprm_creds+0x27/0x70
+[   12.408222]  #1:  (&mm->mmap_sem){++++++}, at: [<c1024fac>] __do_page_fault+0xec/0x410
+[   12.408222] irq event stamp: 586
+[   12.408222] hardirqs last  enabled at (585): [<c107bcd2>] debug_check_no_locks_freed+0x72/0xb0
+[   12.408222] hardirqs last disabled at (586): [<c10a4d1e>] free_hot_cold_page+0x5e/0x390
+[   12.408222] softirqs last  enabled at (304): [<c103565d>] __do_softirq+0xfd/0x160
+[   12.408222] softirqs last disabled at (283): [<c10047d7>] do_softirq+0x87/0xe0
+[   12.408222] Pid: 96, comm: sh Not tainted 3.8.0-rc4-dnuma-00128-gdff346d-dirty #137
+[   12.408222] Call Trace:
+[   12.408222]  [<c10047d7>] ? do_softirq+0x87/0xe0
+[   12.408222]  [<c105d874>] __might_sleep+0x124/0x1d0
+[   12.408222]  [<c10252e0>] ? vmalloc_sync_all+0x10/0x10
+[   12.408222]  [<c1024fc5>] __do_page_fault+0x105/0x410
+[   12.408222]  [<c105de57>] ? sched_clock_cpu+0xd7/0x160
+[   12.408222]  [<c107646d>] ? get_lock_stats+0x1d/0x50
+[   12.408222]  [<c10767dd>] ? put_lock_stats.isra.26+0xd/0x30
+[   12.408222]  [<c1076a2c>] ? lock_release_holdtime.part.27+0x6c/0xd0
+[   12.408222]  [<c107a474>] ? lock_release_nested+0x84/0xc0
+[   12.408222]  [<c10d6df0>] ? memlayout_pfn_to_nid+0x120/0x2e0
+[   12.408222]  [<c10252e0>] ? vmalloc_sync_all+0x10/0x10
+[   12.408222]  [<c10252e8>] do_page_fault+0x8/0x10
+[   12.408222]  [<c1310077>] error_code+0x5f/0x64
+[   12.408222]  [<c10d007b>] ? list_locations+0x32b/0x430
+[   12.408222]  [<c10252e0>] ? vmalloc_sync_all+0x10/0x10
+[   12.408222]  [<c10a4e24>] ? free_hot_cold_page+0x164/0x390
+[   12.408222]  [<c10a4d34>] ? free_hot_cold_page+0x74/0x390
+[   12.408222]  [<c10a530b>] free_hot_cold_page_list+0x2b/0x40
+[   12.408222]  [<c10a8442>] release_pages+0x162/0x1a0
+[   12.408222]  [<c10b7cc5>] tlb_flush_mmu+0x55/0x90
+[   12.408222]  [<c10b7d12>] tlb_finish_mmu+0x12/0x40
+[   12.408222]  [<c10bfb3f>] exit_mmap+0x9f/0x110
+[   12.408222]  [<c102befc>] mmput+0x4c/0x90
+[   12.408222]  [<c10de734>] exec_mmap+0x124/0x230
+[   12.408222]  [<c10dddfb>] ? de_thread+0xfb/0x3f0
+[   12.408222]  [<c10d8b90>] ? wait_on_retry_sync_kiocb+0x50/0x50
+[   12.408222]  [<c10df270>] flush_old_exec+0x90/0xf0
+[   12.408222]  [<c111d9fa>] load_elf_binary+0x23a/0xa20
+[   12.408222]  [<c1076a2c>] ? lock_release_holdtime.part.27+0x6c/0xd0
+[   12.408222]  [<c10767dd>] ? put_lock_stats.isra.26+0xd/0x30
+[   12.408222]  [<c107a474>] ? lock_release_nested+0x84/0xc0
+[   12.408222]  [<c10df771>] ? search_binary_handler+0xf1/0x270
+[   12.408222]  [<c107a545>] ? __lock_release+0x95/0xc0
+[   12.408222]  [<c111d7c0>] ? load_elf_library+0x1d0/0x1d0
+[   12.408222]  [<c10df77e>] search_binary_handler+0xfe/0x270
+[   12.408222]  [<c10df6a2>] ? search_binary_handler+0x22/0x270
+[   12.408222]  [<c111d0b0>] ? lock_may_write+0xb0/0xb0
+[   12.408222]  [<c111d2b8>] load_script+0x208/0x230
+[   12.408222]  [<c107646d>] ? get_lock_stats+0x1d/0x50
+[   12.408222]  [<c10767dd>] ? put_lock_stats.isra.26+0xd/0x30
+[   12.408222]  [<c1076a2c>] ? lock_release_holdtime.part.27+0x6c/0xd0
+[   12.408222]  [<c10767dd>] ? put_lock_stats.isra.26+0xd/0x30
+[   12.408222]  [<c107a474>] ? lock_release_nested+0x84/0xc0
+[   12.408222]  [<c10df771>] ? search_binary_handler+0xf1/0x270
+[   12.408222]  [<c107a545>] ? __lock_release+0x95/0xc0
+[   12.408222]  [<c10df77e>] search_binary_handler+0xfe/0x270
+[   12.408222]  [<c10df6a2>] ? search_binary_handler+0x22/0x270
+[   12.408222]  [<c10dfb2c>] do_execve_common+0x23c/0x2c0
+[   12.408222]  [<c10dfbb8>] do_execve+0x8/0x10
+[   12.408222]  [<c10dfe3a>] sys_execve+0x2a/0x50
+[   12.408222]  [<c130fbd8>] syscall_call+0x7/0xb
+[   12.408222] BUG: unable to handle kernel NULL pointer dereference at 00000740
+[   12.408222] IP: [<c10a4e24>] free_hot_cold_page+0x164/0x390
+[   12.408222] *pdpt = 0000000000091001 *pde = 0000000000000000 
+[   12.408222] Oops: 0000 [#1] PREEMPT SMP DEBUG_PAGEALLOC
+[   12.408222] Pid: 96, comm: sh Not tainted 3.8.0-rc4-dnuma-00128-gdff346d-dirty #137 Bochs Bochs
+[   12.408222] EIP: 0060:[<c10a4e24>] EFLAGS: 00010006 CPU: 3
+[   12.408222] EIP is at free_hot_cold_page+0x164/0x390
+[   12.408222] EAX: ffffffff EBX: 000003c0 ECX: 00000000 EDX: 00000001
+[   12.408222] ESI: c3a04b58 EDI: 05440008 EBP: c0099cf0 ESP: c0099cc0
+[   12.408222]  DS: 007b ES: 007b FS: 00d8 GS: 0000 SS: 0068
+[   12.408222] CR0: 8005003b CR2: 00000740 CR3: 0009a000 CR4: 000006b0
+[   12.408222] DR0: 00000000 DR1: 00000000 DR2: 00000000 DR3: 00000000
+[   12.408222] DR6: ffff0ff0 DR7: 00000400
+[   12.408222] Process sh (pid: 96, ti=c0098000 task=c72d5400 task.ti=c0098000)
+[   12.408222] Stack:
+[   12.408222]  00000002 00000001 00000000 c10a4d34 002d5400 00000286 00000000 00000002
+[   12.408222]  c7800000 c391d140 c0099d20 00000000 c0099d04 c10a530b c3900734 0000002e
+[   12.408222]  00000002 c0099d34 c10a8442 00000000 00000296 c008400c 0000002e c706a0b0
+[   12.408222] Call Trace:
+[   12.408222]  [<c10a4d34>] ? free_hot_cold_page+0x74/0x390
+[   12.408222]  [<c10a530b>] free_hot_cold_page_list+0x2b/0x40
+[   12.408222]  [<c10a8442>] release_pages+0x162/0x1a0
+[   12.408222]  [<c10b7cc5>] tlb_flush_mmu+0x55/0x90
+[   12.408222]  [<c10b7d12>] tlb_finish_mmu+0x12/0x40
+[   12.408222]  [<c10bfb3f>] exit_mmap+0x9f/0x110
+[   12.408222]  [<c102befc>] mmput+0x4c/0x90
+[   12.408222]  [<c10de734>] exec_mmap+0x124/0x230
+[   12.408222]  [<c10dddfb>] ? de_thread+0xfb/0x3f0
+[   12.408222]  [<c10d8b90>] ? wait_on_retry_sync_kiocb+0x50/0x50
+[   12.408222]  [<c10df270>] flush_old_exec+0x90/0xf0
+[   12.408222]  [<c111d9fa>] load_elf_binary+0x23a/0xa20
+[   12.408222]  [<c1076a2c>] ? lock_release_holdtime.part.27+0x6c/0xd0
+[   12.408222]  [<c10767dd>] ? put_lock_stats.isra.26+0xd/0x30
+[   12.408222]  [<c107a474>] ? lock_release_nested+0x84/0xc0
+[   12.408222]  [<c10df771>] ? search_binary_handler+0xf1/0x270
+[   12.408222]  [<c107a545>] ? __lock_release+0x95/0xc0
+[   12.408222]  [<c111d7c0>] ? load_elf_library+0x1d0/0x1d0
+[   12.408222]  [<c10df77e>] search_binary_handler+0xfe/0x270
+[   12.408222]  [<c10df6a2>] ? search_binary_handler+0x22/0x270
+[   12.408222]  [<c111d0b0>] ? lock_may_write+0xb0/0xb0
+[   12.408222]  [<c111d2b8>] load_script+0x208/0x230
+[   12.408222]  [<c107646d>] ? get_lock_stats+0x1d/0x50
+[   12.408222]  [<c10767dd>] ? put_lock_stats.isra.26+0xd/0x30
+[   12.408222]  [<c1076a2c>] ? lock_release_holdtime.part.27+0x6c/0xd0
+[   12.408222]  [<c10767dd>] ? put_lock_stats.isra.26+0xd/0x30
+[   12.408222]  [<c107a474>] ? lock_release_nested+0x84/0xc0
+[   12.408222]  [<c10df771>] ? search_binary_handler+0xf1/0x270
+[   12.408222]  [<c107a545>] ? __lock_release+0x95/0xc0
+[   12.408222]  [<c10df77e>] search_binary_handler+0xfe/0x270
+[   12.408222]  [<c10df6a2>] ? search_binary_handler+0x22/0x270
+[   12.408222]  [<c10dfb2c>] do_execve_common+0x23c/0x2c0
+[   12.408222]  [<c10dfbb8>] do_execve+0x8/0x10
+[   12.408222]  [<c10dfe3a>] sys_execve+0x2a/0x50
+[   12.408222]  [<c130fbd8>] syscall_call+0x7/0xb
+[   12.408222] Code: cc e8 d1 1e 03 00 8b 1e 89 da c1 ea 1a 83 e2 07 39 d0 0f 84 0f 01 00 00 c1 eb 18 83 e3 03 69 db c0 03 00 00 03 1c 85 a0 a4 42 c1 <8b> 93 80 03 00 00 85 d2 0f 84 f2 01 00 00 83 f8 ff 0f 84 e5 00
+[   12.408222] EIP: [<c10a4e24>] free_hot_cold_page+0x164/0x390 SS:ESP 0068:c0099cc0
+[   12.408222] CR2: 0000000000000740
+[   12.408222] ---[ end trace 77b258435eb35ae2 ]---
+Killed[   12.650919] -- n c2c1b600 zone c7c003c0 flags 32976 s c2c1e000 nid 0
+
+[   12.652282] -- n c2c1b600 zone c7c00000 flags 32976 s c2c1e000 nid 0
+[   12.652282] -- n c73a2e00 zone c706a0b0 flags 32976 s c2c1e000 nid 2
+[   12.652282] -- n c7003600 zone c78003c0 flags 32976 s c2c1e000 nid 1
+# [   12.680583] -- n c2c1b600 zone c7c003c0 flags 32976 s c2c1e000 nid 0
+[   12.682580] -- n c2c1b600 zone c7c00000 flags 32976 s c2c1e000 nid 0
+[   12.684089] -- n c73a2e00 zone c706a0b0 flags 32976 s c2c1e000 nid 2
+[   12.684422] -- n c7003600 zone c78003c0 flags 32976 s c2c1e000 nid 1
+[   12.688917] -- n c2c1b600 zone c7c003c0 flags 32976 s c2c1e000 nid 0
+[   12.690627] -- n c2c1b600 zone c7c00000 flags 32976 s c2c1e000 nid 0
+[   12.692643] -- n c73a2e00 zone c706a0b0 flags 32976 s c2c1e000 nid 2
+[   12.692840] -- n c7003600 zone c78003c0 flags 32976 s c2c1e000 nid 1
+[   12.696646] -- n c2c1b600 zone c7c003c0 flags 32976 s c2c1e000 nid 0
+[   12.698350] -- n c2c1b600 zone c7c00000 flags 32976 s c2c1e000 nid 0
+[   12.700391] -- n c73a2e00 zone c706a0b0 flags 32976 s c2c1e000 nid 2
+[   12.700528] -- n c7003600 zone c78003c0 flags 32976 s c2c1e000 nid 1
+[   12.707394] -- n c2c1b600 zone c7c003c0 flags 32976 s c2c1e000 nid 0
+[   12.708639] -- n c2c1b600 zone c7c00000 flags 32976 s c2c1e000 nid 0
+[   12.708639] -- n c73a2e00 zone c706a0b0 flags 32976 s c2c1e000 nid 2
+[   12.708639] -- n c7003600 zone c78003c0 flags 32976 s c2c1e000 nid 1
+[   12.716312] -- n c2c1b600 zone c7c003c0 flags 32976 s c2c1e000 nid 0
+[   12.717858] -- n c2c1b600 zone c7c00000 flags 32976 s c2c1e000 nid 0
+[   12.719448] -- n c73a2e00 zone c706a0b0 flags 32976 s c2c1e000 nid 2
+[   12.720244] -- n c7003600 zone c78003c0 flags 32976 s c2c1e000 nid 1
+[   12.723333] -- n c2c1b600 zone c7c003c0 flags 32976 s c2c1e000 nid 0
+[   12.725145] -- n c2c1b600 zone c7c00000 flags 32976 s c2c1e000 nid 0
+[   12.726896] -- n c73a2e00 zone c706a0b0 flags 32976 s c2c1e000 nid 2
+[   12.735420] -- n c2c1b600 zone c7c003c0 flags 32976 s c2c1e000 nid 0
+[   12.736126] -- n c2c1b600 zone c7c00000 flags 32976 s c2c1e000 nid 0
+[   12.736126] -- n c73a2e00 zone c706a0b0 flags 32976 s c2c1e000 nid 2
+[   12.736126] -- n c7003600 zone c78003c0 flags 32976 s c2c1e000 nid 1
+[   12.742236] -- n c2c1b600 zone c7c003c0 flags 32976 s c2c1e000 nid 0
+[   12.743745] -- n c2c1b600 zone c7c00000 flags 32976 s c2c1e000 nid 0
+[   12.745693] -- n c73a2e00 zone c706a0b0 flags 32976 s c2c1e000 nid 2
+[   12.747238] -- n c2c1b600 zone c7c003c0 flags 32976 s c2c1e000 nid 0
+[   12.748895] -- n c2c1b600 zone c7c00000 flags 32976 s c2c1e000 nid 0
+[   12.750304] -- n c73a2e00 zone c706a0b0 flags 32976 s c2c1e000 nid 2
+[   12.751172] -- n c7003600 zone c78003c0 flags 32976 s c2c1e000 nid 1
+[   12.753301] -- n c2c1b600 zone c7c003c0 flags 32976 s c2c1e000 nid 0
+[   12.754923] -- n c2c1b600 zone c7c00000 flags 32976 s c2c1e000 nid 0
+[   12.756749] -- n c73a2e00 zone c706a0b0 flags 32976 s c2c1e000 nid 2
+[   12.758227] -- n c2c1b600 zone c7c003c0 flags 32976 s c2c1e000 nid 0
+[   12.759928] -- n c2c1b600 zone c7c00000 flags 32976 s c2c1e000 nid 0
+[   12.761839] -- n c73a2e00 zone c706a0b0 flags 32976 s c2c1e000 nid 2
+[   31.764570] BUG: unable to handle kernel NULL pointer dereference at 00000740
+[   31.768304] IP: [<c10a4e24>] free_hot_cold_page+0x164/0x390
+[   31.768304] *pdpt = 0000000000000000 *pde = f000ff53f000ff53 
+[   31.768304] Oops: 0000 [#2] PREEMPT SMP DEBUG_PAGEALLOC
+[   31.768304] Pid: 94, comm: flush-8:0 Tainted: G      D      3.8.0-rc4-dnuma-00128-gdff346d-dirty #137 Bochs Bochs
+[   31.768304] EIP: 0060:[<c10a4e24>] EFLAGS: 00010006 CPU: 5
+[   31.768304] EIP is at free_hot_cold_page+0x164/0x390
+[   31.768304] EAX: ffffffff EBX: 000003c0 ECX: c10d6df0 EDX: 00000001
+[   31.768304] ESI: c3a050a8 EDI: 05440008 EBP: c6421c44 ESP: c6421c14
+[   31.768304]  DS: 007b ES: 007b FS: 00d8 GS: 0000 SS: 0068
+[   31.768304] CR0: 8005003b CR2: 00000740 CR3: 015f6000 CR4: 000006b0
+[   31.768304] DR0: 00000000 DR1: 00000000 DR2: 00000000 DR3: 00000000
+[   31.768304] DR6: ffff0ff0 DR7: 00000400
+[   31.768304] Process flush-8:0 (pid: 94, ti=c6420000 task=c2f93f00 task.ti=c6420000)
+[   31.768304] Stack:
+[   31.768304]  00000002 00000001 00000000 c10a4d34 00421c34 00000296 00000000 00000002
+[   31.768304]  c7800000 c3a04f68 c6421c74 00000000 c6421c58 c10a530b c3a050bc 00000005
+[   31.768304]  00000002 c6421c88 c10a8442 00000000 00000296 c8fb3308 00000005 c78003c0
+[   31.768304] Call Trace:
+[   31.768304]  [<c10a4d34>] ? free_hot_cold_page+0x74/0x390
+[   31.768304]  [<c10a530b>] free_hot_cold_page_list+0x2b/0x40
+[   31.768304]  [<c10a8442>] release_pages+0x162/0x1a0
+[   31.768304]  [<c10a853e>] pagevec_lru_move_fn+0xbe/0xd0
+[   31.768304]  [<c10a7ed0>] ? pagevec_move_tail_fn+0x70/0x70
+[   31.768304]  [<c10a8844>] __pagevec_lru_add+0x14/0x20
+[   31.768304]  [<c10a88c9>] lru_add_drain_cpu+0x79/0xe0
+[   31.768304]  [<c10a8947>] lru_add_drain+0x17/0x40
+[   31.768304]  [<c10a897b>] __pagevec_release+0xb/0x30
+[   31.768304]  [<c10a6c17>] write_cache_pages+0x287/0x370
+[   31.768304]  [<c10a5530>] ? global_dirtyable_memory+0xf0/0xf0
+[   31.768304]  [<c10626ec>] ? load_balance+0x9c/0x450
+[   31.768304]  [<c10a6d3a>] generic_writepages+0x3a/0x60
+[   31.768304]  [<c10a6d7f>] do_writepages+0x1f/0x40
+[   31.768304]  [<c10fd47e>] __writeback_single_inode+0x2e/0xf0
+[   31.768304]  [<c10fdd4d>] writeback_sb_inodes+0x1ad/0x240
+[   31.768304]  [<c10fde5c>] __writeback_inodes_wb+0x7c/0xb0
+[   31.768304]  [<c10fe1b9>] wb_writeback+0x189/0x190
+[   31.768304]  [<c10fe240>] wb_check_old_data_flush+0x80/0x90
+[   31.768304]  [<c10fe49f>] wb_do_writeback+0x9f/0x100
+[   31.768304]  [<c10fe551>] bdi_writeback_thread+0x51/0x100
+[   31.768304]  [<c10fe500>] ? wb_do_writeback+0x100/0x100
+[   31.768304]  [<c104c9df>] kthread+0x8f/0xa0
+[   31.768304]  [<c107a84b>] ? trace_hardirqs_on+0xb/0x10
+[   31.768304]  [<c1310277>] ret_from_kernel_thread+0x1b/0x28
+[   31.768304]  [<c104c950>] ? __kthread_bind+0x30/0x30
+[   31.768304] Code: cc e8 d1 1e 03 00 8b 1e 89 da c1 ea 1a 83 e2 07 39 d0 0f 84 0f 01 00 00 c1 eb 18 83 e3 03 69 db c0 03 00 00 03 1c 85 a0 a4 42 c1 <8b> 93 80 03 00 00 85 d2 0f 84 f2 01 00 00 83 f8 ff 0f 84 e5 00
+[   31.768304] EIP: [<c10a4e24>] free_hot_cold_page+0x164/0x390 SS:ESP 0068:c6421c14
+[   31.768304] CR2: 0000000000000740
+[   31.768304] ---[ end trace 77b258435eb35ae3 ]---
+[   31.768304] note: flush-8:0[94] exited with preempt_count 1
+[   31.768304] BUG: sleeping function called from invalid context at /home/cody/g/linux/kernel/mutex.c:269
+[   31.768304] in_atomic(): 1, irqs_disabled(): 1, pid: 94, name: flush-8:0
+[   31.768304] INFO: lockdep is turned off.
+[   31.768304] irq event stamp: 36
+[   31.768304] hardirqs last  enabled at (35): [<c108be4d>] rcu_preempt_note_context_switch+0x5d/0x190
+[   31.768304] hardirqs last disabled at (36): [<c130ee20>] _raw_spin_lock_irq+0x10/0x80
+[   31.768304] softirqs last  enabled at (30): [<c10fe497>] wb_do_writeback+0x97/0x100
+[   31.768304] softirqs last disabled at (28): [<c130ee9f>] _raw_spin_lock_bh+0xf/0x80
+[   31.768304] Pid: 94, comm: flush-8:0 Tainted: G      D      3.8.0-rc4-dnuma-00128-gdff346d-dirty #137
+[   31.768304] Call Trace:
+[   31.768304]  [<c130ee9f>] ? _raw_spin_lock_bh+0xf/0x80
+[   31.768304]  [<c105d874>] __might_sleep+0x124/0x1d0
+[   31.768304]  [<c130c06e>] mutex_lock_nested+0x1e/0x350
+[   31.768304]  [<c1102b05>] ? exit_fs+0x35/0x90
+[   31.768304]  [<c10995cb>] perf_event_exit_task+0x1b/0xa0
+[   31.768304]  [<c100a731>] ? exit_thread+0xd1/0x110
+[   31.768304]  [<c1033ab1>] do_exit+0x261/0x330
+[   31.768304]  [<c1005a9b>] oops_end+0x6b/0x90
+[   31.768304]  [<c13033bc>] no_context+0x10e/0x116
+[   31.768304]  [<c13034f2>] __bad_area_nosemaphore+0x12e/0x136
+[   31.768304]  [<c10252e0>] ? vmalloc_sync_all+0x10/0x10
+[   31.768304]  [<c130350c>] bad_area_nosemaphore+0x12/0x14
+[   31.768304]  [<c102517d>] __do_page_fault+0x2bd/0x410
+[   31.768304]  [<c102631c>] ? __change_page_attr+0xac/0x2b0
+[   31.768304]  [<c1026561>] ? __change_page_attr_set_clr+0x41/0xa0
+[   31.768304]  [<c10252e0>] ? vmalloc_sync_all+0x10/0x10
+[   31.768304]  [<c10252e8>] do_page_fault+0x8/0x10
+[   31.768304]  [<c1310077>] error_code+0x5f/0x64
+[   31.768304]  [<c10d6df0>] ? memlayout_pfn_to_nid+0x120/0x2e0
+[   31.768304]  [<c10d007b>] ? list_locations+0x32b/0x430
+[   31.768304]  [<c10252e0>] ? vmalloc_sync_all+0x10/0x10
+[   31.768304]  [<c10a4e24>] ? free_hot_cold_page+0x164/0x390
+[   31.768304]  [<c10a4d34>] ? free_hot_cold_page+0x74/0x390
+[   31.768304]  [<c10a530b>] free_hot_cold_page_list+0x2b/0x40
+[   31.768304]  [<c10a8442>] release_pages+0x162/0x1a0
+[   31.768304]  [<c10a853e>] pagevec_lru_move_fn+0xbe/0xd0
+[   31.768304]  [<c10a7ed0>] ? pagevec_move_tail_fn+0x70/0x70
+[   31.768304]  [<c10a8844>] __pagevec_lru_add+0x14/0x20
+[   31.768304]  [<c10a88c9>] lru_add_drain_cpu+0x79/0xe0
+[   31.768304]  [<c10a8947>] lru_add_drain+0x17/0x40
+[   31.768304]  [<c10a897b>] __pagevec_release+0xb/0x30
+[   31.768304]  [<c10a6c17>] write_cache_pages+0x287/0x370
+[   31.768304]  [<c10a5530>] ? global_dirtyable_memory+0xf0/0xf0
+[   31.768304]  [<c10626ec>] ? load_balance+0x9c/0x450
+[   31.768304]  [<c10a6d3a>] generic_writepages+0x3a/0x60
+[   31.768304]  [<c10a6d7f>] do_writepages+0x1f/0x40
+[   31.768304]  [<c10fd47e>] __writeback_single_inode+0x2e/0xf0
+[   31.768304]  [<c10fdd4d>] writeback_sb_inodes+0x1ad/0x240
+[   31.768304]  [<c10fde5c>] __writeback_inodes_wb+0x7c/0xb0
+[   31.768304]  [<c10fe1b9>] wb_writeback+0x189/0x190
+[   31.768304]  [<c10fe240>] wb_check_old_data_flush+0x80/0x90
+[   31.768304]  [<c10fe49f>] wb_do_writeback+0x9f/0x100
+[   31.768304]  [<c10fe551>] bdi_writeback_thread+0x51/0x100
+[   31.768304]  [<c10fe500>] ? wb_do_writeback+0x100/0x100
+[   31.768304]  [<c104c9df>] kthread+0x8f/0xa0
+[   31.768304]  [<c107a84b>] ? trace_hardirqs_on+0xb/0x10
+[   31.768304]  [<c1310277>] ret_from_kernel_thread+0x1b/0x28
+[   31.768304]  [<c104c950>] ? __kthread_bind+0x30/0x30
+[   31.918039] -- n c2c1b600 zone c7c003c0 flags 32976 s c2c1e000 nid 0
+[   31.919517] -- n c2c1b600 zone c7c00000 flags 32976 s c2c1e000 nid 0
+[   31.920118] -- n c73a2e00 zone c706a0b0 flags 32976 s c2c1e000 nid 2
+[   31.920118] -- n c7003600 zone c78003c0 flags 32976 s c2c1e000 nid 1
+[   31.924547] -- n c2c1b600 zone c7c003c0 flags 32976 s c2c1e000 nid 0
+[   31.926076] -- n c2c1b600 zone c7c00000 flags 32976 s c2c1e000 nid 0
+[   31.927585] -- n c73a2e00 zone c706a0b0 flags 32976 s c2c1e000 nid 2
+[   31.930803] -- n c2c1b600 zone c7c003c0 flags 32976 s c2c1e000 nid 0
+[   31.933297] -- n c2c1b600 zone c7c00000 flags 32976 s c2c1e000 nid 0
+[   31.933996] -- n c73a2e00 zone c706a0b0 flags 32976 s c2c1e000 nid 2
+[   31.937861] -- n c2c1b600 zone c7c003c0 flags 32976 s c2c1e000 nid 0
+[   31.939943] -- n c2c1b600 zone c7c00000 flags 32976 s c2c1e000 nid 0
+[   31.941817] -- n c73a2e00 zone c706a0b0 flags 32976 s c2c1e000 nid 2
+[   31.943990] BUG: unable to handle kernel NULL pointer dereference at 00000740
+[   31.943996] IP: [<c10a31e5>] __free_pages_ok+0x105/0x330
+[   31.943998] *pdpt = 0000000000000000 *pde = f000ff53f000ff53 
+[   31.944000] Oops: 0000 [#3] PREEMPT SMP DEBUG_PAGEALLOC
+[   31.944003] Pid: 0, comm: swapper/5 Tainted: G      D      3.8.0-rc4-dnuma-00128-gdff346d-dirty #137 Bochs Bochs
+[   31.944008] EIP: 0060:[<c10a31e5>] EFLAGS: 00010206 CPU: 5
+[   31.944010] EIP is at __free_pages_ok+0x105/0x330
+[   31.944010] EAX: 00000001 EBX: c39f9500 ECX: c10d6df0 EDX: 00000001
+[   31.944011] ESI: 000003c0 EDI: ffffffff EBP: c7057f2c ESP: c7057f04
+[   31.944012]  DS: 007b ES: 007b FS: 00d8 GS: 0000 SS: 0068
+[   31.944013] CR0: 8005003b CR2: 00000740 CR3: 015f6000 CR4: 000006b0
+[   31.944017] DR0: 00000000 DR1: 00000000 DR2: 00000000 DR3: 00000000
+[   31.944019] DR6: ffff0ff0 DR7: 00000400
+[   31.944020] Process swapper/5 (pid: 0, ti=c7056000 task=c2cbd400 task.ti=c2cc6000)
+[   31.944020] Stack:
+[   31.944023]  00000002 00000001 00000000 c10a30fd 00000246 00000246 00000001 00000000
+[   31.944025]  c2f93f00 00000001 c7057f34 c10a5075 c7057f44 c10a50ea 00000001 c2f93f00
+[   31.944027]  c7057f50 c102bac8 c2f93f00 c7057f5c c102bb39 c2f94ba4 c7057f6c c1031d00
+[   31.944028] Call Trace:
+[   31.944030]  [<c10a30fd>] ? __free_pages_ok+0x1d/0x330
+[   31.944032]  [<c10a5075>] __free_pages+0x25/0x40
+[   31.944034]  [<c10a50ea>] free_memcg_kmem_pages+0x4a/0x60
+[   31.944036]  [<c102bac8>] free_task+0x28/0x50
+[   31.944037]  [<c102bb39>] __put_task_struct+0x49/0x80
+[   31.944039]  [<c1031d00>] delayed_put_task_struct+0x30/0x40
+[   31.944042]  [<c1089ff6>] rcu_do_batch.isra.55+0x126/0x2e0
+[   31.944044]  [<c108a23e>] __rcu_process_callbacks+0x8e/0x130
+[   31.944046]  [<c108a317>] rcu_process_callbacks+0x37/0x60
+[   31.944048]  [<c1035600>] __do_softirq+0xa0/0x160
+[   31.944049]  [<c1035560>] ? local_bh_enable_ip+0xd0/0xd0
+[   31.944050]  <IRQ> 
+[   31.944051]  [<c103580e>] ? irq_exit+0x7e/0xa0
+[   31.944053]  [<c101eea3>] ? smp_apic_timer_interrupt+0x53/0x90
+[   31.944066]  [<c1185170>] ? trace_hardirqs_off_thunk+0xc/0x1c
+[   31.944070]  [<c130feba>] ? apic_timer_interrupt+0x32/0x38
+[   31.944072]  [<c100a339>] ? default_idle+0x29/0x60
+[   31.944074]  [<c100a33b>] ? default_idle+0x2b/0x60
+[   31.944076]  [<c100ac2f>] ? cpu_idle+0x6f/0xd0
+[   31.944078]  [<c12fce66>] ? start_secondary+0xa7/0xaa
+[   31.944092] Code: 12 3b 03 00 8b 13 89 c7 89 d0 c1 e8 1a 83 e0 07 39 c7 0f 84 7e 01 00 00 c1 ea 18 83 e2 03 69 f2 c0 03 00 00 03 34 bd a0 a4 42 c1 <8b> 8e 80 03 00 00 85 c9 0f 84 11 02 00 00 83 ff ff 0f 84 5a 01
+[   31.944095] EIP: [<c10a31e5>] __free_pages_ok+0x105/0x330 SS:ESP 0068:c7057f04
+[   31.944095] CR2: 0000000000000740
+[   31.944522] ---[ end trace 77b258435eb35ae4 ]---
+[   31.944525] Kernel panic - not syncing: Fatal exception in interrupt
+
+
+
 -----------------------------------------
+
+Also looks like a 0xcc/POISON init mem bug.
+
+  0xccccccf4
+- 0xcccccccc
+=         40 = 0x28
+[   33.836088] IP: [<c13078ad>] get_any_partial+0xab/0xed | /home/cody/g/linux/mm/slub.c:1625 (discriminator 1)
+
+	n = get_node((struct kmem_cache *)s, zone_to_nid(zone));
+-->	if (n && cpuset_zone_allowed_hardwall(zone, flags) &&
+		n->nr_partial > s->min_partial) {
+
+
+	/* only for SLUB */
+	/* need to test other SL*Bs */
+
+n = get_node(s, zone_to_nid(zone)) == 0xcccccccc;
+
+	s :: struct kmem_cache *
+	node = 2 // a new node created by dnuma.
+	get_node(s, node) = s->node[node]
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Starting network...
 # dnuma-test all-to 2
@@ -76,7 +466,7 @@ Starting network...
 [   33.832152] Built 3 zonelists in Node order, mobility grouping on.  Total pages: 31797
 [   33.834637] Policy zone: Normal
 [   33.835458] BUG: unable to handle kernel paging request at ccccccf4
-[   33.836088] IP: [<c13078ad>] get_any_partial+0xab/0xed
+[   33.836088] IP: [<c13078ad>] get_any_partial+0xab/0xed | /home/cody/g/linux/mm/slub.c:1625 (discriminator 1)
 [   33.836088] *pdpt = 00000000015f3001 *pde = 0000000000000000 
 [   33.836088] Oops: 0000 [#1] PREEMPT SMP DEBUG_PAGEALLOC
 [   33.836088] Pid: 100, comm: dnuma-test Not tainted 3.8.0-rc4-dnuma-00125-g83a4bab-dirty #131 Bochs Bochs
