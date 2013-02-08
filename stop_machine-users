@@ -1,0 +1,27 @@
+= `stop_machine()` users =
+	== zonelists ==
+		`__build_all_zonelists`
+	== per cpu pagesets (zone pcp) ==
+		`zone_pcp_update` -> `__zone_pcp_update`
+
+		zone pcp modifiers that avoid stop_machine():
+			- `drain_all_pages()`: uses on_each_cpu_mask()
+			- `zone_pcp_reset()`: not called with any locking.
+				- on each cpu, drain_zonestat(zone, pset);
+				- free percpu zone->pageset
+				- set zone->pageset to &boot_pageset
+
+	== something in kernel/time/timekeeping.c ==
+		line 522
+		s390 does this it's own way (stop_machine from arch code)
+	== kernel/module.c ==
+		line 1865
+	== cpu hotplug ==
+		kernel/cpu.c +289
+	== ftrace ==
+		`__ftrace_modify_code`
+		s390 & arm do this there own way (stop_machine from arch code)
+	== x86/kernel/cpu/mtrr/mainc ==
+	== x86/kernel/alternative.c ==
+
+# vim: ts=2 sw=2 sts=0 noet

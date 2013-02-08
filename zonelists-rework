@@ -1,0 +1,58 @@
+pg_dat_t currently embeds an array of struct zonelist s (not pointers).
+length of array is MAX_ZONELISTS.
+
+What does zonelists_mutex protect?
+	- "Global mutex to protect against size modification of zonelists as well
+	   as to serialize pageset setup for the new populated zone."
+
+	mm/page_alloc.c::
+
+	Held around __setup_per_zone_wmarks();
+		- Sets zone->watermark[WMARK_MIN], [WMARK_LOW], [WMARK_HIGH]
+		- Calls setup_zone_migrate_reserve(zone);
+			- calls (read) min_wmark_pages(zone) 
+			- calls (read) get_pageblock_migratetype(page)
+			- calls (write) set_pageblock_migratetype()
+			- calls (write) move_freepages_block()
+			
+		- Calls calculate_totalreserve_pages();
+			- reads zone->lowmem_reserve[j] where j = 0..MAX_NR_ZONES
+			- sets zone->dirty_balance_reserve
+			- sets globals dirty_balance_reserve and totalreserve_pages
+	
+	Held around build_all_zonelists(NULL, NULL) in numa_zonelist_order_handler()
+		- 
+
+	kernel/cpu.c::
+
+	Held around build_all_zonelists(NULL, NULL) in cpu_up
+		also has an interesting conditional in calling build_all_zonelists(NULL, NULL).
+	
+	mm/memory_hotplug.c::
+	Held around build_all_zonelists(NULL, zone)
+	Held around walk_system_ram_range(...)
+	Held around zone_pcp_reset(zone)
+
+All callers of build_all_zonelists() ensure they are holding zonelists_mutex.
+	build_all_zonelists() does:
+		set_zonelist_order();
+		checks if system_state == SYSTEM_BOOTING, if it does, then call
+			__build_all_zonelists(NULL) directly.
+		otherwise, stop_machine(__build_all_zonelists, pgdat, NULL)
+		set vm_total_pages = nr_freepagecache_pages()
+		set page_group_by_mobility_disabled based on vm_total_pages & pageblock_nr_pages.
+		Printks.
+
+Do any zonelist users sleep?
+
+nr_free_pagecache_pages() = nr_free_zone_pages(gfp_zone(GFP_HIGHUSER_MOVABLE))
+
+nr_free_zone_pages offset =
+	where zonelist = node_zonelists(numa_node_id(), GFP_KERNEL)
+	sum zone->present_pages - high_wmark_pages(zone)
+
+walk_system_ram_range() uses find_next_system_ram(&res, "System RAM"). It
+screams "some one screwed this up", string comparisons for ram ranges seems
+extremely questionable.
+
+
