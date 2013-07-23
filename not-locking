@@ -1,0 +1,55 @@
+preempt_disable(),preempt_enable()
+
+	- Files: include/linux/preempt.h
+	- Config options that affect it:
+
+		CONFIG_DEBUG_PREEMPT
+			call add_preempt_count() & sub_preempt_count()
+			debugging functions, which check the preempt_count()
+			value (ie: current_thread_info()->preempt_count).
+		CONFIG_PREEMPT_TRACER
+		CONFIG_PREEMPT
+			If enabled, causes preempt_enable() to reschedule if indicated by TIF_NEED_RESCHED.
+		CONFIG_PREEMPT_COUNT
+			If disabled, preempt_disable() and preempt_enable() are NOPs.
+
+	preempt_disable() incriments current_thread_info()->preempt_count and
+	preempt_enable() decriments the same.
+
+	- How does current_thread_info()->preempt_count (or preempt_count())
+	  affect scheduling & atomicity?
+
+local_irq_save(), local_irq_restore()
+
+	- mm/vmstat.c:301: * that comes with local_irq_save/restore if we use this_cpu_cmpxchg.
+	- Documentation/preempt-locking.txt
+	- Documentation/DocBook/kernel-hacking.tmpl:673
+	- Documentation/RCU/whatisRCU.txt:334:
+	- Documentation/RCU/whatisRCU.txt:881:
+
+	- Files: include/linux/irqflags.h
+
+	- local_irq_save calls raw_local_irq_save(flags), which calls arch_local_irq_save().
+		- ppc: flags are "mfmsr();"
+			- ppc-E: asm volatile("wrteei 0" ::: "memory")
+			- ppc-*: SET_MSR_EE(flags & ~MSR_EE) -> mtmsr(flags & ~MSR_EE)
+		- x86 arch/x86/include/asm/irqflags.h
+			arch_local_save_flags()
+				native_save_fl()
+					# __raw_save_flags
+					pushf ; pop %0
+			arch_local_irq_disable()
+				native_irq_disable()
+					cli
+
+	- What garuntees are we given by forbidding maskable interupts from running on the local cpu?
+		- what is allowed (or currently done) in NMIs?
+			- kgdb
+		- what is allowed (or currently done) in maskable interrupts?
+
+register_nmi_handler(), unregister_nmi_handler()
+
+
+cmpxchg_local vs cmpxchg
+local_xchg vs xchg
+
