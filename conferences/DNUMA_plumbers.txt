@@ -1,0 +1,22 @@
+Runtime NUMA Reconfiguration for Virtual Machines
+
+== One Line Summary ==
+
+Allow physical memory to change which node it belongs to at runtime to improve
+long running virtual machine performance.
+
+== Abstract ==
+
+Currently, NUMA layout is determined at boot time and never changes again. This setup works for real hardware, but virtual machines are more dynamic: they could be migrated between different hosts, be suspended and resumed later (with other VMs now running on the same host), or could have their memory shuffled around by the hypervisor.
+
+The end result is the NUMA layout the guest was booted with is probably not the layout it is running with, especially if that VM has been running for a long time.
+
+pHyp (IBM's closed source hypervisor that runs on Power servers) provides firmware interfaces that allow Linux, as the guest, to determine the runtime NUMA layout.
+
+I would like to discuss methods for using runtime NUMA layout updates to reconfigure the page allocator, the potential for reallocating data structures that previously were assumed to be fixed, and how other hypervisors handle (or plan on handling) NUMA configuration for guests.
+
+== Bio ==
+
+Cody is a developer with IBM's Linux Technology Center. He currently
+resides in Hillsboro, Oregon. Previously, Cody worked on the perf user space
+tool to improve support for powerpc.

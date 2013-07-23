@@ -1,0 +1,48 @@
+Subject: [LSF/MM TOPIC][ATTEND] Handling NUMA layout changes at runtime
+
+Yes, this is late. Sorry.
+
+---
+
+Presently, NUMA layout is determined at boot time and never changes again.
+This setup works for real hardware, but virtual machines are more dynamic:
+they could be migrated between different hosts, and have to share the physical
+memory space with other VMs which are also being moved around or shut down
+while other new VMs are started up. As a result, the physical backing memory
+that a VM had when it started up changes at runtime.
+
+Problems to be overcome:
+
+	- How should userspace be notified? Do we need new interfaces so
+	  applications can query memory to see if it was affected?
+
+	- Can we make the NUMA layout initialization generic? This also
+	  implies that all initialization of struct zone/struct
+	  page/NODE_DATA() would be made (somewhat) generic.
+
+	- Some one-time allocations now will know they are on a non-optimal
+	  node.
+
+	- hotpluged per node data is (in general) not being allocated optimally)
+
+		- NODE_DATA() for hotpluged nodes is allocated off-node (except for
+		  ia64).
+
+		- SLUB's kmem_cache_node is always allocated off-node for
+		  hotpluged nodes.
+
+	  [Not a new problem, but one that needs solving].
+
+Some more generic NUMA layout/mm init things:
+
+	- boot-time and hotplug NUMA init don't share enough code.
+
+	- architectures do not share mm init code
+
+	- NUMA layout (from init) is kept (if it is kept at all) in only arch
+	  specific ways. Memblock _happens_ to contain this info, while also
+	  also tracking allocations, and every arch but powerpc discards it as
+	  __init/__initdata)
+
+A WIP patchset addressing initial reconfiguration of the page allocator:
+https://github.com/jmesmon/linux/tree/dnuma/v37
