@@ -1,5 +1,8 @@
 "valid"
  - pfn_valid_within()
+	- implied within pageblock
+	- pageblocks are at least as big as sections. (XXX: check this).
+	- sometimes used as "within section".
  - pfn_valid()
    - Apparent definition: if true, then 'struct page' of pfn_to_page() will be accessable.
      XXX: what does this imply?
