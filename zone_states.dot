@@ -1,0 +1,20 @@
+digraph g {
+
+	unallocated; // zones are embedded in NODE_DATA(), how could they not be allocated?
+	just_allocated;
+	empty_and_uninit;
+	initialized;
+	populated;
+
+	/* pcp pagesets */
+	digraph pcp {
+		null;
+		boot_pageset;
+		setup_done;
+	};
+
+	/* typically via ensure_zone ... */
+	empty_and_uninit -> initialized [ label="init_currently_empty_zone()"];
+
+	just_allocated -> empty_and_uninit [label = "free_area_init_core()"];
+}

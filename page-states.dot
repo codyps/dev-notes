@@ -1,0 +1,44 @@
+digraph G {
+	rankdir="LR";
+	node [shape=rect];
+
+	startup -> free;
+	startup -> reserved;
+	reserved -> free;
+
+	free_huge_page;
+	pinned; /* must be kept at the same physaddr */
+	mlocked; /* must be kept in memory, but physaddr can change */
+	PageDirtyallbuffersclean [label="PageDirty-all-buffers-clean"];
+
+	/* set and clear PageBuddy via rmv_page_order() and set_page_order() */
+	free ->  allocated [label="__alloc_pages_nodemask()"];
+	allocated -> free [label="__free_one_page()"];
+
+	subgraph cluster_lru {
+		label="LRU";
+		active;
+		unevictable;
+		/* "lru" is sometimes a synonym
+		 * !PageActive()*/
+		inactive;
+	};
+
+	allocated -> subgraph cluster_lru [label="UNK"];
+
+	unk1 -> subgraph cluster_lru [label="__mem_cgroup_commit_charge()"];
+	unk2 -> subgraph cluster_lru [label="putback_inactive_pages()"];
+
+	
+	unk3 [label="!A,!U,!L"];
+	/* via __pagevec_lru_add() */
+	unk3 -> active [label="__pagevec_lru_add_fn()"];
+	unk3 -> inactive [label="__pagevec_lru_add_fn()"];
+
+	active -> inactive [label="move_active_pages_to_lru()"]
+
+	dirty;
+	uptodate;
+	zeroed;
+}
+
