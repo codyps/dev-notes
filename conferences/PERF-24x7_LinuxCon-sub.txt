@@ -1,0 +1,30 @@
+Event: LinuxCon North America
+Submission Type: Presentation
+Category: Developer
+
+= Bio =
+Cody is a developer with IBM's Linux Technology Center. Previously, Cody
+worked on the perf user space
+tool to improve support for powerpc. He has also gave a talk about Runtime
+Numa Reconfiguration at LPC 2013.
+Currently, Cody is working on support for POWER8's 24x7 counters which are
+driving the changes to perf that are the subject of this talk.
+
+Abstract Title: Extending Perf for in memory counter accumulation
+
+= Abstract =
+Perf and later the sysfs interfaces describing events were designed with certain assumptions about how hardware performance counters would work: They would be bound to cpus (or something derivable from the cpu), only so many counts could happen at once, and hardware would need to be configured to capture certain counters.
+The in memory counters (called "24x7" or "24x7 IMA") that are provided by POWER 8 break all those assumptions. In memory counters can be read from any cpu. On virtualized systems counts for physical sockets, cores, and cpus can be obtained (we can't map a vcpu to an arbitrary physical socket, for example).
+This presentation discusses the current perf interfaces and changes needed to integrate in-memory-counters into the perf tooling, both in user and kernel space.
+
+= Audience =
+The audience is those interested in the internals of perf (both the tool and kernel side), the interfaces perf uses between the kernel and userspace, and (potential) upcoming expantions of that interface.
+
+Experience Level: Intermediate
+
+= Benefits to the Ecosystem =
+This presentation will describe changes in perf that other developers may want to take advantage of to support other hardware.
+
+= Technical Requirements =
+None.
+

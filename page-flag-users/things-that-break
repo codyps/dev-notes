@@ -1,0 +1,39 @@
+__SetPageUptodate() users don't hold any particular locks (or perform ad-hoc consistency).
+	__Set:
+		kernel/events/uprobe.c, calls after allocating via alloc_page_vma()
+		mm/memory.c:
+			do_wp_page(): after alloc_page_vma()+cow_user_page() or alloc_zeroed_user_highpage_movable()
+			do_anonymous_page(): after alloc_zeroed_user_highpage_movable()
+			__do_fault(): after copy_user_highpage()
+			[read] do_swap_page()
+		mm/hugetlb.c:
+			hugetlb_cow(): after copy_user_huge_page(), allocated via alloc_huge_page()
+			hugetlb_no_page(): after clear_huge_page()
+		mm/huge_memory.c:
+		mm/ksm.c:
+
+	read:
+		mm/filemap.c, has a reference, uses atomic
+
+Slab, apparently, has(had?) page flag setters in the hot path, and atomics are too expensive
+	https://lkml.org/lkml/2012/5/22/486
+
+__SetPageHead() __SetPageTail()
+	Head is always a pageflag. Tail is sometimes a pageflag mask. (see include/linux/page-flags.h)
+
+	mm/hugetlb.c:
+		prep_compound_gigantic_page(): only called at __init, can ignore.
+
+__SetPageSlab()
+	mm/slob.c: used on alloc_pages() or alloc_pages_exact_node() return.
+
+__ClearPageSlab()
+	mm/slob.c: Appears we might be able to examine mapcount to protect against this.
+		unlock slob_lock;
+		__ClearPageSlab(sp);
+		page_mapcount_reset(sp);
+		slob_free_pages();
+
+__SetPageSlobFree() __ClearPageSlobFree()
+	mm/slob.c
+

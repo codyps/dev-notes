@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="47cm" height="42cm" viewBox="-350 -36 940 827" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <rect style="fill: #ffffff" x="0" y="0" width="160" height="60"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="0" y="0" width="160" height="60"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="80" y="33.9">
+      <tspan x="80" y="33.9">system</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="-160" y="100" width="260" height="82"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="-160" y="100" width="260" height="82"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="-30" y="128.9">
+      <tspan x="-30" y="128.9">/* node 0 */</tspan>
+      <tspan x="-30" y="144.9">typedef struct pglist_data pg_data_t;</tspan>
+      <tspan x="-30" y="160.9">NODE_DATA(0);</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="120" y="100" width="120" height="80"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="120" y="100" width="120" height="80"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="180" y="143.9">
+      <tspan x="180" y="143.9">/* node 1 */</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="260" y1="100" x2="260" y2="180"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="260" y1="100" x2="360" y2="100"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="260" y1="180" x2="360" y2="180"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="312.5" y="146">
+      <tspan x="312.5" y="146">/* node ... */</tspan>
+    </text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="80,60 80,80 -30,80 -30,90.2639 "/>
+    <polygon style="fill: #000000" points="-30,97.7639 -35,87.7639 -30,90.2639 -25,87.7639 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="-30,97.7639 -35,87.7639 -30,90.2639 -25,87.7639 "/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="80,60 80,80 180,80 180,90.2639 "/>
+    <polygon style="fill: #000000" points="180,97.7639 175,87.7639 180,90.2639 185,87.7639 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="180,97.7639 175,87.7639 180,90.2639 185,87.7639 "/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="80,60 80,80 310,80 310,90.2639 "/>
+    <polygon style="fill: #000000" points="310,97.7639 305,87.7639 310,90.2639 315,87.7639 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="310,97.7639 305,87.7639 310,90.2639 315,87.7639 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="-342.15" y="220" width="318.05" height="60"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="-342.15" y="220" width="318.05" height="60"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="-183.125" y="245.9">
+      <tspan x="-183.125" y="245.9">/* ZONE_DMA in node 0 */</tspan>
+      <tspan x="-183.125" y="261.9">NODE_DATA(0)-&gt;node_zonelists[ZONE_DMA];</tspan>
+    </text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="-30,182 -30,200 -183.125,200 -183.125,210.264 "/>
+    <polygon style="fill: #000000" points="-183.125,217.764 -188.125,207.764 -183.125,210.264 -178.125,207.764 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="-183.125,217.764 -188.125,207.764 -183.125,210.264 -178.125,207.764 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="-160" y="300" width="339.65" height="60"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="-160" y="300" width="339.65" height="60"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="9.825" y="325.9">
+      <tspan x="9.825" y="325.9">/* ZONE_NORMAL */</tspan>
+      <tspan x="9.825" y="341.9">NODE_DATA(0)-&gt;node_zonelists[ZONE_NORMAL];</tspan>
+    </text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="-30,182 -30,200 9.825,200 9.825,290.264 "/>
+    <polygon style="fill: #000000" points="9.825,297.764 4.825,287.764 9.825,290.264 14.825,287.764 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="9.825,297.764 4.825,287.764 9.825,290.264 14.825,287.764 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="120" y="220" width="339.65" height="60"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="120" y="220" width="339.65" height="60"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="289.825" y="245.9">
+      <tspan x="289.825" y="245.9">/* ZONE_NORMAL in node 1 */</tspan>
+      <tspan x="289.825" y="261.9">NODE_DATA(1)-&gt;node_zonelists[ZONE_NORMAL];</tspan>
+    </text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="180,180 180,200 289.825,200 289.825,210.264 "/>
+    <polygon style="fill: #000000" points="289.825,217.764 284.825,207.764 289.825,210.264 294.825,207.764 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="289.825,217.764 284.825,207.764 289.825,210.264 294.825,207.764 "/>
+  </g>
+  <text font-size="16.9218" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="-180" y="-20">
+    <tspan x="-180" y="-20">All of these specify ranges of PFNs that they control</tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="-240" y="460" width="699.1" height="70"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="-240" y="460" width="699.1" height="70"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="109.55" y="482.9">
+      <tspan x="109.55" y="482.9">/* we have a global array of "sections", each section "contains" PAGES_PER_SECTION contiguous pages</tspan>
+      <tspan x="109.55" y="498.9">Section is found by indexing with a bitshifted PFN */</tspan>
+      <tspan x="109.55" y="514.9">struct mem_section mem_section[NR_SECTION_ROOTS][SECTIONS_PER_ROOT];</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="-240" y="600" width="120" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="-240" y="600" width="120" height="40"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="-180" y="623.9">
+      <tspan x="-180" y="623.9">mem_section</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="40" y="600" width="120" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="40" y="600" width="120" height="40"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="100" y="623.9">
+      <tspan x="100" y="623.9">mem_section</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="-100" y="600" width="120" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="-100" y="600" width="120" height="40"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="-40" y="623.9">
+      <tspan x="-40" y="623.9">mem_section</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="180" y="600" width="120" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="180" y="600" width="120" height="40"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="240" y="623.9">
+      <tspan x="240" y="623.9">mem_section</tspan>
+    </text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="-65.225,530 -65.225,565 -180,565 -180,590.264 "/>
+    <polygon style="fill: #000000" points="-180,597.764 -185,587.764 -180,590.264 -175,587.764 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="-180,597.764 -185,587.764 -180,590.264 -175,587.764 "/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="-65.225,530 -65.225,565 -40,565 -40,590.264 "/>
+    <polygon style="fill: #000000" points="-40,597.764 -45,587.764 -40,590.264 -35,587.764 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="-40,597.764 -45,587.764 -40,590.264 -35,587.764 "/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="-65.225,530 -65.225,565 100,565 100,590.264 "/>
+    <polygon style="fill: #000000" points="100,597.764 95,587.764 100,590.264 105,587.764 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="100,597.764 95,587.764 100,590.264 105,587.764 "/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="-65.225,530 -65.225,565 240,565 240,590.264 "/>
+    <polygon style="fill: #000000" points="240,597.764 235,587.764 240,590.264 245,587.764 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="240,597.764 235,587.764 240,590.264 245,587.764 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="-240" y="720" width="268.05" height="70"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="-240" y="720" width="268.05" height="70"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="-105.975" y="750.9">
+      <tspan x="-105.975" y="750.9">struct page;</tspan>
+      <tspan x="-105.975" y="766.9">/* each of these contains page-flags */</tspan>
+    </text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="-180,640 -180,680 -105.975,680 -105.975,710.264 "/>
+    <polygon style="fill: #000000" points="-105.975,717.764 -110.975,707.764 -105.975,710.264 -100.975,707.764 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="-105.975,717.764 -110.975,707.764 -105.975,710.264 -100.975,707.764 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="60" y="720" width="140" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="60" y="720" width="140" height="40"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="130" y="743.9">
+      <tspan x="130" y="743.9">struct page</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="220" y="720" width="140" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="220" y="720" width="140" height="40"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="290" y="743.9">
+      <tspan x="290" y="743.9">struct page</tspan>
+    </text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="-180,640 -180,680 130,680 130,710.264 "/>
+    <polygon style="fill: #000000" points="130,717.764 125,707.764 130,710.264 135,707.764 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="130,717.764 125,707.764 130,710.264 135,707.764 "/>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="-180,640 -180,680 290,680 290,710.264 "/>
+    <polygon style="fill: #000000" points="290,717.764 285,707.764 290,710.264 295,707.764 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="290,717.764 285,707.764 290,710.264 295,707.764 "/>
+  </g>
+  <line style="fill: none; fill-opacity:0; stroke-width: 20; stroke: #000000" x1="-340" y1="400" x2="580" y2="400"/>
+  <text font-size="16.9218" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="-320" y="440">
+    <tspan x="-320" y="440">The node id is stored either in the page-flags (on a per-page basis) or in an array indexed by section_nr</tspan>
+  </text>
+</svg>

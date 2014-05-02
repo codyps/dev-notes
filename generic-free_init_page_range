@@ -1,0 +1,160 @@
+
+SKIP
+sparc32: uses __free_page (instead of free_page), increments "num_physpages" in addtion to "totalram_pages" and appears to treat "virt_to_page()" as a non-free operation (other archs call it twice).
+
+	arch/sparc/mm/init_32.c
+	394:	printk(KERN_INFO "Freeing unused kernel memory: %ldk freed\n",
+	402:		printk(KERN_INFO "Freeing initrd memory: %ldk freed\n",
+
+SKIP
+sparc64: doesn't appear to do this except for the initrd
+
+	arch/sparc/mm/init_64.c
+	2134:		printk ("Freeing initrd memory: %ldk freed\n", (end - start) >> 10);
+
+DONE
+m32r: no POISON.
+	arch/m32r/mm/init.c
+	196:	printk (KERN_INFO "Freeing unused kernel memory: %dk freed\n", \
+	214:	printk (KERN_INFO "Freeing initrd memory: %ldk freed\n", (end - start) >> 10);
+
+SKIP
+unicore32: uses __free_page(), no POISON.
+
+	arch/unicore32/mm/init.c
+	329:		printk(KERN_INFO "Freeing %s memory: %dK\n", s, size);
+
+DONE
+sh: no POISON.
+
+	arch/sh/mm/init.c
+	513:	printk("Freeing unused kernel memory: %ldk freed\n",
+	528:	printk("Freeing initrd memory: %ldk freed\n", (end - start) >> 10);
+
+DONE
+frv: no POISON.
+
+	arch/frv/mm/init.c
+	179:	printk("Freeing unused kernel memory: %ldKiB freed (0x%lx - 0x%lx)\n",
+	192:	printk("Freeing initrd memory: %dKiB freed\n", (end - start) >> 10);
+
+DONE
+openrisc: no POISON.
+
+	arch/openrisc/mm/init.c
+	255:	printk(KERN_INFO "Freeing initrd memory: %ldk freed\n",
+	278:	printk(KERN_INFO "Freeing unused kernel memory: %luk freed\n",
+
+SKIP
+alpha: has a free_reserved_mem(void *start, void *end) function that does this.
+	arch/alpha/mm/init.c
+
+	arch/alpha/mm/init.c
+	338:	printk ("Freeing unused kernel memory: %ldk freed\n",
+	347:	printk ("Freeing initrd memory: %ldk freed\n", (end - start) >> 10);
+
+DONE
+x86: matches generic
+	arch/x86/mm/init.c
+	369:	printk(KERN_INFO "Freeing %s: %luk freed\n", what, (end - begin) >> 10);
+
+DONE
+mn10300: matches generic
+	arch/mn10300/mm/init.c
+	155:	printk(KERN_INFO "Freeing %s: %ldk freed\n", what, (end - begin) >> 10);
+
+SKIP
+arm: has similar helper "free_area". uses __free_page(), uses pfns,
+     caches pfn_to_page(), uses a custom poison value.
+
+	arch/arm/mm/init.c
+	440:		printk(KERN_INFO "Freeing %s memory: %dK\n", s, size);
+
+HALF-SKIP
+m68k: no POISON, funky bounds calc.
+	arch/m68k/mm/init.c
+	120:	pr_notice("Freeing unused kernel memory: %luk freed (0x%x - 0x%x)\n",
+	222:	pr_notice("Freeing initrd memory: %dk freed\n",
+
+DONE
+um: only handles initrd, no POISON.
+	arch/um/kernel/mem.c
+	258:		printk(KERN_INFO "Freeing initrd memory: %ldk freed\n",
+
+SKIP
+arm64: duplicates arm code.
+	arch/arm64/mm/init.c
+	213:		pr_info("Freeing %s memory: %dK\n", s, size);
+
+SKIP
+ia64: no POISON. virt_addr_valid() check.
+	arch/ia64/mm/init.c
+	168:	printk(KERN_INFO "Freeing unused kernel memory: %ldkB freed\n",
+	211:		printk(KERN_INFO "Freeing initrd memory: %ldkB freed\n", (end - start) >> 10);
+
+
+SKIP: funky (incorrect) count calculations in free_initrd_mem(). Interesting check in free_initmem iteration.
+h8300:
+	arch/h8300/mm/init.c
+	172:	printk ("Freeing initrd memory: %dk freed\n", pages);
+	193:	printk(KERN_INFO "Freeing unused kernel memory: %ldk freed (0x%x - 0x%x)\n",
+
+SKIP
+xtensa: has helper free_reserved_mem(), no POISON.
+	arch/xtensa/mm/init.c
+	229:		printk ("Freeing initrd memory: %ldk freed\n",(end-start)>>10);
+	237:	printk("Freeing unused kernel memory: %zuk freed\n",
+
+SKIP
+tile: has helper free_init_pages() (like x86). mixes some marking of ptes & various checks
+	arch/tile/mm/init.c
+	1030:	pr_info("Freeing %s: %ldk freed\n", what, (end - begin) >> 10);
+
+DONE
+powerpc: no poison on INITRD.
+	arch/powerpc/mm/mem.c
+	396:	pr_info("Freeing unused kernel memory: %luk freed\n",
+	409:	pr_info("Freeing initrd memory: %ldk freed\n", (end - start) >> 10);
+
+SKIP
+parsic: incriments num_physpages, custom POISON on init mem, no POISON on initrd.
+  idea: poison all of range, even fractional pages
+	arch/parisc/mm/init.c
+	547:	printk(KERN_INFO "Freeing unused kernel memory: %luk freed\n",
+	1112:	printk(KERN_INFO "Freeing initrd memory: %ldk freed\n", (end - start) >> 10);
+
+
+microblaze:
+arch/microblaze/mm/init.c
+249:	printk(KERN_INFO "Freeing %s: %ldk freed\n", what, (end - begin) >> 10);
+263:	printk(KERN_NOTICE "Freeing initrd memory: %dk freed\n",
+
+arch/score/mm/init.c
+126:	printk(KERN_INFO "Freeing %s: %ldk freed\n", what, (end - begin) >> 10);
+
+arch/cris/arch-v10/kernel/io_interface_mux.c
+866:		printk(KERN_CRIT "cris_free_io_interface: Freeing free interface %u\n",
+1045:			printk(KERN_CRIT "cris_io_interface_free_pins: Freeing free pins");
+1052:			printk(KERN_CRIT "cris_io_interface_free_pins: Freeing free pins");
+1060:			printk(KERN_CRIT "cris_io_interface_free_pins: Freeing free pins");
+1070:			printk(KERN_CRIT "cris_io_interface_free_pins: Freeing unowned pins");
+
+arch/cris/mm/init.c
+70:        printk (KERN_INFO "Freeing unused kernel memory: %luk freed\n",
+
+arch/mips/mm/init.c
+449:	printk(KERN_INFO "Freeing %s: %ldk freed\n", what, (end - begin) >> 10);
+
+arch/c6x/mm/init.c
+88:	printk(KERN_INFO "Freeing initrd memory: %luk freed\n",
+111:	printk(KERN_INFO "Freeing unused kernel memory: %dK freed\n",
+
+arch/blackfin/mm/init.c
+142:	printk(KERN_INFO "Freeing %s: %ldk freed\n", what, (end - begin) >> 10);
+
+arch/s390/mm/init.c
+175:	printk(KERN_INFO "Freeing %s: %luk freed\n", what, (end - begin) >> 10);
+
+arch/avr32/mm/init.c
+162:		printk(KERN_INFO "Freeing %s memory: %dK (%lx - %lx)\n",
+

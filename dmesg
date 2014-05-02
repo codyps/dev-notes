@@ -1,0 +1,2006 @@
+[   40.002500]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.003838]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.005615]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   40.007337]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   40.009544]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   40.011407]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   40.013400]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   40.015566]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   40.018001]  [<c1203cb1>] memory_notify+0x11/0x20
+[   40.019605]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   40.022231]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   40.023960]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   40.025952]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   40.027832]  [<c10d9a16>] vfs_write+0x86/0x140
+[   40.029605]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   40.030964]  [<c10d9b92>] sys_write+0x42/0x80
+[   40.031881]  [<c13105e8>] syscall_call+0x7/0xb
+[   40.033580]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   40.035005] ---[ end trace 555bf1c50f5d9aa8 ]---
+[   40.036394] ------------[ cut here ]------------
+[   40.037506] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   40.039488] Hardware name: Bochs
+[   40.040310] leaking memory in slab c2d80dc0, node 3 : c2d80f00 c2d80e34
+[   40.042597] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   40.045906] Call Trace:
+[   40.046743]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   40.048718]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.050947]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.053220]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   40.054799]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   40.056880]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   40.059017]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   40.061087]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   40.063137]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   40.065311]  [<c1203cb1>] memory_notify+0x11/0x20
+[   40.066876]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   40.069156]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   40.070318]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   40.071724]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   40.073373]  [<c10d9a16>] vfs_write+0x86/0x140
+[   40.074599]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   40.075740]  [<c10d9b92>] sys_write+0x42/0x80
+[   40.077309]  [<c13105e8>] syscall_call+0x7/0xb
+[   40.078839]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   40.080865] ---[ end trace 555bf1c50f5d9aa9 ]---
+[   40.082042] ------------[ cut here ]------------
+[   40.083005] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   40.085614] Hardware name: Bochs
+[   40.086648] leaking memory in slab c2d81180, node 3 : c2d81040 c2d811f4
+[   40.089219] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   40.091878] Call Trace:
+[   40.092810]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   40.094381]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.095832]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.097601]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   40.099076]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   40.100835]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   40.102261]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   40.103597]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   40.105740]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   40.107396]  [<c1203cb1>] memory_notify+0x11/0x20
+[   40.109048]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   40.111354]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   40.113327]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   40.115247]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   40.117056]  [<c10d9a16>] vfs_write+0x86/0x140
+[   40.118605]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   40.120614]  [<c10d9b92>] sys_write+0x42/0x80
+[   40.122193]  [<c13105e8>] syscall_call+0x7/0xb
+[   40.123623]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   40.125613] ---[ end trace 555bf1c50f5d9aaa ]---
+[   40.127275] ------------[ cut here ]------------
+[   40.128991] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   40.131000] Hardware name: Bochs
+[   40.131669] leaking memory in slab c2d80c80, node 3 : c2d80dc0 c2d80cf4
+[   40.133576] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   40.135688] Call Trace:
+[   40.136488]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   40.137858]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.139247]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.140873]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   40.142221]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   40.143806]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   40.145390]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   40.146798]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   40.148769]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   40.150939]  [<c1203cb1>] memory_notify+0x11/0x20
+[   40.153059]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   40.154873]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   40.155987]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   40.157580]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   40.158804]  [<c10d9a16>] vfs_write+0x86/0x140
+[   40.159725]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   40.161335]  [<c10d9b92>] sys_write+0x42/0x80
+[   40.162451]  [<c13105e8>] syscall_call+0x7/0xb
+[   40.163375]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   40.164819] ---[ end trace 555bf1c50f5d9aab ]---
+[   40.166020] ------------[ cut here ]------------
+[   40.166999] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   40.169698] Hardware name: Bochs
+[   40.170880] leaking memory in slab c2d812c0, node 3 : c2d81180 c2d81334
+[   40.173388] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   40.175570] Call Trace:
+[   40.176652]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   40.179146]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.181204]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.182794]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   40.183925]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   40.186126]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   40.187967]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   40.189977]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   40.192181]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   40.194167]  [<c1203cb1>] memory_notify+0x11/0x20
+[   40.195698]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   40.198177]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   40.199966]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   40.202086]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   40.203826]  [<c10d9a16>] vfs_write+0x86/0x140
+[   40.205558]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   40.207263]  [<c10d9b92>] sys_write+0x42/0x80
+[   40.208880]  [<c13105e8>] syscall_call+0x7/0xb
+[   40.210322]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   40.212153] ---[ end trace 555bf1c50f5d9aac ]---
+[   40.213818] ------------[ cut here ]------------
+[   40.215337] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   40.218675] Hardware name: Bochs
+[   40.219800] leaking memory in slab c2d80b40, node 3 : c2d80c80 c2d80bb4
+[   40.221994] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   40.225128] Call Trace:
+[   40.225968]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   40.227160]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.229091]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.230971]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   40.232505]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   40.234040]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   40.235280]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   40.236753]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   40.238425]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   40.239759]  [<c1203cb1>] memory_notify+0x11/0x20
+[   40.241087]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   40.242678]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   40.243794]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   40.245411]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   40.246565]  [<c10d9a16>] vfs_write+0x86/0x140
+[   40.247629]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   40.249048]  [<c10d9b92>] sys_write+0x42/0x80
+[   40.250240]  [<c13105e8>] syscall_call+0x7/0xb
+[   40.251219]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   40.252742] ---[ end trace 555bf1c50f5d9aad ]---
+[   40.254032] ------------[ cut here ]------------
+[   40.255436] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   40.258236] Hardware name: Bochs
+[   40.259160] leaking memory in slab c2d81400, node 3 : c2d812c0 c2d81474
+[   40.260988] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   40.263358] Call Trace:
+[   40.263911]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   40.265386]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.267102]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.268889]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   40.270169]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   40.271527]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   40.273166]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   40.274589]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   40.276460]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   40.277865]  [<c1203cb1>] memory_notify+0x11/0x20
+[   40.278889]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   40.280853]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   40.282069]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   40.283424]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   40.284870]  [<c10d9a16>] vfs_write+0x86/0x140
+[   40.286519]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   40.288626]  [<c10d9b92>] sys_write+0x42/0x80
+[   40.290100]  [<c13105e8>] syscall_call+0x7/0xb
+[   40.291546]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   40.293597] ---[ end trace 555bf1c50f5d9aae ]---
+[   40.295260] ------------[ cut here ]------------
+[   40.297071] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   40.300237] Hardware name: Bochs
+[   40.301283] leaking memory in slab c2d80a00, node 3 : c2d80b40 c2d80a74
+[   40.303409] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   40.306619] Call Trace:
+[   40.307657]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   40.309654]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.311772]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.313990]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   40.315556]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   40.318069]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   40.319966]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   40.321520]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   40.323022]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   40.324688]  [<c1203cb1>] memory_notify+0x11/0x20
+[   40.325786]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   40.327567]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   40.329346]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   40.331354]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   40.333300]  [<c10d9a16>] vfs_write+0x86/0x140
+[   40.334826]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   40.336810]  [<c10d9b92>] sys_write+0x42/0x80
+[   40.338358]  [<c13105e8>] syscall_call+0x7/0xb
+[   40.339779]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   40.341852] ---[ end trace 555bf1c50f5d9aaf ]---
+[   40.343411] ------------[ cut here ]------------
+[   40.345103] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   40.348353] Hardware name: Bochs
+[   40.349504] leaking memory in slab c2d81540, node 3 : c2d81400 c2d815b4
+[   40.351656] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   40.354836] Call Trace:
+[   40.355746]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   40.357642]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.359863]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.362228]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   40.363942]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   40.366188]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   40.367996]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   40.369924]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   40.371947]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   40.374146]  [<c1203cb1>] memory_notify+0x11/0x20
+[   40.375594]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   40.378176]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   40.380299]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   40.381950]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   40.382995]  [<c10d9a16>] vfs_write+0x86/0x140
+[   40.383929]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   40.385876]  [<c10d9b92>] sys_write+0x42/0x80
+[   40.387446]  [<c13105e8>] syscall_call+0x7/0xb
+[   40.389442]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   40.391301] ---[ end trace 555bf1c50f5d9ab0 ]---
+[   40.393336] ------------[ cut here ]------------
+[   40.394882] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   40.397657] Hardware name: Bochs
+[   40.398582] leaking memory in slab c2d808c0, node 3 : c2d80a00 c2d80934
+[   40.400281] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   40.402482] Call Trace:
+[   40.403125]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   40.404776]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.406419]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.407797]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   40.409292]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   40.410867]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   40.412201]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   40.413812]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   40.415142]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   40.417324]  [<c1203cb1>] memory_notify+0x11/0x20
+[   40.418749]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   40.420709]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   40.422219]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   40.423468]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   40.424900]  [<c10d9a16>] vfs_write+0x86/0x140
+[   40.426096]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   40.427358]  [<c10d9b92>] sys_write+0x42/0x80
+[   40.428748]  [<c13105e8>] syscall_call+0x7/0xb
+[   40.429930]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   40.431112] ---[ end trace 555bf1c50f5d9ab1 ]---
+[   40.432935] ------------[ cut here ]------------
+[   40.434143] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   40.436422] Hardware name: Bochs
+[   40.437398] leaking memory in slab c2d81680, node 3 : c2d81540 c2d816f4
+[   40.439029] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   40.441339] Call Trace:
+[   40.442130]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   40.443317]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.444918]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.446425]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   40.447522]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   40.449178]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   40.450519]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   40.451628]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   40.453195]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   40.454628]  [<c1203cb1>] memory_notify+0x11/0x20
+[   40.455761]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   40.457486]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   40.458873]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   40.460381]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   40.461643]  [<c10d9a16>] vfs_write+0x86/0x140
+[   40.462567]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   40.463659]  [<c10d9b92>] sys_write+0x42/0x80
+[   40.464884]  [<c13105e8>] syscall_call+0x7/0xb
+[   40.466201]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   40.467474] ---[ end trace 555bf1c50f5d9ab2 ]---
+[   40.469002] ------------[ cut here ]------------
+[   40.470063] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   40.471953] Hardware name: Bochs
+[   40.473137] leaking memory in slab c2d80780, node 3 : c2d808c0 c2d807f4
+[   40.474765] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   40.476971] Call Trace:
+[   40.477695]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   40.479108]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.480928]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.482507]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   40.483578]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   40.485440]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   40.486846]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   40.488215]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   40.489760]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   40.491059]  [<c1203cb1>] memory_notify+0x11/0x20
+[   40.492270]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   40.493957]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   40.494987]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   40.496537]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   40.497862]  [<c10d9a16>] vfs_write+0x86/0x140
+[   40.498780]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   40.499907]  [<c10d9b92>] sys_write+0x42/0x80
+[   40.501117]  [<c13105e8>] syscall_call+0x7/0xb
+[   40.502697]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   40.503861] ---[ end trace 555bf1c50f5d9ab3 ]---
+[   40.505182] ------------[ cut here ]------------
+[   40.506492] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   40.508829] Hardware name: Bochs
+[   40.509813] leaking memory in slab c2d817c0, node 3 : c2d81680 c2d81834
+[   40.511275] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   40.513640] Call Trace:
+[   40.514418]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   40.515600]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.517803]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.519908]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   40.521816]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   40.523885]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   40.525551]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   40.526940]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   40.528787]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   40.530318]  [<c1203cb1>] memory_notify+0x11/0x20
+[   40.531367]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   40.533265]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   40.534612]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   40.535929]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   40.537587]  [<c10d9a16>] vfs_write+0x86/0x140
+[   40.538665]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   40.539829]  [<c10d9b92>] sys_write+0x42/0x80
+[   40.541390]  [<c13105e8>] syscall_call+0x7/0xb
+[   40.543099]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   40.545143] ---[ end trace 555bf1c50f5d9ab4 ]---
+[   40.546438] ------------[ cut here ]------------
+[   40.547608] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   40.550240] Hardware name: Bochs
+[   40.551295] leaking memory in slab c2d80640, node 3 : c2d80780 c2d806b4
+[   40.553041] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   40.555319] Call Trace:
+[   40.555871]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   40.557351]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.558934]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.560557]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   40.562208]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   40.564485]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   40.566312]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   40.568239]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   40.570223]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   40.572383]  [<c1203cb1>] memory_notify+0x11/0x20
+[   40.573923]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   40.576541]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   40.577875]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   40.579222]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   40.580654]  [<c10d9a16>] vfs_write+0x86/0x140
+[   40.581971]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   40.583145]  [<c10d9b92>] sys_write+0x42/0x80
+[   40.584409]  [<c13105e8>] syscall_call+0x7/0xb
+[   40.585412]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   40.586594] ---[ end trace 555bf1c50f5d9ab5 ]---
+[   40.587645] ------------[ cut here ]------------
+[   40.588985] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   40.591329] Hardware name: Bochs
+[   40.592187] leaking memory in slab c2d81900, node 3 : c2d817c0 c2d81974
+[   40.593897] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   40.595825] Call Trace:
+[   40.596683]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   40.598002]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.599355]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.600993]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   40.602274]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   40.603640]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   40.605251]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   40.606693]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   40.608339]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   40.609718]  [<c1203cb1>] memory_notify+0x11/0x20
+[   40.610733]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   40.612651]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   40.614023]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   40.615343]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   40.616798]  [<c10d9a16>] vfs_write+0x86/0x140
+[   40.618081]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   40.619234]  [<c10d9b92>] sys_write+0x42/0x80
+[   40.620521]  [<c13105e8>] syscall_call+0x7/0xb
+[   40.622071]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   40.623934] ---[ end trace 555bf1c50f5d9ab6 ]---
+[   40.625930] ------------[ cut here ]------------
+[   40.627704] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   40.630874] Hardware name: Bochs
+[   40.631790] leaking memory in slab c2d80500, node 3 : c2d80640 c2d80574
+[   40.633652] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   40.635769] Call Trace:
+[   40.636699]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   40.638066]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.639472]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.641250]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   40.642541]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   40.643832]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   40.645211]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   40.646660]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   40.648194]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   40.650935]  [<c1203cb1>] memory_notify+0x11/0x20
+[   40.652724]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   40.654968]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   40.656918]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   40.658874]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   40.660797]  [<c10d9a16>] vfs_write+0x86/0x140
+[   40.662232]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   40.663985]  [<c10d9b92>] sys_write+0x42/0x80
+[   40.665633]  [<c13105e8>] syscall_call+0x7/0xb
+[   40.667159]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   40.669288] ---[ end trace 555bf1c50f5d9ab7 ]---
+[   40.670855] ------------[ cut here ]------------
+[   40.672613] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   40.675569] Hardware name: Bochs
+[   40.676850] leaking memory in slab c2d81a40, node 3 : c2d81900 c2d81ab4
+[   40.679020] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   40.682358] Call Trace:
+[   40.683277]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   40.685252]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.687345]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.689316]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   40.690578]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   40.691986]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   40.693525]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   40.695114]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   40.696812]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   40.698178]  [<c1203cb1>] memory_notify+0x11/0x20
+[   40.699142]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   40.700901]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   40.702154]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   40.703375]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   40.704843]  [<c10d9a16>] vfs_write+0x86/0x140
+[   40.706019]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   40.707163]  [<c10d9b92>] sys_write+0x42/0x80
+[   40.708462]  [<c13105e8>] syscall_call+0x7/0xb
+[   40.709659]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   40.710857] ---[ end trace 555bf1c50f5d9ab8 ]---
+[   40.711899] ------------[ cut here ]------------
+[   40.713426] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   40.715625] Hardware name: Bochs
+[   40.716674] leaking memory in slab c2d803c0, node 3 : c2d80500 c2d80434
+[   40.718318] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   40.720791] Call Trace:
+[   40.721771]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   40.723525]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.725536]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.727153]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   40.728852]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   40.730879]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   40.732923]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   40.734713]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   40.736967]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   40.738924]  [<c1203cb1>] memory_notify+0x11/0x20
+[   40.740943]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   40.743233]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   40.745064]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   40.746943]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   40.749108]  [<c10d9a16>] vfs_write+0x86/0x140
+[   40.750818]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   40.752753]  [<c10d9b92>] sys_write+0x42/0x80
+[   40.754195]  [<c13105e8>] syscall_call+0x7/0xb
+[   40.755615]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   40.757600] ---[ end trace 555bf1c50f5d9ab9 ]---
+[   40.759284] ------------[ cut here ]------------
+[   40.761048] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   40.764139] Hardware name: Bochs
+[   40.765289] leaking memory in slab c2d81b80, node 3 : c2d81a40 c2d81bf4
+[   40.767450] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   40.770814] Call Trace:
+[   40.771730]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   40.773800]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.775953]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.778227]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   40.779961]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   40.782308]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   40.784609]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   40.786362]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   40.789150]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   40.791111]  [<c1203cb1>] memory_notify+0x11/0x20
+[   40.793090]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   40.795403]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   40.797256]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   40.799182]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   40.801208]  [<c10d9a16>] vfs_write+0x86/0x140
+[   40.802846]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   40.804874]  [<c10d9b92>] sys_write+0x42/0x80
+[   40.806124]  [<c13105e8>] syscall_call+0x7/0xb
+[   40.807538]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   40.808972] ---[ end trace 555bf1c50f5d9aba ]---
+[   40.810209] ------------[ cut here ]------------
+[   40.811147] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   40.813375] Hardware name: Bochs
+[   40.814266] leaking memory in slab c2d80280, node 3 : c2d803c0 c2d802f4
+[   40.815864] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   40.818605] Call Trace:
+[   40.819575]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   40.821723]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.823909]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.826401]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   40.828300]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   40.830303]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   40.832395]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   40.834605]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   40.837005]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   40.838980]  [<c1203cb1>] memory_notify+0x11/0x20
+[   40.840758]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   40.843058]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   40.844908]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   40.846836]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   40.848892]  [<c10d9a16>] vfs_write+0x86/0x140
+[   40.850370]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   40.852204]  [<c10d9b92>] sys_write+0x42/0x80
+[   40.853285]  [<c13105e8>] syscall_call+0x7/0xb
+[   40.854264]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   40.855418] ---[ end trace 555bf1c50f5d9abb ]---
+[   40.856805] ------------[ cut here ]------------
+[   40.857994] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   40.860744] Hardware name: Bochs
+[   40.861654] leaking memory in slab c2d81cc0, node 3 : c2d81b80 c2d81d34
+[   40.863010] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   40.865268] Call Trace:
+[   40.865977]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   40.867077]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.868785]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.870326]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   40.871378]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   40.873277]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   40.875144]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   40.877116]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   40.879151]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   40.881385]  [<c1203cb1>] memory_notify+0x11/0x20
+[   40.883017]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   40.885791]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   40.887578]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   40.889752]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   40.891478]  [<c10d9a16>] vfs_write+0x86/0x140
+[   40.893249]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   40.894944]  [<c10d9b92>] sys_write+0x42/0x80
+[   40.896653]  [<c13105e8>] syscall_call+0x7/0xb
+[   40.898094]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   40.899812] ---[ end trace 555bf1c50f5d9abc ]---
+[   40.901463] ------------[ cut here ]------------
+[   40.902660] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   40.905489] Hardware name: Bochs
+[   40.906639] leaking memory in slab c2d80140, node 3 : c2d80280 c2d801b4
+[   40.909031] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   40.915281] Call Trace:
+[   40.916530]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   40.918331]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.920640]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.922744]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   40.924884]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   40.927231]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   40.929491]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   40.931501]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   40.933898]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   40.936159]  [<c1203cb1>] memory_notify+0x11/0x20
+[   40.937809]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   40.940202]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   40.941887]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   40.943782]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   40.945627]  [<c10d9a16>] vfs_write+0x86/0x140
+[   40.947188]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   40.948650]  [<c10d9b92>] sys_write+0x42/0x80
+[   40.949733]  [<c13105e8>] syscall_call+0x7/0xb
+[   40.950736]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   40.951943] ---[ end trace 555bf1c50f5d9abd ]---
+[   40.953293] ------------[ cut here ]------------
+[   40.954537] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   40.956980] Hardware name: Bochs
+[   40.957883] leaking memory in slab c2d81e00, node 3 : c2d81cc0 c2d81e74
+[   40.959405] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   40.961702] Call Trace:
+[   40.962320]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   40.963495]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.965301]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   40.966951]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   40.968464]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   40.970030]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   40.971278]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   40.972792]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   40.974384]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   40.975804]  [<c1203cb1>] memory_notify+0x11/0x20
+[   40.977135]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   40.978833]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   40.979875]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   40.981705]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   40.983466]  [<c10d9a16>] vfs_write+0x86/0x140
+[   40.985348]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   40.987065]  [<c10d9b92>] sys_write+0x42/0x80
+[   40.988976]  [<c13105e8>] syscall_call+0x7/0xb
+[   40.990691]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   40.992810] ---[ end trace 555bf1c50f5d9abe ]---
+[   40.994418] ------------[ cut here ]------------
+[   40.996325] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   40.998364] Hardware name: Bochs
+[   40.999032] leaking memory in slab c2d80000, node 3 : c2d80140 c2d80074
+[   41.000783] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   41.002901] Call Trace:
+[   41.003447]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   41.004872]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.006532]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.007899]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   41.009353]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   41.011297]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   41.012931]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   41.014731]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   41.017149]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   41.019322]  [<c1203cb1>] memory_notify+0x11/0x20
+[   41.021066]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   41.023463]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   41.025343]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   41.027301]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   41.028970]  [<c10d9a16>] vfs_write+0x86/0x140
+[   41.030225]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   41.031360]  [<c10d9b92>] sys_write+0x42/0x80
+[   41.032681]  [<c13105e8>] syscall_call+0x7/0xb
+[   41.033954]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   41.035156] ---[ end trace 555bf1c50f5d9abf ]---
+[   41.036741] ------------[ cut here ]------------
+[   41.037958] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   41.039880] Hardware name: Bochs
+[   41.041056] leaking memory in slab c2c09040, node 3 : c2c08f00 c2c090b4
+[   41.042704] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   41.045042] Call Trace:
+[   41.045781]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   41.046871]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.048619]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.050266]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   41.051388]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   41.053389]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   41.054624]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   41.055886]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   41.057705]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   41.059374]  [<c1203cb1>] memory_notify+0x11/0x20
+[   41.060971]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   41.062765]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   41.064142]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   41.065632]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   41.066674]  [<c10d9a16>] vfs_write+0x86/0x140
+[   41.067686]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   41.069160]  [<c10d9b92>] sys_write+0x42/0x80
+[   41.070830]  [<c13105e8>] syscall_call+0x7/0xb
+[   41.072570]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   41.074420] ---[ end trace 555bf1c50f5d9ac0 ]---
+[   41.075951] ------------[ cut here ]------------
+[   41.077882] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   41.081345] Hardware name: Bochs
+[   41.082457] leaking memory in slab c2c08dc0, node 3 : c2c08f00 c2c08e34
+[   41.084824] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   41.087864] Call Trace:
+[   41.089042]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   41.090804]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.093098]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.095233]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   41.097335]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   41.099409]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   41.101375]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   41.103099]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   41.105158]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   41.106490]  [<c1203cb1>] memory_notify+0x11/0x20
+[   41.107557]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   41.109384]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   41.110689]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   41.112210]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   41.113956]  [<c10d9a16>] vfs_write+0x86/0x140
+[   41.115396]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   41.117132]  [<c10d9b92>] sys_write+0x42/0x80
+[   41.118299]  [<c13105e8>] syscall_call+0x7/0xb
+[   41.119545]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   41.121330] ---[ end trace 555bf1c50f5d9ac1 ]---
+[   41.122633] ------------[ cut here ]------------
+[   41.123724] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   41.126539] Hardware name: Bochs
+[   41.127406] leaking memory in slab c2c09180, node 3 : c2c09040 c2c091f4
+[   41.129128] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   41.131380] Call Trace:
+[   41.131892]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   41.133183]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.135358]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.138002]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   41.139635]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   41.141324]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   41.142616]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   41.143773]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   41.146885]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   41.149204]  [<c1203cb1>] memory_notify+0x11/0x20
+[   41.150316]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   41.151781]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   41.153075]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   41.154544]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   41.155671]  [<c10d9a16>] vfs_write+0x86/0x140
+[   41.156944]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   41.158217]  [<c10d9b92>] sys_write+0x42/0x80
+[   41.159125]  [<c13105e8>] syscall_call+0x7/0xb
+[   41.160623]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   41.162089] ---[ end trace 555bf1c50f5d9ac2 ]---
+[   41.163057] ------------[ cut here ]------------
+[   41.164283] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   41.166393] Hardware name: Bochs
+[   41.167064] leaking memory in slab c2c08c80, node 3 : c2c08dc0 c2c08cf4
+[   41.168883] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   41.171032] Call Trace:
+[   41.171559]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   41.173111]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.174728]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.176507]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   41.178366]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   41.180786]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   41.182807]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   41.184733]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   41.186783]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   41.188970]  [<c1203cb1>] memory_notify+0x11/0x20
+[   41.190229]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   41.191750]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   41.193180]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   41.194696]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   41.195889]  [<c10d9a16>] vfs_write+0x86/0x140
+[   41.197599]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   41.198924]  [<c10d9b92>] sys_write+0x42/0x80
+[   41.200203]  [<c13105e8>] syscall_call+0x7/0xb
+[   41.201483]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   41.202664] ---[ end trace 555bf1c50f5d9ac3 ]---
+[   41.203884] ------------[ cut here ]------------
+[   41.205259] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   41.207382] Hardware name: Bochs
+[   41.208313] leaking memory in slab c2c092c0, node 3 : c2c09180 c2c09334
+[   41.209807] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   41.211723] Call Trace:
+[   41.212566]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   41.213841]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.215178]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.217064]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   41.218327]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   41.219596]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   41.221369]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   41.222730]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   41.224171]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   41.225732]  [<c1203cb1>] memory_notify+0x11/0x20
+[   41.226807]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   41.228561]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   41.229850]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   41.231068]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   41.232469]  [<c10d9a16>] vfs_write+0x86/0x140
+[   41.233593]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   41.234766]  [<c10d9b92>] sys_write+0x42/0x80
+[   41.235676]  [<c13105e8>] syscall_call+0x7/0xb
+[   41.236915]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   41.238420] ---[ end trace 555bf1c50f5d9ac4 ]---
+[   41.239430] ------------[ cut here ]------------
+[   41.240864] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   41.242966] Hardware name: Bochs
+[   41.243647] leaking memory in slab c2c08b40, node 3 : c2c08c80 c2c08bb4
+[   41.245404] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   41.247594] Call Trace:
+[   41.248448]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   41.249715]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.250998]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.253011]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   41.254274]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   41.255762]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   41.257492]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   41.258845]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   41.260442]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   41.261885]  [<c1203cb1>] memory_notify+0x11/0x20
+[   41.262837]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   41.264669]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   41.265978]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   41.267285]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   41.268777]  [<c10d9a16>] vfs_write+0x86/0x140
+[   41.269973]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   41.271021]  [<c10d9b92>] sys_write+0x42/0x80
+[   41.271933]  [<c13105e8>] syscall_call+0x7/0xb
+[   41.273746]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   41.275743] ---[ end trace 555bf1c50f5d9ac5 ]---
+[   41.277499] ------------[ cut here ]------------
+[   41.279024] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   41.282245] Hardware name: Bochs
+[   41.283385] leaking memory in slab c2c09400, node 3 : c2c092c0 c2c09474
+[   41.285405] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   41.287733] Call Trace:
+[   41.288607]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   41.289876]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.291790]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.293610]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   41.295102]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   41.296881]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   41.298343]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   41.299519]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   41.301153]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   41.302584]  [<c1203cb1>] memory_notify+0x11/0x20
+[   41.303608]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   41.305533]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   41.306830]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   41.309220]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   41.310533]  [<c10d9a16>] vfs_write+0x86/0x140
+[   41.311516]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   41.312930]  [<c10d9b92>] sys_write+0x42/0x80
+[   41.314096]  [<c13105e8>] syscall_call+0x7/0xb
+[   41.315018]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   41.316939] ---[ end trace 555bf1c50f5d9ac6 ]---
+[   41.318207] ------------[ cut here ]------------
+[   41.319234] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   41.322104] Hardware name: Bochs
+[   41.323299] leaking memory in slab c2c08a00, node 3 : c2c08b40 c2c08a74
+[   41.325288] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   41.327518] Call Trace:
+[   41.328314]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   41.329676]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.331096]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.332780]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   41.334127]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   41.335471]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   41.337019]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   41.338624]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   41.340252]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   41.341675]  [<c1203cb1>] memory_notify+0x11/0x20
+[   41.342941]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   41.345007]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   41.346278]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   41.347518]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   41.348944]  [<c10d9a16>] vfs_write+0x86/0x140
+[   41.350140]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   41.351208]  [<c10d9b92>] sys_write+0x42/0x80
+[   41.352497]  [<c13105e8>] syscall_call+0x7/0xb
+[   41.353779]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   41.354880] ---[ end trace 555bf1c50f5d9ac7 ]---
+[   41.356174] ------------[ cut here ]------------
+[   41.357423] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   41.359287] Hardware name: Bochs
+[   41.359956] leaking memory in slab c2c09540, node 3 : c2c09400 c2c095b4
+[   41.362479] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   41.365382] Call Trace:
+[   41.366064]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   41.367248]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.368942]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.370580]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   41.371710]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   41.373530]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   41.375050]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   41.376683]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   41.378246]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   41.379631]  [<c1203cb1>] memory_notify+0x11/0x20
+[   41.381044]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   41.382807]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   41.383856]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   41.385538]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   41.386955]  [<c10d9a16>] vfs_write+0x86/0x140
+[   41.387888]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   41.389867]  [<c10d9b92>] sys_write+0x42/0x80
+[   41.391462]  [<c13105e8>] syscall_call+0x7/0xb
+[   41.393185]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   41.394939] ---[ end trace 555bf1c50f5d9ac8 ]---
+[   41.396711] ------------[ cut here ]------------
+[   41.398307] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   41.401519] Hardware name: Bochs
+[   41.402630] leaking memory in slab c2c088c0, node 3 : c2c08a00 c2c08934
+[   41.405016] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   41.408187] Call Trace:
+[   41.409179]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   41.410840]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.413163]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.415418]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   41.417355]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   41.419419]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   41.421408]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   41.423240]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   41.425339]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   41.426688]  [<c1203cb1>] memory_notify+0x11/0x20
+[   41.427737]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   41.429799]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   41.431020]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   41.432680]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   41.433948]  [<c10d9a16>] vfs_write+0x86/0x140
+[   41.434988]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   41.436502]  [<c10d9b92>] sys_write+0x42/0x80
+[   41.437577]  [<c13105e8>] syscall_call+0x7/0xb
+[   41.438592]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   41.439782] ---[ end trace 555bf1c50f5d9ac9 ]---
+[   41.441164] ------------[ cut here ]------------
+[   41.442722] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   41.445210] Hardware name: Bochs
+[   41.446113] leaking memory in slab c2c09680, node 3 : c2c09540 c2c096f4
+[   41.447584] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   41.450180] Call Trace:
+[   41.451146]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   41.452860]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.454467]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.455851]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   41.457344]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   41.458907]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   41.460832]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   41.462512]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   41.464504]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   41.466017]  [<c1203cb1>] memory_notify+0x11/0x20
+[   41.466998]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   41.468867]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   41.470198]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   41.471425]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   41.472745]  [<c10d9a16>] vfs_write+0x86/0x140
+[   41.473914]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   41.474973]  [<c10d9b92>] sys_write+0x42/0x80
+[   41.475904]  [<c13105e8>] syscall_call+0x7/0xb
+[   41.477606]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   41.479048] ---[ end trace 555bf1c50f5d9aca ]---
+[   41.480540] ------------[ cut here ]------------
+[   41.481721] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   41.483568] Hardware name: Bochs
+[   41.484516] leaking memory in slab c2c08780, node 3 : c2c088c0 c2c087f4
+[   41.486168] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   41.488809] Call Trace:
+[   41.489493]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   41.490598]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.491910]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.493746]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   41.495166]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   41.496799]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   41.498112]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   41.499241]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   41.500858]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   41.502493]  [<c1203cb1>] memory_notify+0x11/0x20
+[   41.503566]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   41.505846]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   41.507570]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   41.510029]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   41.511759]  [<c10d9a16>] vfs_write+0x86/0x140
+[   41.513517]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   41.515343]  [<c10d9b92>] sys_write+0x42/0x80
+[   41.516985]  [<c13105e8>] syscall_call+0x7/0xb
+[   41.518486]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   41.520629] ---[ end trace 555bf1c50f5d9acb ]---
+[   41.522145] ------------[ cut here ]------------
+[   41.523623] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   41.526763] Hardware name: Bochs
+[   41.527814] leaking memory in slab c2c097c0, node 3 : c2c09680 c2c09834
+[   41.530031] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   41.533079] Call Trace:
+[   41.533927]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   41.535044]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.536950]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.539051]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   41.541014]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   41.543104]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   41.545308]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   41.546743]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   41.548604]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   41.550069]  [<c1203cb1>] memory_notify+0x11/0x20
+[   41.551051]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   41.552744]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   41.554001]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   41.555240]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   41.556614]  [<c10d9a16>] vfs_write+0x86/0x140
+[   41.557866]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   41.558921]  [<c10d9b92>] sys_write+0x42/0x80
+[   41.559846]  [<c13105e8>] syscall_call+0x7/0xb
+[   41.561172]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   41.562581] ---[ end trace 555bf1c50f5d9acc ]---
+[   41.563562] ------------[ cut here ]------------
+[   41.565419] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   41.568965] Hardware name: Bochs
+[   41.570066] leaking memory in slab c2c08640, node 3 : c2c08780 c2c086b4
+[   41.572741] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   41.574840] Call Trace:
+[   41.575386]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   41.576777]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.578291]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.579603]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   41.580972]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   41.582542]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   41.583671]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   41.585063]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   41.586610]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   41.587923]  [<c1203cb1>] memory_notify+0x11/0x20
+[   41.589209]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   41.590995]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   41.592420]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   41.594020]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   41.595386]  [<c10d9a16>] vfs_write+0x86/0x140
+[   41.596658]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   41.598038]  [<c10d9b92>] sys_write+0x42/0x80
+[   41.599150]  [<c13105e8>] syscall_call+0x7/0xb
+[   41.600445]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   41.601785] ---[ end trace 555bf1c50f5d9acd ]---
+[   41.602621] ------------[ cut here ]------------
+[   41.603448] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   41.605554] Hardware name: Bochs
+[   41.606595] leaking memory in slab c2c09900, node 3 : c2c097c0 c2c09974
+[   41.608768] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   41.610821] Call Trace:
+[   41.611344]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   41.612804]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.614326]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.615634]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   41.617271]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   41.618846]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   41.620502]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   41.621873]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   41.623262]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   41.624888]  [<c1203cb1>] memory_notify+0x11/0x20
+[   41.626316]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   41.627920]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   41.629443]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   41.630927]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   41.632387]  [<c10d9a16>] vfs_write+0x86/0x140
+[   41.633608]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   41.634772]  [<c10d9b92>] sys_write+0x42/0x80
+[   41.635742]  [<c13105e8>] syscall_call+0x7/0xb
+[   41.637793]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   41.639273] ---[ end trace 555bf1c50f5d9ace ]---
+[   41.640651] ------------[ cut here ]------------
+[   41.641851] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   41.643710] Hardware name: Bochs
+[   41.644866] leaking memory in slab c2c08500, node 3 : c2c08640 c2c08574
+[   41.646570] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   41.648831] Call Trace:
+[   41.649872]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   41.651606]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.653945]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.656365]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   41.658055]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   41.660267]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   41.662070]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   41.663794]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   41.666280]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   41.668828]  [<c1203cb1>] memory_notify+0x11/0x20
+[   41.670417]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   41.672927]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   41.674658]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   41.676703]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   41.678578]  [<c10d9a16>] vfs_write+0x86/0x140
+[   41.679675]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   41.681141]  [<c10d9b92>] sys_write+0x42/0x80
+[   41.682317]  [<c13105e8>] syscall_call+0x7/0xb
+[   41.683302]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   41.684837] ---[ end trace 555bf1c50f5d9acf ]---
+[   41.686380] ------------[ cut here ]------------
+[   41.687425] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   41.689912] Hardware name: Bochs
+[   41.691168] leaking memory in slab c2c09a40, node 3 : c2c09900 c2c09ab4
+[   41.693764] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   41.697338] Call Trace:
+[   41.697977]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   41.699229]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.701629]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.703631]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   41.705009]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   41.706502]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   41.707677]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   41.709114]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   41.710659]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   41.711890]  [<c1203cb1>] memory_notify+0x11/0x20
+[   41.713133]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   41.714980]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   41.716387]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   41.718329]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   41.719985]  [<c10d9a16>] vfs_write+0x86/0x140
+[   41.721721]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   41.723577]  [<c10d9b92>] sys_write+0x42/0x80
+[   41.725072]  [<c13105e8>] syscall_call+0x7/0xb
+[   41.726233]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   41.727494] ---[ end trace 555bf1c50f5d9ad0 ]---
+[   41.729384] ------------[ cut here ]------------
+[   41.730936] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   41.734174] Hardware name: Bochs
+[   41.735268] leaking memory in slab c2c083c0, node 3 : c2c08500 c2c08434
+[   41.737614] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   41.739818] Call Trace:
+[   41.740806]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   41.742061]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.743399]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.745080]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   41.746429]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   41.748912]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   41.750374]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   41.751524]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   41.753154]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   41.754740]  [<c1203cb1>] memory_notify+0x11/0x20
+[   41.755729]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   41.757510]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   41.758848]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   41.760550]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   41.761847]  [<c10d9a16>] vfs_write+0x86/0x140
+[   41.762770]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   41.763847]  [<c10d9b92>] sys_write+0x42/0x80
+[   41.765516]  [<c13105e8>] syscall_call+0x7/0xb
+[   41.767088]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   41.769019] ---[ end trace 555bf1c50f5d9ad1 ]---
+[   41.770226] ------------[ cut here ]------------
+[   41.771338] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   41.773743] Hardware name: Bochs
+[   41.774711] leaking memory in slab c2c09b80, node 3 : c2c09a40 c2c09bf4
+[   41.776338] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   41.778523] Call Trace:
+[   41.779039]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   41.780438]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.782060]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.783384]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   41.784794]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   41.786276]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   41.787462]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   41.788986]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   41.790627]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   41.791920]  [<c1203cb1>] memory_notify+0x11/0x20
+[   41.793290]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   41.795048]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   41.796459]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   41.797872]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   41.798924]  [<c10d9a16>] vfs_write+0x86/0x140
+[   41.799864]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   41.801287]  [<c10d9b92>] sys_write+0x42/0x80
+[   41.802358]  [<c13105e8>] syscall_call+0x7/0xb
+[   41.803321]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   41.804504] ---[ end trace 555bf1c50f5d9ad2 ]---
+[   41.805490] ------------[ cut here ]------------
+[   41.806896] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   41.811650] Hardware name: Bochs
+[   41.813201] leaking memory in slab c2c08280, node 3 : c2c083c0 c2c082f4
+[   41.815337] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   41.818763] Call Trace:
+[   41.819623]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   41.821495]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.823606]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.825880]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   41.827567]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   41.830920]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   41.832940]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   41.834674]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   41.836895]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   41.839236]  [<c1203cb1>] memory_notify+0x11/0x20
+[   41.841025]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   41.843370]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   41.845111]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   41.846417]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   41.847476]  [<c10d9a16>] vfs_write+0x86/0x140
+[   41.848766]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   41.850196]  [<c10d9b92>] sys_write+0x42/0x80
+[   41.851153]  [<c13105e8>] syscall_call+0x7/0xb
+[   41.852418]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   41.854017] ---[ end trace 555bf1c50f5d9ad3 ]---
+[   41.855058] ------------[ cut here ]------------
+[   41.856488] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   41.858860] Hardware name: Bochs
+[   41.859585] leaking memory in slab c2c09cc0, node 3 : c2c09b80 c2c09d34
+[   41.861330] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   41.863693] Call Trace:
+[   41.864616]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   41.865962]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.867477]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.869281]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   41.871051]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   41.873572]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   41.875484]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   41.877641]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   41.879787]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   41.882017]  [<c1203cb1>] memory_notify+0x11/0x20
+[   41.883606]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   41.886243]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   41.888391]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   41.890338]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   41.891979]  [<c10d9a16>] vfs_write+0x86/0x140
+[   41.893776]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   41.895330]  [<c10d9b92>] sys_write+0x42/0x80
+[   41.896654]  [<c13105e8>] syscall_call+0x7/0xb
+[   41.897701]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   41.898807] ---[ end trace 555bf1c50f5d9ad4 ]---
+[   41.900315] ------------[ cut here ]------------
+[   41.901555] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   41.903425] Hardware name: Bochs
+[   41.904498] leaking memory in slab c2c08140, node 3 : c2c08280 c2c081b4
+[   41.906108] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   41.908659] Call Trace:
+[   41.909553]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   41.911258]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.913573]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.915692]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   41.917674]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   41.919864]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   41.921786]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   41.923544]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   41.925825]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   41.927846]  [<c1203cb1>] memory_notify+0x11/0x20
+[   41.929620]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   41.931910]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   41.933783]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   41.936585]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   41.938275]  [<c10d9a16>] vfs_write+0x86/0x140
+[   41.939714]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   41.941576]  [<c10d9b92>] sys_write+0x42/0x80
+[   41.943138]  [<c13105e8>] syscall_call+0x7/0xb
+[   41.945328]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   41.946525] ---[ end trace 555bf1c50f5d9ad5 ]---
+[   41.947669] ------------[ cut here ]------------
+[   41.949155] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   41.951447] Hardware name: Bochs
+[   41.952534] leaking memory in slab c2c09e00, node 3 : c2c09cc0 c2c09e74
+[   41.954200] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   41.956431] Call Trace:
+[   41.957129]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   41.958243]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.959592]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   41.961904]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   41.964601]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   41.965953]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   41.967042]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   41.968537]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   41.970369]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   41.971604]  [<c1203cb1>] memory_notify+0x11/0x20
+[   41.973160]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   41.975473]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   41.977332]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   41.979303]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   41.980722]  [<c10d9a16>] vfs_write+0x86/0x140
+[   41.981916]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   41.983167]  [<c10d9b92>] sys_write+0x42/0x80
+[   41.984457]  [<c13105e8>] syscall_call+0x7/0xb
+[   41.985968]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   41.987486] ---[ end trace 555bf1c50f5d9ad6 ]---
+[   41.989068] ------------[ cut here ]------------
+[   41.990312] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   41.992594] Hardware name: Bochs
+[   41.993434] leaking memory in slab c2c08000, node 3 : c2c08140 c2c08074
+[   41.994830] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   41.997305] Call Trace:
+[   41.998054]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   41.999138]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.000861]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.002656]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   42.003735]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   42.005402]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   42.006796]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   42.007945]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   42.009525]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   42.011015]  [<c1203cb1>] memory_notify+0x11/0x20
+[   42.011995]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   42.014113]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   42.015712]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   42.017604]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   42.019143]  [<c10d9a16>] vfs_write+0x86/0x140
+[   42.020802]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   42.022061]  [<c10d9b92>] sys_write+0x42/0x80
+[   42.023024]  [<c13105e8>] syscall_call+0x7/0xb
+[   42.023994]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   42.025433] ---[ end trace 555bf1c50f5d9ad7 ]---
+[   42.026685] ------------[ cut here ]------------
+[   42.027771] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   42.030304] Hardware name: Bochs
+[   42.031267] leaking memory in slab c2c03040, node 3 : c2c02f00 c2c030b4
+[   42.033048] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   42.035098] Call Trace:
+[   42.035627]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   42.037091]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.038717]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.040419]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   42.041662]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   42.042936]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   42.044422]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   42.045721]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   42.047343]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   42.048972]  [<c1203cb1>] memory_notify+0x11/0x20
+[   42.050147]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   42.051838]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   42.053315]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   42.054782]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   42.055831]  [<c10d9a16>] vfs_write+0x86/0x140
+[   42.057045]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   42.058319]  [<c10d9b92>] sys_write+0x42/0x80
+[   42.059257]  [<c13105e8>] syscall_call+0x7/0xb
+[   42.060571]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   42.061893] ---[ end trace 555bf1c50f5d9ad8 ]---
+[   42.062851] ------------[ cut here ]------------
+[   42.063827] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   42.066362] Hardware name: Bochs
+[   42.067508] leaking memory in slab c2c02dc0, node 3 : c2c02f00 c2c02e34
+[   42.069204] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   42.071359] Call Trace:
+[   42.071872]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   42.073374]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.074940]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.076643]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   42.077892]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   42.079208]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   42.080652]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   42.082037]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   42.083611]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   42.085796]  [<c1203cb1>] memory_notify+0x11/0x20
+[   42.087490]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   42.090107]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   42.091837]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   42.094079]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   42.095765]  [<c10d9a16>] vfs_write+0x86/0x140
+[   42.097557]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   42.099332]  [<c10d9b92>] sys_write+0x42/0x80
+[   42.101227]  [<c13105e8>] syscall_call+0x7/0xb
+[   42.102704]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   42.104708] ---[ end trace 555bf1c50f5d9ad9 ]---
+[   42.106320] ------------[ cut here ]------------
+[   42.107808] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   42.110947] Hardware name: Bochs
+[   42.112212] leaking memory in slab c2c03180, node 3 : c2c03040 c2c031f4
+[   42.114400] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   42.117800] Call Trace:
+[   42.118670]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   42.120747]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.122834]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.125064]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   42.126743]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   42.129042]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   42.130839]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   42.132846]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   42.134868]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   42.137121]  [<c1203cb1>] memory_notify+0x11/0x20
+[   42.138706]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   42.141157]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   42.142826]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   42.145027]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   42.146218]  [<c10d9a16>] vfs_write+0x86/0x140
+[   42.147336]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   42.148770]  [<c10d9b92>] sys_write+0x42/0x80
+[   42.149812]  [<c13105e8>] syscall_call+0x7/0xb
+[   42.150838]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   42.152540] ---[ end trace 555bf1c50f5d9ada ]---
+[   42.154137] ------------[ cut here ]------------
+[   42.155175] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   42.157379] Hardware name: Bochs
+[   42.158280] leaking memory in slab c2c02c80, node 3 : c2c02dc0 c2c02cf4
+[   42.159654] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   42.161878] Call Trace:
+[   42.162673]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   42.163782]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.165443]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.166825]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   42.167904]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   42.169424]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   42.170761]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   42.171988]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   42.173534]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   42.175231]  [<c1203cb1>] memory_notify+0x11/0x20
+[   42.176647]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   42.179062]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   42.180895]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   42.182425]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   42.183464]  [<c10d9a16>] vfs_write+0x86/0x140
+[   42.184925]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   42.186658]  [<c10d9b92>] sys_write+0x42/0x80
+[   42.188342]  [<c13105e8>] syscall_call+0x7/0xb
+[   42.189813]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   42.191561] ---[ end trace 555bf1c50f5d9adb ]---
+[   42.193052] ------------[ cut here ]------------
+[   42.194308] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   42.196533] Hardware name: Bochs
+[   42.197430] leaking memory in slab c2c032c0, node 3 : c2c03180 c2c03334
+[   42.198782] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   42.201279] Call Trace:
+[   42.202203]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   42.203385]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.205268]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.206898]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   42.208297]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   42.209764]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   42.211013]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   42.212544]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   42.214113]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   42.215486]  [<c1203cb1>] memory_notify+0x11/0x20
+[   42.217098]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   42.218554]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   42.219612]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   42.221156]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   42.222334]  [<c10d9a16>] vfs_write+0x86/0x140
+[   42.223687]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   42.225289]  [<c10d9b92>] sys_write+0x42/0x80
+[   42.226594]  [<c13105e8>] syscall_call+0x7/0xb
+[   42.227676]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   42.229541] ---[ end trace 555bf1c50f5d9adc ]---
+[   42.231094] ------------[ cut here ]------------
+[   42.232985] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   42.236259] Hardware name: Bochs
+[   42.237336] leaking memory in slab c2c02b40, node 3 : c2c02c80 c2c02bb4
+[   42.239530] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   42.242784] Call Trace:
+[   42.243725]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   42.245673]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.247815]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.250114]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   42.251382]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   42.252919]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   42.254411]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   42.255937]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   42.257584]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   42.259177]  [<c1203cb1>] memory_notify+0x11/0x20
+[   42.260711]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   42.262492]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   42.263722]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   42.265387]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   42.266577]  [<c10d9a16>] vfs_write+0x86/0x140
+[   42.267561]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   42.269085]  [<c10d9b92>] sys_write+0x42/0x80
+[   42.270194]  [<c13105e8>] syscall_call+0x7/0xb
+[   42.271188]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   42.272778] ---[ end trace 555bf1c50f5d9add ]---
+[   42.274527] ------------[ cut here ]------------
+[   42.275740] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   42.277864] Hardware name: Bochs
+[   42.279362] leaking memory in slab c2c03400, node 3 : c2c032c0 c2c03474
+[   42.281608] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   42.284635] Call Trace:
+[   42.285379]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   42.286959]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.288757]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.290366]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   42.291482]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   42.293631]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   42.295206]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   42.296989]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   42.298475]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   42.299807]  [<c1203cb1>] memory_notify+0x11/0x20
+[   42.301249]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   42.303024]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   42.304432]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   42.306187]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   42.307298]  [<c10d9a16>] vfs_write+0x86/0x140
+[   42.309022]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   42.311300]  [<c10d9b92>] sys_write+0x42/0x80
+[   42.313764]  [<c13105e8>] syscall_call+0x7/0xb
+[   42.315827]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   42.317208] ---[ end trace 555bf1c50f5d9ade ]---
+[   42.318693] ------------[ cut here ]------------
+[   42.320458] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   42.322452] Hardware name: Bochs
+[   42.323126] leaking memory in slab c2c02a00, node 3 : c2c02b40 c2c02a74
+[   42.325114] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   42.327524] Call Trace:
+[   42.328212]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   42.329698]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.331079]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.332756]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   42.334113]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   42.335581]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   42.337181]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   42.338827]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   42.340680]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   42.342087]  [<c1203cb1>] memory_notify+0x11/0x20
+[   42.343075]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   42.345433]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   42.347049]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   42.348903]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   42.350267]  [<c10d9a16>] vfs_write+0x86/0x140
+[   42.351187]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   42.352797]  [<c10d9b92>] sys_write+0x42/0x80
+[   42.354027]  [<c13105e8>] syscall_call+0x7/0xb
+[   42.355217]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   42.356791] ---[ end trace 555bf1c50f5d9adf ]---
+[   42.358040] ------------[ cut here ]------------
+[   42.359290] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   42.362151] Hardware name: Bochs
+[   42.363057] leaking memory in slab c2c03540, node 3 : c2c03400 c2c035b4
+[   42.365851] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   42.368177] Call Trace:
+[   42.368833]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   42.369952]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.371304]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.372915]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   42.374239]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   42.375570]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   42.377173]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   42.379187]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   42.381868]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   42.384293]  [<c1203cb1>] memory_notify+0x11/0x20
+[   42.385789]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   42.388163]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   42.389962]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   42.391858]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   42.393677]  [<c10d9a16>] vfs_write+0x86/0x140
+[   42.395312]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   42.397213]  [<c10d9b92>] sys_write+0x42/0x80
+[   42.398657]  [<c13105e8>] syscall_call+0x7/0xb
+[   42.400298]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   42.402058] ---[ end trace 555bf1c50f5d9ae0 ]---
+[   42.403540] ------------[ cut here ]------------
+[   42.405782] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   42.409198] Hardware name: Bochs
+[   42.410305] leaking memory in slab c2c028c0, node 3 : c2c02a00 c2c02934
+[   42.412771] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   42.415852] Call Trace:
+[   42.416960]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   42.418253]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.419570]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.421287]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   42.422650]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   42.424182]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   42.425532]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   42.426619]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   42.427899]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   42.429601]  [<c1203cb1>] memory_notify+0x11/0x20
+[   42.430853]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   42.432747]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   42.434039]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   42.435394]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   42.436861]  [<c10d9a16>] vfs_write+0x86/0x140
+[   42.437893]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   42.439032]  [<c10d9b92>] sys_write+0x42/0x80
+[   42.440156]  [<c13105e8>] syscall_call+0x7/0xb
+[   42.441245]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   42.442421] ---[ end trace 555bf1c50f5d9ae1 ]---
+[   42.443466] ------------[ cut here ]------------
+[   42.445203] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   42.447281] Hardware name: Bochs
+[   42.447974] leaking memory in slab c2c03680, node 3 : c2c03540 c2c036f4
+[   42.449656] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   42.451757] Call Trace:
+[   42.452658]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   42.453898]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.455320]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.456967]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   42.458320]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   42.459703]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   42.461337]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   42.462769]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   42.464569]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   42.465951]  [<c1203cb1>] memory_notify+0x11/0x20
+[   42.466983]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   42.468876]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   42.470207]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   42.471500]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   42.472965]  [<c10d9a16>] vfs_write+0x86/0x140
+[   42.474190]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   42.475322]  [<c10d9b92>] sys_write+0x42/0x80
+[   42.476752]  [<c13105e8>] syscall_call+0x7/0xb
+[   42.478284]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   42.480173] ---[ end trace 555bf1c50f5d9ae2 ]---
+[   42.481952] ------------[ cut here ]------------
+[   42.483465] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   42.486797] Hardware name: Bochs
+[   42.487958] leaking memory in slab c2c02780, node 3 : c2c028c0 c2c027f4
+[   42.490310] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   42.493572] Call Trace:
+[   42.494435]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   42.496415]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.498540]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.500846]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   42.502215]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   42.503629]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   42.505307]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   42.506523]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   42.508235]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   42.509648]  [<c1203cb1>] memory_notify+0x11/0x20
+[   42.510619]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   42.512278]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   42.513726]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   42.514964]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   42.516157]  [<c10d9a16>] vfs_write+0x86/0x140
+[   42.517490]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   42.518615]  [<c10d9b92>] sys_write+0x42/0x80
+[   42.519951]  [<c13105e8>] syscall_call+0x7/0xb
+[   42.521324]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   42.522851] ---[ end trace 555bf1c50f5d9ae3 ]---
+[   42.523839] ------------[ cut here ]------------
+[   42.525291] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   42.527769] Hardware name: Bochs
+[   42.528717] leaking memory in slab c2c037c0, node 3 : c2c03680 c2c03834
+[   42.530467] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   42.533623] Call Trace:
+[   42.534363]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   42.535506]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.537399]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.538955]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   42.540352]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   42.541789]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   42.542895]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   42.544165]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   42.545699]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   42.546921]  [<c1203cb1>] memory_notify+0x11/0x20
+[   42.547901]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   42.549882]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   42.551257]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   42.552795]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   42.554105]  [<c10d9a16>] vfs_write+0x86/0x140
+[   42.555065]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   42.556478]  [<c10d9b92>] sys_write+0x42/0x80
+[   42.557625]  [<c13105e8>] syscall_call+0x7/0xb
+[   42.558665]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   42.559994] ---[ end trace 555bf1c50f5d9ae4 ]---
+[   42.561299] ------------[ cut here ]------------
+[   42.562670] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   42.565049] Hardware name: Bochs
+[   42.565900] leaking memory in slab c2c02640, node 3 : c2c02780 c2c026b4
+[   42.567480] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   42.570009] Call Trace:
+[   42.570699]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   42.571894]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.573622]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.575191]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   42.576681]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   42.578128]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   42.579271]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   42.580653]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   42.582174]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   42.583476]  [<c1203cb1>] memory_notify+0x11/0x20
+[   42.584763]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   42.586504]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   42.587611]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   42.589425]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   42.590757]  [<c10d9a16>] vfs_write+0x86/0x140
+[   42.591827]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   42.593176]  [<c10d9b92>] sys_write+0x42/0x80
+[   42.594427]  [<c13105e8>] syscall_call+0x7/0xb
+[   42.595370]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   42.596989] ---[ end trace 555bf1c50f5d9ae5 ]---
+[   42.598266] ------------[ cut here ]------------
+[   42.599241] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   42.601437] Hardware name: Bochs
+[   42.602439] leaking memory in slab c2c03900, node 3 : c2c037c0 c2c03974
+[   42.604205] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   42.606388] Call Trace:
+[   42.606927]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   42.608443]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.610014]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.611431]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   42.613098]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   42.615134]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   42.617265]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   42.619023]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   42.621328]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   42.623346]  [<c1203cb1>] memory_notify+0x11/0x20
+[   42.625223]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   42.627089]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   42.628774]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   42.630717]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   42.632734]  [<c10d9a16>] vfs_write+0x86/0x140
+[   42.633968]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   42.635157]  [<c10d9b92>] sys_write+0x42/0x80
+[   42.636701]  [<c13105e8>] syscall_call+0x7/0xb
+[   42.638150]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   42.639597] ---[ end trace 555bf1c50f5d9ae6 ]---
+[   42.641159] ------------[ cut here ]------------
+[   42.642736] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   42.646458] Hardware name: Bochs
+[   42.647740] leaking memory in slab c2c02500, node 3 : c2c02640 c2c02574
+[   42.650847] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   42.654195] Call Trace:
+[   42.654787]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   42.656533]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.658213]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.659563]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   42.662009]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   42.663683]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   42.665231]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   42.666574]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   42.668172]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   42.669725]  [<c1203cb1>] memory_notify+0x11/0x20
+[   42.670749]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   42.672619]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   42.673904]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   42.675292]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   42.676480]  [<c10d9a16>] vfs_write+0x86/0x140
+[   42.677475]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   42.678785]  [<c10d9b92>] sys_write+0x42/0x80
+[   42.679940]  [<c13105e8>] syscall_call+0x7/0xb
+[   42.681003]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   42.682211] ---[ end trace 555bf1c50f5d9ae7 ]---
+[   42.683341] ------------[ cut here ]------------
+[   42.685188] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   42.687553] Hardware name: Bochs
+[   42.688589] leaking memory in slab c2c03a40, node 3 : c2c03900 c2c03ab4
+[   42.690284] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   42.692690] Call Trace:
+[   42.693215]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   42.694193]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.695343]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.697283]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   42.699033]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   42.701287]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   42.703071]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   42.704912]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   42.706357]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   42.707666]  [<c1203cb1>] memory_notify+0x11/0x20
+[   42.709089]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   42.710960]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   42.712849]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   42.714132]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   42.715046]  [<c10d9a16>] vfs_write+0x86/0x140
+[   42.715839]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   42.717549]  [<c10d9b92>] sys_write+0x42/0x80
+[   42.719092]  [<c13105e8>] syscall_call+0x7/0xb
+[   42.720779]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   42.722570] ---[ end trace 555bf1c50f5d9ae8 ]---
+[   42.724718] ------------[ cut here ]------------
+[   42.726478] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   42.730300] Hardware name: Bochs
+[   42.731587] leaking memory in slab c2c023c0, node 3 : c2c02500 c2c02434
+[   42.734360] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   42.737642] Call Trace:
+[   42.738344]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   42.739565]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.741306]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.743028]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   42.744441]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   42.746100]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   42.747283]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   42.748731]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   42.750420]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   42.751720]  [<c1203cb1>] memory_notify+0x11/0x20
+[   42.753073]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   42.754760]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   42.755886]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   42.757488]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   42.758770]  [<c10d9a16>] vfs_write+0x86/0x140
+[   42.759712]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   42.761247]  [<c10d9b92>] sys_write+0x42/0x80
+[   42.762478]  [<c13105e8>] syscall_call+0x7/0xb
+[   42.763401]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   42.765074] ---[ end trace 555bf1c50f5d9ae9 ]---
+[   42.766540] ------------[ cut here ]------------
+[   42.767821] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   42.770238] Hardware name: Bochs
+[   42.771268] leaking memory in slab c2c03b80, node 3 : c2c03a40 c2c03bf4
+[   42.773575] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   42.776153] Call Trace:
+[   42.777207]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   42.779210]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.781883]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.783488]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   42.785179]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   42.786677]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   42.787799]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   42.789215]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   42.790782]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   42.792151]  [<c1203cb1>] memory_notify+0x11/0x20
+[   42.793361]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   42.794781]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   42.795884]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   42.797498]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   42.798982]  [<c10d9a16>] vfs_write+0x86/0x140
+[   42.799902]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   42.801236]  [<c10d9b92>] sys_write+0x42/0x80
+[   42.802559]  [<c13105e8>] syscall_call+0x7/0xb
+[   42.803866]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   42.806041] ---[ end trace 555bf1c50f5d9aea ]---
+[   42.807483] ------------[ cut here ]------------
+[   42.808731] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   42.810850] Hardware name: Bochs
+[   42.811542] leaking memory in slab c2c02280, node 3 : c2c023c0 c2c022f4
+[   42.813857] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   42.816921] Call Trace:
+[   42.817383]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   42.818307]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.819505]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.821181]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   42.822644]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   42.823997]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   42.826186]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   42.827515]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   42.829224]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   42.830605]  [<c1203cb1>] memory_notify+0x11/0x20
+[   42.831753]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   42.834351]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   42.836507]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   42.838100]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   42.839143]  [<c10d9a16>] vfs_write+0x86/0x140
+[   42.841228]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   42.843231]  [<c10d9b92>] sys_write+0x42/0x80
+[   42.844610]  [<c13105e8>] syscall_call+0x7/0xb
+[   42.845672]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   42.846945] ---[ end trace 555bf1c50f5d9aeb ]---
+[   42.847975] ------------[ cut here ]------------
+[   42.849688] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   42.851928] Hardware name: Bochs
+[   42.853294] leaking memory in slab c2c03cc0, node 3 : c2c03b80 c2c03d34
+[   42.855502] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   42.858839] Call Trace:
+[   42.859732]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   42.861761]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.863882]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.866369]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   42.868364]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   42.870327]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   42.872277]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   42.873901]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   42.875178]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   42.876812]  [<c1203cb1>] memory_notify+0x11/0x20
+[   42.878043]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   42.879504]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   42.880863]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   42.882357]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   42.883403]  [<c10d9a16>] vfs_write+0x86/0x140
+[   42.884792]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   42.886146]  [<c10d9b92>] sys_write+0x42/0x80
+[   42.887091]  [<c13105e8>] syscall_call+0x7/0xb
+[   42.888679]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   42.890428] ---[ end trace 555bf1c50f5d9aec ]---
+[   42.891736] ------------[ cut here ]------------
+[   42.893151] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   42.895279] Hardware name: Bochs
+[   42.895960] leaking memory in slab c2c02140, node 3 : c2c02280 c2c021b4
+[   42.897730] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   42.899985] Call Trace:
+[   42.900776]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   42.902128]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.903463]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.905310]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   42.906676]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   42.907976]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   42.909483]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   42.910859]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   42.912476]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   42.913883]  [<c1203cb1>] memory_notify+0x11/0x20
+[   42.914858]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   42.916813]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   42.918108]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   42.919344]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   42.920846]  [<c10d9a16>] vfs_write+0x86/0x140
+[   42.921968]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   42.923074]  [<c10d9b92>] sys_write+0x42/0x80
+[   42.923997]  [<c13105e8>] syscall_call+0x7/0xb
+[   42.925276]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   42.926693] ---[ end trace 555bf1c50f5d9aed ]---
+[   42.927748] ------------[ cut here ]------------
+[   42.929142] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   42.931370] Hardware name: Bochs
+[   42.932544] leaking memory in slab c2c03e00, node 3 : c2c03cc0 c2c03e74
+[   42.935059] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   42.938766] Call Trace:
+[   42.939705]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   42.941605]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.943716]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.946026]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   42.947770]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   42.950038]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   42.951845]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   42.953808]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   42.955874]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   42.958094]  [<c1203cb1>] memory_notify+0x11/0x20
+[   42.959810]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   42.962308]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   42.964208]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   42.965886]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   42.966994]  [<c10d9a16>] vfs_write+0x86/0x140
+[   42.968396]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   42.969729]  [<c10d9b92>] sys_write+0x42/0x80
+[   42.970741]  [<c13105e8>] syscall_call+0x7/0xb
+[   42.971817]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   42.973473] ---[ end trace 555bf1c50f5d9aee ]---
+[   42.974734] ------------[ cut here ]------------
+[   42.975854] WARNING: at /home/cody/g/linux/mm/slub.c:3577 slab_mem_going_online_callback+0xb3/0xe0()
+[   42.978173] Hardware name: Bochs
+[   42.979149] leaking memory in slab c2c02000, node 3 : c2c02140 c2c02074
+[   42.980985] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   42.983139] Call Trace:
+[   42.983666]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   42.985152]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.986737]  [<c10cf2d3>] ? slab_mem_going_online_callback+0xb3/0xe0
+[   42.988467]  [<c102dc0e>] warn_slowpath_fmt+0x2e/0x30
+[   42.989745]  [<c10cf2d3>] slab_mem_going_online_callback+0xb3/0xe0
+[   42.991177]  [<c10d0ecf>] slab_memory_callback+0xef/0x110
+[   42.992749]  [<c10537a9>] notifier_call_chain+0x59/0x130
+[   42.993937]  [<c1053c28>] __blocking_notifier_call_chain+0x58/0xa0
+[   42.995390]  [<c1053c8a>] blocking_notifier_call_chain+0x1a/0x20
+[   42.997033]  [<c1203cb1>] memory_notify+0x11/0x20
+[   42.998287]  [<c10d66b8>] dnuma_online_required_nodes_and_zones+0x108/0x160
+[   42.999819]  [<c10d765c>] memlayout_commit+0x5c/0x120
+[   43.001446]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   43.003016]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   43.004508]  [<c10d9a16>] vfs_write+0x86/0x140
+[   43.005713]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   43.006853]  [<c10d9b92>] sys_write+0x42/0x80
+[   43.007809]  [<c13105e8>] syscall_call+0x7/0xb
+[   43.009456]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   43.011441] ---[ end trace 555bf1c50f5d9aef ]---
+[   43.013334] On node 3 totalpages: 0
+[   43.053160] Built 3 zonelists in Node order, mobility grouping on.  Total pages: 31797
+[   43.054836] Policy zone: Normal
+[   43.108181] hrtimer: interrupt took 23019060 ns
+[   43.121240] Built 4 zonelists in Node order, mobility grouping on.  Total pages: 31797
+[   43.122898] Policy zone: Normal
+[   43.123653] dnuma: high-order page from pfn 00200 to 003ff extends beyond end of rme {00200 - 002ff}:2
+[   43.183877] Built 4 zonelists in Node order, mobility grouping on.  Total pages: 31286
+[   43.186447] Policy zone: Normal
+[   43.187440] ------------[ cut here ]------------
+[   43.188837] kernel BUG at /home/cody/g/linux/include/linux/mm.h:443!
+[   43.190426] invalid opcode: 0000 [#1] PREEMPT SMP DEBUG_PAGEALLOC
+[   43.190426] Pid: 98, comm: dnuma-test Tainted: G        W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182 Bochs Bochs
+[   43.190426] EIP: 0060:[<c10a2f15>] EFLAGS: 00010097 CPU: 5
+[   43.190426] EIP is at free_one_page+0x355/0x430
+[   43.190426] EAX: ffffff80 EBX: c3904000 ECX: 00000000 EDX: c3904028
+[   43.190426] ESI: 00000200 EDI: 00000000 EBP: c6aafe74 ESP: c6aafe44
+[   43.190426]  DS: 007b ES: 007b FS: 00d8 GS: 0033 SS: 0068
+[   43.190426] CR0: 8005003b CR2: 0804e008 CR3: 06b18000 CR4: 000006b0
+[   43.190426] DR0: 00000000 DR1: 00000000 DR2: 00000000 DR3: 00000000
+[   43.190426] DR6: ffff0ff0 DR7: 00000400
+[   43.190426] Process dnuma-test (pid: 98, ti=c6aae000 task=c6ac2a00 task.ti=c6aae000)
+[   43.190426] Stack:
+[   43.190426]  c130f9a6 c2438034 00000000 c2438000 c10d1917 00000000 00000001 00000292
+[   43.190426]  00000201 00000292 c3904000 c2438000 c6aafe90 c10a3022 00000000 00000000
+[   43.190426]  c2438000 00000002 c3904000 c6aafeb0 c12f782d 00000002 00000001 00000000
+[   43.190426] Call Trace:
+[   43.190426]  [<c130f9a6>] ? _raw_spin_unlock_irqrestore+0x36/0x70
+[   43.190426]  [<c10d1917>] ? grow_pgdat_and_zone+0xb7/0xf0
+[   43.190426]  [<c10a3022>] return_pages_to_zone+0x32/0x70
+[   43.190426]  [<c12f782d>] add_free_page_to_node+0x5d/0xd0
+[   43.190426]  [<c1308937>] add_split_pages_to_zones+0x6a/0x79
+[   43.190426]  [<c10d6a2c>] dnuma_move_free_pages+0x1ec/0x200
+[   43.190426]  [<c10d76b6>] memlayout_commit+0xb6/0x120
+[   43.190426]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   43.190426]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   43.190426]  [<c10d9a16>] vfs_write+0x86/0x140
+[   43.190426]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   43.190426]  [<c10d9b92>] sys_write+0x42/0x80
+[   43.190426]  [<c13105e8>] syscall_call+0x7/0xb
+[   43.190426]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   43.190426] Code: 8b 45 f0 25 00 40 02 00 3d 00 40 02 00 0f 44 ce 8b 41 10 85 c0 0f 84 8b fe ff ff 0f 0b 89 f6 8d bc 27 00 00 00 00 e8 0e 41 26 00 <0f> 0b 0f 0b 0f 0b 0f 0b 0f b6 4d d8 b8 01 00 00 00 31 d2 d3 e0
+[   43.190426] EIP: [<c10a2f15>] free_one_page+0x355/0x430 SS:ESP 0068:c6aafe44
+[   43.190426] ---[ end trace 555bf1c50f5d9af0 ]---
+[   43.190426] note: dnuma-test[98] exited with preempt_count 1
+[   43.190426] BUG: sleeping function called from invalid context at /home/cody/g/linux/kernel/rwsem.c:20
+[   43.190426] in_atomic(): 1, irqs_disabled(): 1, pid: 98, name: dnuma-test
+[   43.190426] INFO: lockdep is turned off.
+[   43.190426] irq event stamp: 394686
+[   43.190426] hardirqs last  enabled at (394685): [<c130f9c5>] _raw_spin_unlock_irqrestore+0x55/0x70
+[   43.190426] hardirqs last disabled at (394686): [<c10a300e>] return_pages_to_zone+0x1e/0x70
+[   43.190426] softirqs last  enabled at (394678): [<c10355ad>] __do_softirq+0xfd/0x160
+[   43.190426] softirqs last disabled at (394659): [<c10047d7>] do_softirq+0x87/0xe0
+[   43.190426] Pid: 98, comm: dnuma-test Tainted: G      D W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   43.190426] Call Trace:
+[   43.190426]  [<c10047d7>] ? do_softirq+0x87/0xe0
+[   43.190426]  [<c105d904>] __might_sleep+0x124/0x1d0
+[   43.190426]  [<c130deae>] down_read+0x1e/0x90
+[   43.190426]  [<c130f9a6>] ? _raw_spin_unlock_irqrestore+0x36/0x70
+[   43.190426]  [<c10317db>] exit_mm+0x2b/0xf0
+[   43.190426]  [<c10339e2>] do_exit+0x242/0x330
+[   43.190426]  [<c1005a9b>] oops_end+0x6b/0x90
+[   43.190426]  [<c1005c2f>] die+0x4f/0x70
+[   43.190426]  [<c1002c85>] do_trap+0x95/0xd0
+[   43.190426]  [<c1002e60>] ? do_bounds+0x80/0x80
+[   43.190426]  [<c1002ee6>] do_invalid_op+0x86/0xa0
+[   43.190426]  [<c10a2f15>] ? free_one_page+0x355/0x430
+[   43.190426]  [<c1079d63>] ? __lock_acquire+0x393/0x7c0
+[   43.190426]  [<c1079d63>] ? __lock_acquire+0x393/0x7c0
+[   43.190426]  [<c10764ed>] ? get_lock_stats+0x1d/0x50
+[   43.190426]  [<c107685d>] ? put_lock_stats.isra.26+0xd/0x30
+[   43.190426]  [<c1185650>] ? trace_hardirqs_off_thunk+0xc/0x1c
+[   43.190426]  [<c1310a87>] error_code+0x5f/0x64
+[   43.190426]  [<c1002e60>] ? do_bounds+0x80/0x80
+[   43.190426]  [<c10a2f15>] ? free_one_page+0x355/0x430
+[   43.190426]  [<c130f9a6>] ? _raw_spin_unlock_irqrestore+0x36/0x70
+[   43.190426]  [<c10d1917>] ? grow_pgdat_and_zone+0xb7/0xf0
+[   43.190426]  [<c10a3022>] return_pages_to_zone+0x32/0x70
+[   43.190426]  [<c12f782d>] add_free_page_to_node+0x5d/0xd0
+[   43.190426]  [<c1308937>] add_split_pages_to_zones+0x6a/0x79
+[   43.190426]  [<c10d6a2c>] dnuma_move_free_pages+0x1ec/0x200
+[   43.190426]  [<c10d76b6>] memlayout_commit+0xb6/0x120
+[   43.190426]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   43.190426]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   43.190426]  [<c10d9a16>] vfs_write+0x86/0x140
+[   43.190426]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   43.190426]  [<c10d9b92>] sys_write+0x42/0x80
+[   43.190426]  [<c13105e8>] syscall_call+0x7/0xb
+[   43.190426]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   43.190426] ------------[ cut here ]------------
+[   43.190426] WARNING: at /home/cody/g/linux/kernel/smp.c:466 smp_call_function_many+0x9a/0x230()
+[   43.190426] Hardware name: Bochs
+[   43.190426] Pid: 98, comm: dnuma-test Tainted: G      D W    3.8.0-rc6-dnuma-00106-g9fa0d5c-dirty #182
+[   43.190426] Call Trace:
+[   43.190426]  [<c102db78>] warn_slowpath_common+0x68/0xa0
+[   43.190426]  [<c108212a>] ? smp_call_function_many+0x9a/0x230
+[   43.190426]  [<c108212a>] ? smp_call_function_many+0x9a/0x230
+[   43.190426]  [<c102dc5d>] warn_slowpath_null+0x1d/0x20
+[   43.190426]  [<c108212a>] smp_call_function_many+0x9a/0x230
+[   43.190426]  [<c102a080>] ? do_flush_tlb_all+0x50/0x50
+[   43.190426]  [<c102a136>] native_flush_tlb_others+0x26/0x30
+[   43.190426]  [<c102a39a>] flush_tlb_mm_range+0x1ca/0x200
+[   43.190426]  [<c10b7e25>] tlb_flush_mmu+0x35/0x90
+[   43.190426]  [<c10b7e92>] tlb_finish_mmu+0x12/0x40
+[   43.190426]  [<c10bfcbf>] exit_mmap+0x9f/0x110
+[   43.190426]  [<c102bedc>] mmput+0x4c/0x90
+[   43.190426]  [<c1031880>] exit_mm+0xd0/0xf0
+[   43.190426]  [<c10339e2>] do_exit+0x242/0x330
+[   43.190426]  [<c1005a9b>] oops_end+0x6b/0x90
+[   43.190426]  [<c1005c2f>] die+0x4f/0x70
+[   43.190426]  [<c1002c85>] do_trap+0x95/0xd0
+[   43.190426]  [<c1002e60>] ? do_bounds+0x80/0x80
+[   43.190426]  [<c1002ee6>] do_invalid_op+0x86/0xa0
+[   43.190426]  [<c10a2f15>] ? free_one_page+0x355/0x430
+[   43.190426]  [<c1079d63>] ? __lock_acquire+0x393/0x7c0
+[   43.190426]  [<c1079d63>] ? __lock_acquire+0x393/0x7c0
+[   43.190426]  [<c10764ed>] ? get_lock_stats+0x1d/0x50
+[   43.190426]  [<c107685d>] ? put_lock_stats.isra.26+0xd/0x30
+[   43.190426]  [<c1185650>] ? trace_hardirqs_off_thunk+0xc/0x1c
+[   43.190426]  [<c1310a87>] error_code+0x5f/0x64
+[   43.190426]  [<c1002e60>] ? do_bounds+0x80/0x80
+[   43.190426]  [<c10a2f15>] ? free_one_page+0x355/0x430
+[   43.190426]  [<c130f9a6>] ? _raw_spin_unlock_irqrestore+0x36/0x70
+[   43.190426]  [<c10d1917>] ? grow_pgdat_and_zone+0xb7/0xf0
+[   43.190426]  [<c10a3022>] return_pages_to_zone+0x32/0x70
+[   43.190426]  [<c12f782d>] add_free_page_to_node+0x5d/0xd0
+[   43.190426]  [<c1308937>] add_split_pages_to_zones+0x6a/0x79
+[   43.190426]  [<c10d6a2c>] dnuma_move_free_pages+0x1ec/0x200
+[   43.190426]  [<c10d76b6>] memlayout_commit+0xb6/0x120
+[   43.190426]  [<c10d774a>] dnuma_user_commit_watch_set+0x2a/0x50
+[   43.190426]  [<c10fd615>] simple_attr_write+0xb5/0xd0
+[   43.190426]  [<c10d9a16>] vfs_write+0x86/0x140
+[   43.190426]  [<c10fd560>] ? simple_attr_read+0xf0/0xf0
+[   43.190426]  [<c10d9b92>] sys_write+0x42/0x80
+[   43.190426]  [<c13105e8>] syscall_call+0x7/0xb
+[   43.190426]  [<c1310000>] ? _raw_write_lock_irq+0x20/0x80
+[   43.190426] ---[ end trace 555bf1c50f5d9af1 ]---
+[   62.581143] serial8250: too much work for irq4
+[   62.738122] serial8250: too much work for irq4
+[   62.928615] serial8250: too much work for irq4
+[   63.093473] serial8250: too much work for irq4

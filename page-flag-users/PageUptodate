@@ -1,0 +1,472 @@
+/home/cody/g/linux/Documentation/filesystems/vfs.txt:715:        need to ensure this.  Possibly it can clear the PageUptodate
+/home/cody/g/linux/kernel/power/block_io.c:95:		if (!PageUptodate(page) || PageError(page))
+/home/cody/g/linux/kernel/events/uprobes.c:285:	__SetPageUptodate(new_page);
+/home/cody/g/linux/fs/cachefiles/rdwr.c:44:	if (!PageUptodate(page) && !PageError(page)) {
+/home/cody/g/linux/fs/cachefiles/rdwr.c:114:		if (PageUptodate(backpage))
+/home/cody/g/linux/fs/cachefiles/rdwr.c:180:		} else if (PageUptodate(monitor->back_page)) {
+/home/cody/g/linux/fs/cachefiles/rdwr.c:329:	if (PageUptodate(backpage))
+/home/cody/g/linux/fs/cachefiles/rdwr.c:599:		if (PageUptodate(backpage))
+/home/cody/g/linux/fs/cachefiles/rdwr.c:613:		if (PageUptodate(backpage))
+/home/cody/g/linux/fs/logfs/file.c:25:	if ((len == PAGE_CACHE_SIZE) || PageUptodate(page))
+/home/cody/g/linux/fs/logfs/file.c:56:		if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/logfs/file.c:69:	SetPageUptodate(page);
+/home/cody/g/linux/fs/logfs/dev_mtd.c:138:		ClearPageUptodate(page);
+/home/cody/g/linux/fs/logfs/dev_mtd.c:141:		SetPageUptodate(page);
+/home/cody/g/linux/fs/logfs/dev_bdev.c:56:		ClearPageUptodate(page);
+/home/cody/g/linux/fs/logfs/dev_bdev.c:59:		SetPageUptodate(page);
+/home/cody/g/linux/fs/logfs/readwrite.c:692:	SetPageUptodate(page);
+/home/cody/g/linux/fs/logfs/readwrite.c:1071:		ClearPageUptodate(page);
+/home/cody/g/linux/fs/logfs/readwrite.c:1074:		SetPageUptodate(page);
+/home/cody/g/linux/fs/logfs/readwrite.c:1435:	} else if (!PageUptodate(ipage)) {
+/home/cody/g/linux/fs/logfs/readwrite.c:2045:	if (!PageUptodate(page))
+/home/cody/g/linux/fs/logfs/segment.c:87:		SetPageUptodate(page);
+/home/cody/g/linux/fs/logfs/segment.c:138:		SetPageUptodate(page);
+/home/cody/g/linux/fs/logfs/segment.c:563:	ClearPageUptodate(page);
+/home/cody/g/linux/fs/logfs/segment.c:661:	if (PageUptodate(page))
+/home/cody/g/linux/fs/logfs/segment.c:670:		SetPageUptodate(page);
+/home/cody/g/linux/fs/ubifs/file.c:177:	SetPageUptodate(page);
+/home/cody/g/linux/fs/ubifs/file.c:185:	ClearPageUptodate(page);
+/home/cody/g/linux/fs/ubifs/file.c:256:	if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/ubifs/file.c:268:		SetPageUptodate(page);
+/home/cody/g/linux/fs/ubifs/file.c:446:	if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/ubifs/file.c:469:		SetPageUptodate(page);
+/home/cody/g/linux/fs/ubifs/file.c:482:			ClearPageUptodate(page);
+/home/cody/g/linux/fs/ubifs/file.c:687:	SetPageUptodate(page);
+/home/cody/g/linux/fs/ubifs/file.c:695:	ClearPageUptodate(page);
+/home/cody/g/linux/fs/ubifs/file.c:787:		if (!PageUptodate(page))
+/home/cody/g/linux/fs/gfs2/file.c:420:		if (!PageUptodate(page) || page->mapping != inode->i_mapping) {
+/home/cody/g/linux/fs/gfs2/file.c:462:	if (!PageUptodate(page) || page->mapping != inode->i_mapping)
+/home/cody/g/linux/fs/gfs2/aops.c:427:		SetPageUptodate(page);
+/home/cody/g/linux/fs/gfs2/aops.c:443:	SetPageUptodate(page);
+/home/cody/g/linux/fs/gfs2/aops.c:503:	if (page->mapping == mapping && !PageUptodate(page))
+/home/cody/g/linux/fs/gfs2/aops.c:677:		} else if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/gfs2/aops.c:787:	if (!PageUptodate(page))
+/home/cody/g/linux/fs/gfs2/aops.c:788:		SetPageUptodate(page);
+/home/cody/g/linux/fs/gfs2/bmap.c:70:	if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/gfs2/bmap.c:81:		SetPageUptodate(page);
+/home/cody/g/linux/fs/gfs2/bmap.c:971:	if (PageUptodate(page))
+/home/cody/g/linux/fs/gfs2/quota.c:714:	if (PageUptodate(page))
+/home/cody/g/linux/fs/gfs2/ops_fstype.c:163:		SetPageUptodate(page);
+/home/cody/g/linux/fs/gfs2/ops_fstype.c:222:	ClearPageUptodate(page);
+/home/cody/g/linux/fs/gfs2/ops_fstype.c:236:	if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/ufs/util.c:269:		if (!PageUptodate(page) || PageError(page)) {
+/home/cody/g/linux/fs/squashfs/symlink.c:105:	SetPageUptodate(page);
+/home/cody/g/linux/fs/squashfs/file.c:464:		if (PageUptodate(push_page))
+/home/cody/g/linux/fs/squashfs/file.c:472:		SetPageUptodate(push_page);
+/home/cody/g/linux/fs/squashfs/file.c:492:		SetPageUptodate(page);
+/home/cody/g/linux/fs/coda/symlink.c:36:	SetPageUptodate(page);
+/home/cody/g/linux/fs/cramfs/inode.c:195:			if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/cramfs/inode.c:524:	SetPageUptodate(page);
+/home/cody/g/linux/fs/cramfs/inode.c:530:	ClearPageUptodate(page);
+/home/cody/g/linux/fs/ext4/mballoc.c:866:		if (PageUptodate(page) && !EXT4_MB_GRP_NEED_INIT(grinfo)) {
+/home/cody/g/linux/fs/ext4/mballoc.c:950:	SetPageUptodate(page);
+/home/cody/g/linux/fs/ext4/mballoc.c:1059:	if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/ext4/mballoc.c:1079:	if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/ext4/mballoc.c:1143:	if (page == NULL || !PageUptodate(page)) {
+/home/cody/g/linux/fs/ext4/mballoc.c:1157:			if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/ext4/mballoc.c:1169:	if (page == NULL || !PageUptodate(page)) {
+/home/cody/g/linux/fs/ext4/mballoc.c:1182:	if (page == NULL || !PageUptodate(page)) {
+/home/cody/g/linux/fs/ext4/mballoc.c:1188:			if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/ext4/mballoc.c:1198:	if (page == NULL || !PageUptodate(page)) {
+/home/cody/g/linux/fs/ext4/inode.c:1209:			if (!PageUptodate(page))
+/home/cody/g/linux/fs/ext4/inode.c:1217:			SetPageUptodate(page);
+/home/cody/g/linux/fs/ext4/inode.c:1614:			ClearPageUptodate(page);
+/home/cody/g/linux/fs/ext4/inode.c:3532:		if (PageUptodate(page))
+/home/cody/g/linux/fs/ext4/move_extent.c:837:	if (PageUptodate(page))
+/home/cody/g/linux/fs/ext4/move_extent.c:886:		SetPageUptodate(page);
+/home/cody/g/linux/fs/ext4/inline.c:488:	SetPageUptodate(page);
+/home/cody/g/linux/fs/ext4/inline.c:511:	else if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/ext4/inline.c:513:		SetPageUptodate(page);
+/home/cody/g/linux/fs/ext4/inline.c:576:	if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/ext4/inline.c:696:	if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/ext4/inline.c:724:		if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/ext4/inline.c:743:	SetPageUptodate(page);
+/home/cody/g/linux/fs/ext4/inline.c:806:	if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/ext4/inline.c:820:	SetPageUptodate(page);
+/home/cody/g/linux/fs/ext4/inline.c:899:	if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/ecryptfs/mmap.c:73:		ClearPageUptodate(page);
+/home/cody/g/linux/fs/ecryptfs/mmap.c:76:	SetPageUptodate(page);
+/home/cody/g/linux/fs/ecryptfs/mmap.c:237:		ClearPageUptodate(page);
+/home/cody/g/linux/fs/ecryptfs/mmap.c:239:		SetPageUptodate(page);
+/home/cody/g/linux/fs/ecryptfs/mmap.c:294:	if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/ecryptfs/mmap.c:305:				ClearPageUptodate(page);
+/home/cody/g/linux/fs/ecryptfs/mmap.c:308:				SetPageUptodate(page);
+/home/cody/g/linux/fs/ecryptfs/mmap.c:320:					ClearPageUptodate(page);
+/home/cody/g/linux/fs/ecryptfs/mmap.c:323:				SetPageUptodate(page);
+/home/cody/g/linux/fs/ecryptfs/mmap.c:332:					ClearPageUptodate(page);
+/home/cody/g/linux/fs/ecryptfs/mmap.c:335:				SetPageUptodate(page);
+/home/cody/g/linux/fs/ecryptfs/mmap.c:341:				SetPageUptodate(page);
+/home/cody/g/linux/fs/ecryptfs/mmap.c:349:					ClearPageUptodate(page);
+/home/cody/g/linux/fs/ecryptfs/mmap.c:352:				SetPageUptodate(page);
+/home/cody/g/linux/fs/ecryptfs/mmap.c:503:	if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/ecryptfs/mmap.c:508:		SetPageUptodate(page);
+/home/cody/g/linux/fs/ecryptfs/read_write.c:180:		SetPageUptodate(ecryptfs_page);
+/home/cody/g/linux/fs/f2fs/checkpoint.c:43:	SetPageUptodate(page);
+/home/cody/g/linux/fs/f2fs/checkpoint.c:163:	SetPageUptodate(page);
+/home/cody/g/linux/fs/f2fs/recovery.c:163:		ClearPageUptodate(page);
+/home/cody/g/linux/fs/f2fs/recovery.c:339:		ClearPageUptodate(page);
+/home/cody/g/linux/fs/f2fs/file.c:69:			!PageUptodate(page)) {
+/home/cody/g/linux/fs/f2fs/file.c:91:	SetPageUptodate(page);
+/home/cody/g/linux/fs/f2fs/node.c:42:	ClearPageUptodate(page);
+/home/cody/g/linux/fs/f2fs/node.c:818:	SetPageUptodate(page);
+/home/cody/g/linux/fs/f2fs/node.c:868:	if (apage && PageUptodate(apage))
+/home/cody/g/linux/fs/f2fs/node.c:924:	if (page && PageUptodate(page))
+/home/cody/g/linux/fs/f2fs/node.c:1159:	SetPageUptodate(page);
+/home/cody/g/linux/fs/f2fs/node.c:1435:	SetPageUptodate(ipage);
+/home/cody/g/linux/fs/f2fs/node.c:1489:		 * we must clear PageUptodate flag.
+/home/cody/g/linux/fs/f2fs/node.c:1491:		ClearPageUptodate(page);
+/home/cody/g/linux/fs/f2fs/data.c:181:	if (page && PageUptodate(page))
+/home/cody/g/linux/fs/f2fs/data.c:237:	if (PageUptodate(page))
+/home/cody/g/linux/fs/f2fs/data.c:281:	if (PageUptodate(page))
+/home/cody/g/linux/fs/f2fs/data.c:293:	SetPageUptodate(page);
+/home/cody/g/linux/fs/f2fs/data.c:315:			SetPageUptodate(page);
+/home/cody/g/linux/fs/f2fs/data.c:317:			ClearPageUptodate(page);
+/home/cody/g/linux/fs/f2fs/data.c:338:	if (PageUptodate(page)) {
+/home/cody/g/linux/fs/f2fs/data.c:630:	if ((len == PAGE_CACHE_SIZE) || PageUptodate(page))
+/home/cody/g/linux/fs/f2fs/data.c:651:	SetPageUptodate(page);
+/home/cody/g/linux/fs/f2fs/data.c:692:	SetPageUptodate(page);
+/home/cody/g/linux/fs/f2fs/dir.c:517:		ClearPageUptodate(page);
+/home/cody/g/linux/fs/libfs.c:388:	SetPageUptodate(page);
+/home/cody/g/linux/fs/libfs.c:408:	if (!PageUptodate(page) && (len != PAGE_CACHE_SIZE)) {
+/home/cody/g/linux/fs/libfs.c:451:	if (!PageUptodate(page))
+/home/cody/g/linux/fs/libfs.c:452:		SetPageUptodate(page);
+/home/cody/g/linux/fs/ramfs/file-nommu.c:113:		SetPageUptodate(page);
+/home/cody/g/linux/fs/fuse/dev.c:777:	if (WARN_ON(!PageUptodate(newpage)))
+/home/cody/g/linux/fs/fuse/dev.c:1558:			SetPageUptodate(page);
+/home/cody/g/linux/fs/fuse/file.c:570:		SetPageUptodate(page);
+/home/cody/g/linux/fs/fuse/file.c:608:			SetPageUptodate(page);
+/home/cody/g/linux/fs/fuse/file.c:809:			SetPageUptodate(page);
+/home/cody/g/linux/fs/xfs/xfs_aops.c:739:		if (!(PageUptodate(page) || buffer_uptodate(bh))) {
+/home/cody/g/linux/fs/xfs/xfs_aops.c:772:		SetPageUptodate(page);
+/home/cody/g/linux/fs/xfs/xfs_aops.c:1022:			if (PageUptodate(page))
+/home/cody/g/linux/fs/xfs/xfs_aops.c:1067:		SetPageUptodate(page);
+/home/cody/g/linux/fs/xfs/xfs_aops.c:1121:	ClearPageUptodate(page);
+/home/cody/g/linux/fs/reiserfs/tail_conversion.c:111:		    || PageUptodate(unbh->b_page)) {
+/home/cody/g/linux/fs/reiserfs/inode.c:287:		    && !PageUptodate(bh_result->b_page)) {
+/home/cody/g/linux/fs/reiserfs/inode.c:313:			    && !PageUptodate(bh_result->b_page)) {
+/home/cody/g/linux/fs/reiserfs/inode.c:345:	if (!bh_result->b_page || PageUptodate(bh_result->b_page)) {
+/home/cody/g/linux/fs/reiserfs/inode.c:2508:			SetPageUptodate(page);
+/home/cody/g/linux/fs/reiserfs/inode.c:2518:	ClearPageUptodate(page);
+/home/cody/g/linux/fs/reiserfs/inode.c:2719:		if (!PageUptodate(page))
+/home/cody/g/linux/fs/hugetlbfs/inode.c:327:	ClearPageUptodate(page);
+/home/cody/g/linux/fs/splice.c:53:		WARN_ON(!PageUptodate(page));
+/home/cody/g/linux/fs/splice.c:105:	if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/splice.c:120:		if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/splice.c:410:		if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/splice.c:434:			if (PageUptodate(page)) {
+/home/cody/g/linux/fs/splice.c:458:		 * i_size must be checked after PageUptodate.
+/home/cody/g/linux/fs/freevxfs/vxfs_immed.c:111:	SetPageUptodate(pp);
+/home/cody/g/linux/fs/affs/symlink.c:61:	SetPageUptodate(page);
+/home/cody/g/linux/fs/affs/file.c:620:		SetPageUptodate(page);
+/home/cody/g/linux/fs/affs/file.c:650:	if (PageUptodate(page))
+/home/cody/g/linux/fs/affs/file.c:771:	SetPageUptodate(page);
+/home/cody/g/linux/fs/reiserfs/file.c:233:		SetPageUptodate(page);
+/home/cody/g/linux/fs/exofs/inode.c:154:		SetPageUptodate(page);
+/home/cody/g/linux/fs/exofs/inode.c:166:		SetPageUptodate(page);
+/home/cody/g/linux/fs/exofs/inode.c:393:	if (PageUptodate(page))
+/home/cody/g/linux/fs/exofs/inode.c:394:		EXOFS_ERR("PageUptodate(0x%lx, 0x%lx)\n", pcol->inode->i_ino,
+/home/cody/g/linux/fs/exofs/inode.c:412:		SetPageUptodate(page);
+/home/cody/g/linux/fs/exofs/inode.c:598:			*uptodate = PageUptodate(page);
+/home/cody/g/linux/fs/exofs/inode.c:887:	if (!PageUptodate(page) && (len != PAGE_CACHE_SIZE)) {
+/home/cody/g/linux/fs/exofs/inode.c:901:			SetPageUptodate(page);
+/home/cody/g/linux/fs/exofs/dir.c:71:	if (!PageUptodate(page))
+/home/cody/g/linux/fs/exofs/dir.c:72:		SetPageUptodate(page);
+/home/cody/g/linux/fs/exofs/ore_raid.c:438:			SetPageUptodate(page);
+/home/cody/g/linux/fs/nilfs2/page.c:104:	ClearPageUptodate(page);
+/home/cody/g/linux/fs/nilfs2/page.c:140:		SetPageUptodate(dpage);
+/home/cody/g/linux/fs/nilfs2/page.c:142:		ClearPageUptodate(dpage);
+/home/cody/g/linux/fs/nilfs2/page.c:239:	if (PageUptodate(src) && !PageUptodate(dst))
+/home/cody/g/linux/fs/nilfs2/page.c:240:		SetPageUptodate(dst);
+/home/cody/g/linux/fs/nilfs2/page.c:241:	else if (!PageUptodate(src) && PageUptodate(dst))
+/home/cody/g/linux/fs/nilfs2/page.c:242:		ClearPageUptodate(dst);
+/home/cody/g/linux/fs/nilfs2/page.c:418:	ClearPageUptodate(page);
+/home/cody/g/linux/fs/nilfs2/file.c:80:	    page_offset(page) >= i_size_read(inode) || !PageUptodate(page)) {
+/home/cody/g/linux/fs/jffs2/file.c:101:		ClearPageUptodate(pg);
+/home/cody/g/linux/fs/jffs2/file.c:104:		SetPageUptodate(pg);
+/home/cody/g/linux/fs/jffs2/file.c:225:	if (!PageUptodate(pg)) {
+/home/cody/g/linux/fs/jffs2/file.c:266:	BUG_ON(!PageUptodate(pg));
+/home/cody/g/linux/fs/jffs2/file.c:330:		ClearPageUptodate(pg);
+/home/cody/g/linux/fs/ncpfs/symlink.c:82:	SetPageUptodate(page);
+/home/cody/g/linux/fs/ncpfs/dir.c:469:	if (!PageUptodate(page) || !ctl.head.eof)
+/home/cody/g/linux/fs/ncpfs/dir.c:495:			if (!PageUptodate(ctl.page))
+/home/cody/g/linux/fs/ncpfs/dir.c:519:			SetPageUptodate(ctl.page);
+/home/cody/g/linux/fs/ncpfs/dir.c:560:		SetPageUptodate(ctl.page);
+/home/cody/g/linux/fs/ncpfs/dir.c:567:		SetPageUptodate(page);
+/home/cody/g/linux/fs/ncpfs/dir.c:650:			SetPageUptodate(ctl.page);
+/home/cody/g/linux/fs/jfs/jfs_metapage.c:282:		SetPageUptodate(page);
+/home/cody/g/linux/fs/jfs/jfs_metapage.c:635:		SetPageUptodate(page);
+/home/cody/g/linux/fs/jfs/jfs_metapage.c:638:		if (IS_ERR(page) || !PageUptodate(page)) {
+/home/cody/g/linux/fs/cifs/file.c:2078:	if (!PageUptodate(page))
+/home/cody/g/linux/fs/cifs/file.c:2101:		SetPageUptodate(page);
+/home/cody/g/linux/fs/cifs/file.c:2135:			SetPageUptodate(page);
+/home/cody/g/linux/fs/cifs/file.c:2137:	} else if (!PageUptodate(page) && copied == PAGE_CACHE_SIZE)
+/home/cody/g/linux/fs/cifs/file.c:2138:		SetPageUptodate(page);
+/home/cody/g/linux/fs/cifs/file.c:2140:	if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/cifs/file.c:3122:			SetPageUptodate(page);
+/home/cody/g/linux/fs/cifs/file.c:3185:			SetPageUptodate(page);
+/home/cody/g/linux/fs/cifs/file.c:3388:	SetPageUptodate(page);
+/home/cody/g/linux/fs/cifs/file.c:3492:	if (PageUptodate(page))
+/home/cody/g/linux/fs/cifs/fscache.c:148:		SetPageUptodate(page);
+/home/cody/g/linux/fs/mpage.c:56:				SetPageUptodate(page);
+/home/cody/g/linux/fs/mpage.c:58:				ClearPageUptodate(page);
+/home/cody/g/linux/fs/mpage.c:126:			SetPageUptodate(page);    
+/home/cody/g/linux/fs/mpage.c:267:			SetPageUptodate(page);
+/home/cody/g/linux/fs/mpage.c:275:	if (fully_mapped && blocks_per_page == 1 && !PageUptodate(page) &&
+/home/cody/g/linux/fs/mpage.c:277:		SetPageUptodate(page);
+/home/cody/g/linux/fs/mpage.c:315:	if (!PageUptodate(page))
+/home/cody/g/linux/fs/mpage.c:520:	BUG_ON(!PageUptodate(page));
+/home/cody/g/linux/fs/mpage.c:616:		if (buffer_heads_over_limit && PageUptodate(page))
+/home/cody/g/linux/fs/ntfs/attrib.c:1658:	if (page && !PageUptodate(page)) {
+/home/cody/g/linux/fs/ntfs/attrib.c:1666:		SetPageUptodate(page);
+/home/cody/g/linux/fs/ntfs/attrib.c:2581:		SetPageUptodate(page);
+/home/cody/g/linux/fs/ntfs/file.c:576:			if (PageUptodate(page)) {
+/home/cody/g/linux/fs/ntfs/file.c:634:			if (PageUptodate(page)) {
+/home/cody/g/linux/fs/ntfs/file.c:730:			if (PageUptodate(page)) {
+/home/cody/g/linux/fs/ntfs/file.c:854:				if (PageUptodate(page)) {
+/home/cody/g/linux/fs/ntfs/file.c:1256:				if (PageUptodate(page))
+/home/cody/g/linux/fs/ntfs/file.c:1514:		if (!partial && !PageUptodate(page))
+/home/cody/g/linux/fs/ntfs/file.c:1515:			SetPageUptodate(page);
+/home/cody/g/linux/fs/ntfs/file.c:1706:	if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/ntfs/file.c:1714:		SetPageUptodate(page);
+/home/cody/g/linux/fs/ntfs/file.c:1740:		if (PageUptodate(page)) {
+/home/cody/g/linux/fs/ntfs/mft.c:497:	BUG_ON(!PageUptodate(page));
+/home/cody/g/linux/fs/ntfs/mft.c:498:	ClearPageUptodate(page);
+/home/cody/g/linux/fs/ntfs/mft.c:620:	SetPageUptodate(page);
+/home/cody/g/linux/fs/ntfs/mft.c:804:			if (PageUptodate(page))
+/home/cody/g/linux/fs/ntfs/mft.c:2127:	BUG_ON(!PageUptodate(page));
+/home/cody/g/linux/fs/ntfs/mft.c:2128:	ClearPageUptodate(page);
+/home/cody/g/linux/fs/ntfs/mft.c:2134:		SetPageUptodate(page);
+/home/cody/g/linux/fs/ntfs/mft.c:2140:	SetPageUptodate(page);
+/home/cody/g/linux/fs/ntfs/mft.c:2529:	BUG_ON(!PageUptodate(page));
+/home/cody/g/linux/fs/ntfs/mft.c:2530:	ClearPageUptodate(page);
+/home/cody/g/linux/fs/ntfs/mft.c:2543:			SetPageUptodate(page);
+/home/cody/g/linux/fs/ntfs/mft.c:2562:			SetPageUptodate(page);
+/home/cody/g/linux/fs/ntfs/mft.c:2577:	SetPageUptodate(page);
+/home/cody/g/linux/fs/ntfs/aops.c:139:			SetPageUptodate(page);
+/home/cody/g/linux/fs/ntfs/aops.c:158:			SetPageUptodate(page);
+/home/cody/g/linux/fs/ntfs/aops.c:374:		SetPageUptodate(page);
+/home/cody/g/linux/fs/ntfs/aops.c:423:	 * This can potentially happen because we clear PageUptodate() during
+/home/cody/g/linux/fs/ntfs/aops.c:426:	if (PageUptodate(page)) {
+/home/cody/g/linux/fs/ntfs/aops.c:521:	SetPageUptodate(page);
+/home/cody/g/linux/fs/ntfs/aops.c:581:		BUG_ON(!PageUptodate(page));
+/home/cody/g/linux/fs/ntfs/aops.c:672:				// - Check (PageUptodate(page) &&
+/home/cody/g/linux/fs/ntfs/aops.c:691:			if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/ntfs/aops.c:823:	if (unlikely(!PageUptodate(page))) {
+/home/cody/g/linux/fs/ntfs/aops.c:833:			SetPageUptodate(page);
+/home/cody/g/linux/fs/ntfs/aops.c:1122:	BUG_ON(!PageUptodate(page));
+/home/cody/g/linux/fs/ntfs/aops.c:1123:	ClearPageUptodate(page);
+/home/cody/g/linux/fs/ntfs/aops.c:1296:	SetPageUptodate(page);
+/home/cody/g/linux/fs/ntfs/aops.c:1438:	BUG_ON(!PageUptodate(page));
+/home/cody/g/linux/fs/ntfs/aops.c:1596:	BUG_ON(!PageUptodate(page));
+/home/cody/g/linux/fs/ntfs/compress.c:239:				SetPageUptodate(dp);
+/home/cody/g/linux/fs/ntfs/compress.c:571:		SetPageUptodate(page);
+/home/cody/g/linux/fs/ntfs/compress.c:587:			if (!PageDirty(page) && (!PageUptodate(page) ||
+/home/cody/g/linux/fs/ntfs/compress.c:769:				SetPageUptodate(page);
+/home/cody/g/linux/fs/ntfs/compress.c:848:				SetPageUptodate(page);
+/home/cody/g/linux/fs/ocfs2/symlink.c:79:	SetPageUptodate(page);
+/home/cody/g/linux/fs/ocfs2/alloc.c:6594:		SetPageUptodate(page);
+/home/cody/g/linux/fs/ocfs2/refcounttree.c:2983:		if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/ocfs2/aops.c:247:	SetPageUptodate(page);
+/home/cody/g/linux/fs/ocfs2/aops.c:317:		SetPageUptodate(page);
+/home/cody/g/linux/fs/ocfs2/aops.c:758:			if (PageUptodate(page))
+/home/cody/g/linux/fs/ocfs2/aops.c:775:		if (PageUptodate(page)) {
+/home/cody/g/linux/fs/ocfs2/aops.c:997:				if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/ocfs2/aops.c:1115:	if (new && !PageUptodate(page))
+/home/cody/g/linux/fs/ocfs2/aops.c:1539:	if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/ocfs2/aops.c:1979:		if (!PageUptodate(wc->w_target_page)) {
+/home/cody/g/linux/fs/ocfs2/aops.c:2015:		if (!PageUptodate(wc->w_target_page))
+/home/cody/g/linux/fs/ocfs2/mmap.c:90:	    (!PageUptodate(page)) ||
+/home/cody/g/linux/fs/nfs/symlink.c:36:	SetPageUptodate(page);
+/home/cody/g/linux/fs/nfs/file.c:344:	    !PageUptodate(page) &&		/* Uptodate? */
+/home/cody/g/linux/fs/nfs/file.c:420:	if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/nfs/file.c:427:			SetPageUptodate(page);
+/home/cody/g/linux/fs/nfs/file.c:431:				SetPageUptodate(page);
+/home/cody/g/linux/fs/nfs/read.c:111:	SetPageUptodate(page);
+/home/cody/g/linux/fs/nfs/read.c:161:	if (PageUptodate(req->wb_page))
+/home/cody/g/linux/fs/nfs/read.c:196:				SetPageUptodate(page);
+/home/cody/g/linux/fs/nfs/read.c:198:			SetPageUptodate(page);
+/home/cody/g/linux/fs/nfs/read.c:554:	if (PageUptodate(page))
+/home/cody/g/linux/fs/nfs/write.c:217:	if (PageUptodate(page))
+/home/cody/g/linux/fs/nfs/write.c:223:	SetPageUptodate(page);
+/home/cody/g/linux/fs/nfs/write.c:878: * the PageUptodate() flag. In this case, we will need to turn off
+/home/cody/g/linux/fs/nfs/write.c:888:	return PageUptodate(page) != 0;
+/home/cody/g/linux/fs/nfs/blocklayout/blocklayout.c:57:	dprintk("	PageUptodate %d\n", PageUptodate(page));
+/home/cody/g/linux/fs/nfs/blocklayout/blocklayout.c:213:			SetPageUptodate(page);
+/home/cody/g/linux/fs/nfs/blocklayout/blocklayout.c:318:			SetPageUptodate(pages[i]);
+/home/cody/g/linux/fs/nfs/blocklayout/blocklayout.c:573:			SetPageUptodate(page);
+/home/cody/g/linux/fs/nfs/blocklayout/blocklayout.c:600:	BUG_ON(PageUptodate(page));
+/home/cody/g/linux/fs/nfs/blocklayout/blocklayout.c:603:		SetPageUptodate(page);
+/home/cody/g/linux/fs/nfs/blocklayout/blocklayout.c:619:	SetPageUptodate(page);
+/home/cody/g/linux/fs/nfs/blocklayout/blocklayout.c:657:	 * PageUptodate: It was read before
+/home/cody/g/linux/fs/nfs/blocklayout/blocklayout.c:672:	if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/nfs/objlayout/objio_osd.c:515:		*uptodate = PageUptodate(page);
+/home/cody/g/linux/fs/nfs/dir.c:638:	SetPageUptodate(page);
+/home/cody/g/linux/fs/nfs/dir.c:1807:		SetPageUptodate(page);
+/home/cody/g/linux/fs/efs/symlink.c:41:	SetPageUptodate(page);
+/home/cody/g/linux/fs/nfs/fscache.c:401:		SetPageUptodate(page);
+/home/cody/g/linux/fs/udf/symlink.c:107:	SetPageUptodate(page);
+/home/cody/g/linux/fs/udf/file.c:52:	SetPageUptodate(page);
+/home/cody/g/linux/fs/udf/file.c:77:	SetPageUptodate(page);
+/home/cody/g/linux/fs/udf/file.c:98:	if (!PageUptodate(page) && len != PAGE_CACHE_SIZE)
+/home/cody/g/linux/fs/udf/inode.c:288:	if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/udf/inode.c:295:		SetPageUptodate(page);
+/home/cody/g/linux/fs/buffer.c:313:		SetPageUptodate(page);
+/home/cody/g/linux/fs/buffer.c:625:		WARN_ON_ONCE(warn && !PageUptodate(page));
+/home/cody/g/linux/fs/buffer.c:937:	int uptodate = PageUptodate(page);
+/home/cody/g/linux/fs/buffer.c:1524:	if (PageUptodate(page) || PageDirty(page)) {
+/home/cody/g/linux/fs/buffer.c:1529:			if (PageUptodate(page))
+/home/cody/g/linux/fs/buffer.c:1806:				if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/buffer.c:1854:			if (PageUptodate(page)) {
+/home/cody/g/linux/fs/buffer.c:1870:				if (PageUptodate(page)) {
+/home/cody/g/linux/fs/buffer.c:1883:		if (PageUptodate(page)) {
+/home/cody/g/linux/fs/buffer.c:1943:		SetPageUptodate(page);
+/home/cody/g/linux/fs/buffer.c:1998:		if (!PageUptodate(page))
+/home/cody/g/linux/fs/buffer.c:2159:			SetPageUptodate(page);
+/home/cody/g/linux/fs/buffer.c:2516:		if (PageUptodate(page)) {
+/home/cody/g/linux/fs/buffer.c:2593:	SetPageUptodate(page);
+/home/cody/g/linux/fs/buffer.c:2717:	if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/buffer.c:2724:		if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/buffer.c:2795:	if (PageUptodate(page))
+/home/cody/g/linux/fs/romfs/super.c:133:		SetPageUptodate(page);
+/home/cody/g/linux/fs/afs/file.c:118:		SetPageUptodate(page);
+/home/cody/g/linux/fs/afs/file.c:189:		SetPageUptodate(page);
+/home/cody/g/linux/fs/afs/write.c:154:	if (!PageUptodate(page) && len != PAGE_CACHE_SIZE) {
+/home/cody/g/linux/fs/afs/write.c:161:		SetPageUptodate(page);
+/home/cody/g/linux/fs/afs/write.c:299:			ClearPageUptodate(pv.pages[loop]);
+/home/cody/g/linux/fs/btrfs/disk-io.c:439:	if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/btrfs/file.c:452:		if (!PageUptodate(page) && copied < count)
+/home/cody/g/linux/fs/btrfs/file.c:523:		SetPageUptodate(p);
+/home/cody/g/linux/fs/btrfs/file.c:1207:	    !PageUptodate(page)) {
+/home/cody/g/linux/fs/btrfs/file.c:1212:		if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/btrfs/relocation.c:3040:		if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/btrfs/relocation.c:3043:			if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/btrfs/scrub.c:619:	if (PageUptodate(page)) {
+/home/cody/g/linux/fs/btrfs/scrub.c:3237:		if (PageUptodate(page)) {
+/home/cody/g/linux/fs/btrfs/scrub.c:3251:			if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/btrfs/inode.c:4293:	if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/btrfs/inode.c:4301:		if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/btrfs/inode.c:6207:		if (create == 0 && !PageUptodate(page)) {
+/home/cody/g/linux/fs/btrfs/inode.c:6226:		} else if (create && PageUptodate(page)) {
+/home/cody/g/linux/fs/btrfs/inode.c:7645:	SetPageUptodate(page);
+/home/cody/g/linux/fs/btrfs/ioctl.c:1054:		if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/btrfs/ioctl.c:1057:			if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/btrfs/free-space-cache.c:348:		if (uptodate && !PageUptodate(page)) {
+/home/cody/g/linux/fs/btrfs/free-space-cache.c:351:			if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/btrfs/extent_io.c:1872:		SetPageUptodate(page);
+/home/cody/g/linux/fs/btrfs/extent_io.c:2305:		ClearPageUptodate(page);
+/home/cody/g/linux/fs/btrfs/extent_io.c:2458:				SetPageUptodate(page);
+/home/cody/g/linux/fs/btrfs/extent_io.c:2460:				ClearPageUptodate(page);
+/home/cody/g/linux/fs/btrfs/extent_io.c:2468:				ClearPageUptodate(page);
+/home/cody/g/linux/fs/btrfs/extent_io.c:2654:	if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/btrfs/extent_io.c:2794:			SetPageUptodate(page);
+/home/cody/g/linux/fs/btrfs/extent_io.c:3207:			ClearPageUptodate(page);
+/home/cody/g/linux/fs/btrfs/extent_io.c:4082:		SetPageUptodate(p);
+/home/cody/g/linux/fs/btrfs/extent_io.c:4298:		if (!PageUptodate(p))
+/home/cody/g/linux/fs/btrfs/extent_io.c:4535:			ClearPageUptodate(page);
+/home/cody/g/linux/fs/btrfs/extent_io.c:4550:		SetPageUptodate(page);
+/home/cody/g/linux/fs/btrfs/extent_io.c:4575:		uptodate = PageUptodate(page);
+/home/cody/g/linux/fs/btrfs/extent_io.c:4628:		if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/btrfs/extent_io.c:4644:		if (!PageUptodate(page)) {
+/home/cody/g/linux/fs/btrfs/extent_io.c:4668:		if (!PageUptodate(page))
+/home/cody/g/linux/fs/btrfs/extent_io.c:4808:		WARN_ON(!PageUptodate(page));
+/home/cody/g/linux/fs/btrfs/extent_io.c:4838:		WARN_ON(!PageUptodate(page));
+/home/cody/g/linux/fs/btrfs/extent_io.c:4869:		WARN_ON(!PageUptodate(page));
+/home/cody/g/linux/fs/btrfs/volumes.c:5654:	 * but sb spans only this function. Add an explicit SetPageUptodate call
+/home/cody/g/linux/fs/btrfs/volumes.c:5658:		SetPageUptodate(sb->pages[0]);
+/home/cody/g/linux/fs/btrfs/raid56.c:265:		SetPageUptodate(rbio->stripe_pages[i]);
+/home/cody/g/linux/fs/btrfs/raid56.c:303:		if (!s || !PageUptodate(s)) {
+/home/cody/g/linux/fs/btrfs/raid56.c:984:		ClearPageUptodate(page);
+/home/cody/g/linux/fs/btrfs/raid56.c:1200:		SetPageUptodate(p);
+/home/cody/g/linux/fs/btrfs/raid56.c:1210:			SetPageUptodate(p);
+/home/cody/g/linux/fs/btrfs/raid56.c:1375:		SetPageUptodate(p);
+/home/cody/g/linux/fs/btrfs/raid56.c:1482:			if (PageUptodate(page))
+/home/cody/g/linux/fs/btrfs/raid56.c:1859:					SetPageUptodate(page);
+/home/cody/g/linux/fs/btrfs/raid56.c:1863:					SetPageUptodate(page);
+/home/cody/g/linux/fs/btrfs/raid56.c:1976:			if (PageUptodate(p))
+/home/cody/g/linux/fs/ceph/addr.c:113:		WARN_ON_ONCE(!PageUptodate(page));
+/home/cody/g/linux/fs/ceph/addr.c:220:	SetPageUptodate(page);
+/home/cody/g/linux/fs/ceph/addr.c:257:		SetPageUptodate(page);
+/home/cody/g/linux/fs/ceph/addr.c:581:		WARN_ON(!PageUptodate(page));
+/home/cody/g/linux/fs/ceph/addr.c:1018:	if (PageUptodate(page)) {
+/home/cody/g/linux/fs/ceph/addr.c:1147:	if (!PageUptodate(page))
+/home/cody/g/linux/fs/ceph/addr.c:1148:		SetPageUptodate(page);
+/home/cody/g/linux/fs/hpfs/namei.c:501:	SetPageUptodate(page);
+/home/cody/g/linux/fs/hostfs/hostfs_kern.c:418:		ClearPageUptodate(page);
+/home/cody/g/linux/fs/hostfs/hostfs_kern.c:452:	SetPageUptodate(page);
+/home/cody/g/linux/fs/hostfs/hostfs_kern.c:486:	if (!PageUptodate(page) && err == PAGE_CACHE_SIZE)
+/home/cody/g/linux/fs/hostfs/hostfs_kern.c:487:		SetPageUptodate(page);
+/home/cody/g/linux/fs/9p/vfs_addr.c:78:	SetPageUptodate(page);
+/home/cody/g/linux/fs/9p/vfs_addr.c:291:	if (PageUptodate(page))
+/home/cody/g/linux/fs/9p/vfs_addr.c:323:	if (!PageUptodate(page))
+/home/cody/g/linux/fs/9p/vfs_addr.c:324:		SetPageUptodate(page);
+/home/cody/g/linux/fs/9p/cache.c:309:		SetPageUptodate(page);
+/home/cody/g/linux/fs/ext3/inode.c:1451:		if (!PageUptodate(page))
+/home/cody/g/linux/fs/ext3/inode.c:1460:		SetPageUptodate(page);
+/home/cody/g/linux/fs/ext3/inode.c:2083:	if (PageUptodate(page))
+/home/cody/g/linux/fs/isofs/rock.c:750:	SetPageUptodate(page);
+/home/cody/g/linux/fs/isofs/compress.c:75:			SetPageUptodate(pages[i]);
+/home/cody/g/linux/fs/isofs/compress.c:176:				SetPageUptodate(pages[curpage]);
+/home/cody/g/linux/fs/isofs/compress.c:287:		SetPageUptodate(*pages);
+/home/cody/g/linux/fs/isofs/compress.c:316:		SetPageUptodate(page);
+/home/cody/g/linux/fs/isofs/compress.c:345:	/* Release any residual pages, do not SetPageUptodate */
+/home/cody/g/linux/drivers/staging/zcache/zcache-main.c:1002:	SetPageUptodate(page);  /* above does SetPageDirty, is that enough? */
+/home/cody/g/linux/include/linux/page-flags.h:295:static inline int PageUptodate(struct page *page)
+/home/cody/g/linux/include/linux/page-flags.h:301:	 * _after_ we've loaded page->flags to check for PageUptodate.
+/home/cody/g/linux/include/linux/page-flags.h:305:	 * See SetPageUptodate() for the other side of the story.
+/home/cody/g/linux/include/linux/page-flags.h:313:static inline void __SetPageUptodate(struct page *page)
+/home/cody/g/linux/include/linux/page-flags.h:319:static inline void SetPageUptodate(struct page *page)
+/home/cody/g/linux/include/linux/page-flags.h:324:	 * uptodate are actually visible before PageUptodate becomes true.
+/home/cody/g/linux/mm/page_io.c:78:		ClearPageUptodate(page);
+/home/cody/g/linux/mm/page_io.c:84:		SetPageUptodate(page);
+/home/cody/g/linux/mm/page_io.c:279:	VM_BUG_ON(PageUptodate(page));
+/home/cody/g/linux/mm/page_io.c:281:		SetPageUptodate(page);
+/home/cody/g/linux/mm/swap_state.c:169:	VM_BUG_ON(!PageUptodate(page));
+/home/cody/g/linux/mm/memory.c:2797:	__SetPageUptodate(new_page);
+/home/cody/g/linux/mm/memory.c:3097:	if (unlikely(!PageUptodate(page))) {
+/home/cody/g/linux/mm/memory.c:3248:	 * The memory barrier inside __SetPageUptodate makes sure that
+/home/cody/g/linux/mm/memory.c:3252:	__SetPageUptodate(page);
+/home/cody/g/linux/mm/memory.c:3368:			__SetPageUptodate(page);
+/home/cody/g/linux/mm/memory-failure.c:686:	ClearPageUptodate(p);
+/home/cody/g/linux/mm/shmem.c:491:			if (!unfalloc || !PageUptodate(page)) {
+/home/cody/g/linux/mm/shmem.c:568:			if (!unfalloc || !PageUptodate(page)) {
+/home/cody/g/linux/mm/shmem.c:822:	if (!PageUptodate(page)) {
+/home/cody/g/linux/mm/shmem.c:839:		SetPageUptodate(page);
+/home/cody/g/linux/mm/shmem.c:1021:	SetPageUptodate(newpage);
+/home/cody/g/linux/mm/shmem.c:1097:	if (page && !PageUptodate(page)) {
+/home/cody/g/linux/mm/shmem.c:1137:		if (!PageUptodate(page)) {
+/home/cody/g/linux/mm/shmem.c:1240:			SetPageUptodate(page);
+/home/cody/g/linux/mm/shmem.c:1451:	if (!PageUptodate(page)) {
+/home/cody/g/linux/mm/shmem.c:1457:		SetPageUptodate(page);
+/home/cody/g/linux/mm/shmem.c:1669:		if (!PageUptodate(page) || page->mapping != mapping) {
+/home/cody/g/linux/mm/shmem.c:1750:				if (!PageUptodate(page))
+/home/cody/g/linux/mm/shmem.c:1869:			/* Remove the !PageUptodate pages we added */
+/home/cody/g/linux/mm/shmem.c:1881:		if (!PageUptodate(page))
+/home/cody/g/linux/mm/shmem.c:1885:		 * If !PageUptodate, leave it that way so that freeable pages
+/home/cody/g/linux/mm/shmem.c:2112:		SetPageUptodate(page);
+/home/cody/g/linux/mm/hugetlb.c:2631:	__SetPageUptodate(new_page);
+/home/cody/g/linux/mm/hugetlb.c:2740:		__SetPageUptodate(page);
+/home/cody/g/linux/mm/huge_memory.c:716:	 * The memory barrier inside __SetPageUptodate makes sure that
+/home/cody/g/linux/mm/huge_memory.c:720:	__SetPageUptodate(page);
+/home/cody/g/linux/mm/huge_memory.c:977:	__SetPageUptodate(page);
+/home/cody/g/linux/mm/huge_memory.c:1072:		__SetPageUptodate(pages[i]);
+/home/cody/g/linux/mm/huge_memory.c:1197:	__SetPageUptodate(new_page);
+/home/cody/g/linux/mm/huge_memory.c:1644:		BUG_ON(!PageUptodate(page_tail));
+/home/cody/g/linux/mm/huge_memory.c:2342:	__SetPageUptodate(new_page);
+/home/cody/g/linux/mm/migrate.c:438:	if (PageUptodate(page))
+/home/cody/g/linux/mm/migrate.c:439:		SetPageUptodate(newpage);
+/home/cody/g/linux/mm/filemap.c:125:	if (PageUptodate(page) && PageMappedToDisk(page))
+/home/cody/g/linux/mm/filemap.c:1140:		if (!PageUptodate(page)) {
+/home/cody/g/linux/mm/filemap.c:1233:		if (PageUptodate(page)) {
+/home/cody/g/linux/mm/filemap.c:1256:		if (!PageUptodate(page)) {
+/home/cody/g/linux/mm/filemap.c:1260:			if (!PageUptodate(page)) {
+/home/cody/g/linux/mm/filemap.c:1663:	if (unlikely(!PageUptodate(page)))
+/home/cody/g/linux/mm/filemap.c:1715:		if (!PageUptodate(page))
+/home/cody/g/linux/mm/filemap.c:1843:	if (PageUptodate(page))
+/home/cody/g/linux/mm/filemap.c:1852:	if (PageUptodate(page)) {
+/home/cody/g/linux/mm/filemap.c:1876: * Read into the page cache. If a page already exists, and PageUptodate() is
+/home/cody/g/linux/mm/filemap.c:1894:		if (!PageUptodate(page)) {
+/home/cody/g/linux/mm/filemap.c:1930: * Read into the page cache. If a page already exists, and PageUptodate() is
+/home/cody/g/linux/mm/ksm.c:1879:	if (!PageUptodate(page))
+/home/cody/g/linux/mm/ksm.c:1887:		__SetPageUptodate(new_page);
+/home/cody/g/linux/mm/mincore.c:82:		present = PageUptodate(page);
+/home/cody/g/linux/mm/page-writeback.c:2042:			WARN_ON_ONCE(!PagePrivate(page) && !PageUptodate(page));

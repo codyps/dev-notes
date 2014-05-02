@@ -1,0 +1,34 @@
+Conference: LinuxCon North America
+Title: Extending perf to support POWER's 24x7 counters
+Presenter: Cody P Schafer <cpschafe@us.ibm.com>
+
+
+== One Line Summary ==
+
+How we're extending perf event alaises in sysfs and the perf userspace tool
+event parsing to support parameterized events to allow greater flexibility in
+perf event specification.
+
+== Abstract ==
+
+POWER 8 provides a new set of in-memory counters called 24x7 that are more
+flexible than existing PMU events and behave in ways not concieved when perf
+(the subsystem and the tool) were originally designed. Rather writing
+registers to configure PMUs to collect certain events and then reading
+registers to aquire the counts, 24x7 accumulates all counts it supports in
+memory all the time. As a result, cross cpu count reads become "normal" and
+viewing transactions as a scheduling concern no longer makes sense.
+
+Additionally, 24x7 does per-guest event accumulation at the hardware level and
+allows (properly authorized) guests to retrieve both physical level events and
+the event counts of other guests.
+
+As a result of this increase in flexibility, the 'cpu' parameter to
+perf_event_open() (currently the only even parameter), becomes insufficient.
+We also want to specify physical chips, cores, cpus, and the chips, cores and
+cpus on other guests. We've slightly extended both the contents of sysfs event
+aliases and perf tool's event specification to allow per-event
+parameterization which is distinct from the 'cpu' argument.
+
+Future work could address the more generic-transaction meaning and the lack of
+a meaningful "cpu" for each perf event to be bound to.

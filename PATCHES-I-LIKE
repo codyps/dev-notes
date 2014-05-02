@@ -5,3 +5,7 @@ POSIX_FADV_NOREUSE
 inotify_at
 
 
+frace funtion_duration
+	not merged because of ftrace plugin deprication, probably needs
+	fixups to deal with lockless ring buffers.
+
