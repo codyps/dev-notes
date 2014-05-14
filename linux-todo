@@ -1,2 +1,4 @@
  - local_xchg (really, local_* and atomic_*) on arbitrary widthed variables.
  - kill zonelists_mutex or the stop_machine() used when updating zonelists.
+ - generic bind/unbind driver support
+   - particularly, look at the ppc drivers that solely use HCALLs to interface with their "device". 
